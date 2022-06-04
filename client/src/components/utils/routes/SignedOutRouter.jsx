@@ -46,7 +46,6 @@ const SignUpPage = Loadable(
     lazy(() => import("../../../pages/auth/SignUpPage"))
 );
 
-
 const SignInPage = Loadable(
     lazy(()=>import("../../../pages/auth/SignInPage")),
 )
