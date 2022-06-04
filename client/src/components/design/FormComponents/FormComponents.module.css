@@ -1,0 +1,124 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.container:disabled,
+.container[disabled] {
+  cursor: not-allowed;
+  background-color: var(--grey-400);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  min-height: 52px;
+  border: 2px solid var(--primary-black);
+  border-radius: 8px;
+  padding: 9px 14px;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+}
+
+.normal {
+  border-color: var(--grey-500-transparent-48);
+}
+
+.error {
+  border-color: var(--primary-red);
+}
+
+.success {
+  border-color: var(--primary-green);
+}
+
+.warning {
+  border-color: var(--primary-yellow);
+}
+
+.info {
+  border-color: var(--primary-blue);
+}
+
+.valueWrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 100%;
+}
+
+.iconWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 8px;
+  font-size: 18px;
+}
+
+.label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: var(--heading-font);
+  color: var(--grey-700);
+}
+
+.required {
+  color: var(--primary-red);
+  font-size: 12px;
+}
+
+.input {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  font-family: var(--para-font);
+  color: var(--primary-black);
+  font-weight: 600;
+}
+
+.textarea {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  font-family: var(--para-font);
+  color: var(--primary-black);
+  font-weight: 600;
+  resize: vertical;
+  height: 200px;
+  min-height: 100px;
+  max-height: 300px;
+}
+
+.textarea::-webkit-scrollbar {
+  width: 5px;
+}
+
+.textarea::-webkit-scrollbar-thumb {
+  background-color: var(--grey-300);
+  border-radius: 2px;
+}
+
+.input:disabled,
+.input[disabled] {
+  cursor: not-allowed;
+  background-color: var(--grey-400);
+}
+
+.radioGroupOne {
+  margin-bottom: 24px;
+}
+
+.radioLabel {
+  font-family: var(--para-font);
+  color: var(--primary-black);
+  font-weight: 600;
+  margin-right: 24px;
+  padding: 0 10px;
+}
