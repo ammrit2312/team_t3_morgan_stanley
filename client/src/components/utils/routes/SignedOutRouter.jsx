@@ -25,19 +25,28 @@ export default function SignedOutRouter() {
             children: [
                 {
                     path: entireRoutes.SIGN_IN,
+                    element: <SignInPage />
                 },
                 {
                     path: entireRoutes.SIGN_UP,
+                    element: <SignUpPage />
                 },
                 {
                     path: entireRoutes.CONTACT_US,
                 },
-                {
-                    path: "*",
-                    element: <Navigate to={entireRoutes.SIGN_IN} replace/>,
-                }
             ],
         },
         { path: "*", element: <Navigate to={entireRoutes.NOT_FOUND} replace /> },
     ])
 }
+
+
+// Generic Pages
+const SignUpPage = Loadable(
+    lazy(() => import("../../../pages/auth/SignUpPage"))
+);
+
+
+const SignInPage = Loadable(
+    lazy(()=>import("../../../pages/auth/SignInPage")),
+)

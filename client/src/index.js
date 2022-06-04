@@ -5,9 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 // redux
-import { store, persistor } from './redux';
-import { PersistGate } from "redux-persist/lib/integration/react";
-import { Provider as ReduxProvider } from "react-redux";
+// import { store, persistor } from './redux';
+// import { PersistGate } from "redux-persist/lib/integration/react";
+// import { Provider as ReduxProvider } from "react-redux";
 
 // others
 import { BrowserRouter as Router } from "react-router-dom";
@@ -17,13 +17,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ReactNotifications/>
-    <ReduxProvider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+    {/* <ReduxProvider store={store}> */}
+        {/* <PersistGate loading={null} persistor={persistor}> */}
           <Router>
             <App />
           </Router>
-        </PersistGate>
-      </ReduxProvider>
+        {/* </PersistGate> */}
+      {/* </ReduxProvider> */}
   </React.StrictMode>
 );
 

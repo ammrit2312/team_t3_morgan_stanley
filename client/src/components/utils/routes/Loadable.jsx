@@ -14,3 +14,5 @@ const Loadable = (Component) => (props) => {
         </Suspense>
     );
 }
+
+export {Loadable};

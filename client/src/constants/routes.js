@@ -27,7 +27,7 @@ export const entireRoutes = {
     SIGN_IN: entirepath(routes.SIGN_IN),
     SIGN_UP: entirepath(routes.VOLUNTEER, routes.SIGN_UP),
     VOLUNTEER_FORM: entirepath(routes.VOLUNTEER, routes.FORM),
-    ADMIN_UPLOAD_ACTIVITY: enitreRoutes(routes.ADMIN, routes.UPLOAD_ACTIVITY),
+    ADMIN_UPLOAD_ACTIVITY: entirepath(routes.ADMIN, routes.UPLOAD_ACTIVITY),
     ADMIN_SHOW_VOLUNTEERS: entirepath(routes.ADMIN, routes.SHOW_VOLUNTEERS),
     ACCOUNT: entirepath(routes.ACCOUNT),
     ACCOUNT_PROFILE: entirepath(routes.ACCOUNT, routes.PROFILE),
