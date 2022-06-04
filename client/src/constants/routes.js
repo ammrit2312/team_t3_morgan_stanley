@@ -21,11 +21,11 @@ export const routes = {
     SHOW_VOLUNTEERS: "show-volunteers",
 };
 
-export const enitreRoutes = {
+export const entireRoutes = {
     BASE: "/",
     VOLUNTEER: entirepath(routes.VOLUNTEER),
     SIGN_IN: entirepath(routes.SIGN_IN),
-    SIGN_UP: entirepath(routes.SIGN_UP),
+    SIGN_UP: entirepath(routes.VOLUNTEER, routes.SIGN_UP),
     VOLUNTEER_FORM: entirepath(routes.VOLUNTEER, routes.FORM),
     ADMIN_UPLOAD_ACTIVITY: enitreRoutes(routes.ADMIN, routes.UPLOAD_ACTIVITY),
     ADMIN_SHOW_VOLUNTEERS: entirepath(routes.ADMIN, routes.SHOW_VOLUNTEERS),
