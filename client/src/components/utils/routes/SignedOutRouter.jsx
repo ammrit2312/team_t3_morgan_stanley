@@ -33,7 +33,9 @@ export default function SignedOutRouter() {
                 },
                 {
                     path: entireRoutes.CONTACT_US,
+                    element: <ContactUsPage />
                 },
+                {path: entireRoutes.NOT_FOUND, element: <NotFoundPage />},
             ],
         },
         { path: "*", element: <Navigate to={entireRoutes.NOT_FOUND} replace /> },
@@ -48,4 +50,12 @@ const SignUpPage = Loadable(
 
 const SignInPage = Loadable(
     lazy(()=>import("../../../pages/auth/SignInPage")),
-)
+);
+
+const ContactUsPage = Loadable(
+    lazy(()=>import("../../../pages/ContactUsPage")),
+);
+
+const NotFoundPage = Loadable(
+    lazy(()=>import("../../../pages/NotFound")),
+);
