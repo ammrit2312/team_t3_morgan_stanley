@@ -1,0 +1,41 @@
+{
+name:'user1'
+language:'english,tamil'
+availability:'weekend,weekday'
+preferred_volunteer:'on-ground'
+location:'outside mumbai'
+skills : playing , teaching , story telling
+}
+
+
+----------------------------------------|------|
+activity posted by admin		|      |
+----------------------------------------|------|
+{
+volunteering_type:'on-ground'
+activity_name:'story-telling'
+activity_category:'play2learn'
+toy_bank_location:'outside mumbai'
+language_preference:'tamil'
+preffered_skill:'Story telling,'
+availabilty :[weekend]
+location: ['navi mumbai']
+}
+---------------------------------------
+=========
+lang = 10
+avail = 10
+loc = 0
+
+
+preffered skill = 1
+
+-----
+bare min
+lang -- 10
+avail -- 10
+location -- 10
+
+-----
+preffered_skill
+boost ranking score
