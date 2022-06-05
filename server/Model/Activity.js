@@ -22,7 +22,7 @@ const ActivitySchema = new mongoose.Schema({
         type:Array,
         default:[]
     },
-    Preffered_skills:{
+    Preferred_skills:{
         type:Array,
         default:[]
     },
@@ -30,7 +30,7 @@ const ActivitySchema = new mongoose.Schema({
         type:Number,
         default:0
     },
-    Activity_Adress:{
+    Activity_Address:{
         type:String,
         default:''
     },

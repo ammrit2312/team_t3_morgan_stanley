@@ -3,10 +3,10 @@ const Activity = require('../Model/Activity')
 
 router.post("/submit-activity",async (req,res) => {
     try{
-
+        console.log("hello")
         const newActivity = new Activity(req.body);    
-        const activtity = await newActivity.save();
-        res.status(200).json(activtity);
+        const activity = await newActivity.save();
+        res.status(200).json(activity);
     
     }
     catch(err){
@@ -17,17 +17,23 @@ router.post("/submit-activity",async (req,res) => {
 
 // function for getting the list of all activities (to be used for mapping)
 // returns the object of all activities.
-const getAllActivities = async () => {
+async function getAllActivities(){
+    try
+    {
     const activities = await Activity.find({},{_id:1,ActivityName:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1});
-    return activities
+    console.log(activities)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+    
 }
-
 
 // api to get list of all activities
 router.get("/list-all-activities",async(req,res)=> {
     try{
         const activities = await Activity.find({},{_id:1,ActivityName:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1});
-        console.log(activities)
         res.status(200).json(activities);
     }
     catch(err){
@@ -35,4 +41,5 @@ router.get("/list-all-activities",async(req,res)=> {
     }
 })
 
-module.exports = router
+module.exports =router
+//module.exports=getAllActivities

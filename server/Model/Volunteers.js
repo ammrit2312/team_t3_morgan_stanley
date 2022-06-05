@@ -6,11 +6,6 @@ const VolunteerSchema = new mongoose.Schema({
         require:true,
         default:""
     },
-    Volunteer_DOB:{
-        type:Date,
-        require:true,
-        default:""
-    },
     Volunteer_Address:{
         type:String,
         default:""
@@ -71,12 +66,10 @@ const VolunteerSchema = new mongoose.Schema({
         default:[]
     },
 
-    Volunteer_Number:{
-        type:Number,
-        require:true,
-        default:0
+    Volunteer_Languages:{
+        type:Array,
+        default:[]
     },
-
     Volunteer_Skills:{
         type:Array,
         require:true,
