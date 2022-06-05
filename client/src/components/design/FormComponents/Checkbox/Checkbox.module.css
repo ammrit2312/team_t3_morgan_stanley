@@ -1,0 +1,5 @@
+.label{
+    color: var(--primary-blue);
+    font-family: var(--heading-font);
+    font-weight: 600;
+}
