@@ -1,3 +1,4 @@
+import React from "react";
 import { lazy } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 
@@ -24,9 +25,13 @@ export default function SignedOutRouter() {
             element: <SignedOutLayout />,
             children: [
                 {
-                    path: entireRoutes.SIGN_IN,
-                    element: <SignInPage />
+                    element: <SignInPage/>,
+                    index: true,
                 },
+                // {
+                //     path: entireRoutes.SIGN_IN,
+                //     element: <SignInPage />
+                // },
                 {
                     path: entireRoutes.SIGN_UP,
                     element: <SignUpPage />
