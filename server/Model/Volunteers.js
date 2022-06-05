@@ -6,6 +6,10 @@ const VolunteerSchema = new mongoose.Schema({
         require:true,
         default:""
     },
+    Volunteer_Username:{
+        type:String,
+        default:""
+    },
     Volunteer_Address:{
         type:String,
         default:""

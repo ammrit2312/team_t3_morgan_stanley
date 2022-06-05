@@ -1,3 +1,8 @@
+:root{
+  --gutter:  0 3vw;
+  --yellow: #fcc900
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

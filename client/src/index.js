@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
 // redux
 // import { store, persistor } from './redux';
@@ -13,17 +13,23 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from "react-router-dom";
 import { ReactNotifications } from "react-notifications-component";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// Mui Theme
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./constants/muiTheme.constants";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ReactNotifications/>
+    <ReactNotifications />
     {/* <ReduxProvider store={store}> */}
-        {/* <PersistGate loading={null} persistor={persistor}> */}
-          <Router>
-            <App />
-          </Router>
-        {/* </PersistGate> */}
-      {/* </ReduxProvider> */}
+    {/* <PersistGate loading={null} persistor={persistor}> */}
+    <Router>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </Router>
+    {/* </PersistGate> */}
+    {/* </ReduxProvider> */}
   </React.StrictMode>
 );
 
