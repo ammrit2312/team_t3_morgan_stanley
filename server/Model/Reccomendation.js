@@ -18,7 +18,7 @@ const ReccomendationSchema = new mongoose.Schema({
         type:Boolean,
         default:false
     },
-    UserPreffered_Activity:{
+    UserPreferred_Activity:{
         type:Array,
         default:[]
     }

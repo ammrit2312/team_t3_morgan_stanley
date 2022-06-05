@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const Activity = require('../Model/Activity')
+const Activity = require('../Model/Activity');
+const Reccomendation = require('../Model/Reccomendation');
 
 router.post("/submit-activity",async (req,res) => {
     try{
-        console.log("hello")
         const newActivity = new Activity(req.body);    
         const activity = await newActivity.save();
         res.status(200).json(activity);
@@ -40,6 +40,27 @@ router.get("/list-all-activities",async(req,res)=> {
         console.log(err)
     }
 })
+// get all the recommended activities
+router.get("/list-all-recommended-activities",(req,res)=>{
+    Reccomendation.find({},(err,activities)=>{
+        res.json(activities);
+    })
+})
+
+router.put("/updateList/:id/:uid",async(req,res)=>{
+    try{
+    id=req.params.id 
+    userID=req.params.uid
+    const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID}});
+    res.json(data);
+    }
+    catch(e)
+    {
+        console.log(e);
+    }
+})
+
+
 
 module.exports =router
-//module.exports=getAllActivities
+//module.exports=getAllActiv    ities
