@@ -1,0 +1,25 @@
+.container {
+    font-family: var(--para-font);
+    font-weight: 500;
+    color: var(--yellow);
+    text-decoration: none !important;
+    cursor: pointer;
+    font-size: larger;
+}
+
+.container:after {
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    background: var(--yellow);
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+
+.container:hover:after {
+    width: 100%;
+    left: 0;
+}

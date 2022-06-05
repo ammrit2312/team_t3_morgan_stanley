@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// css
+import styles from "./NavLink.module.css";
+
 /**
  * 
  * @author ammrit2312 <amriteshc101@icloud.com>
@@ -9,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const NavLink = ({ data }) => {
     return (
-        <Link to={data.path}>
+        <Link to={data.path} className={styles.container}>
             {data.name}
         </Link>
     );

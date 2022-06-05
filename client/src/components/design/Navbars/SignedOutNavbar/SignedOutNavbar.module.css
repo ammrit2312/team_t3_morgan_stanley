@@ -1,0 +1,52 @@
+.container{
+    /* background-image: url("../../../../assets/textured_paper.png"); */
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--nav-height);
+    padding: var(--gutter);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--primary-white);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.logo {
+    background-color: var(--primary-fill-color);
+    height: calc(var(--nav-height) - 20px);
+    width: auto;
+}
+
+.navContainer {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    margin-right: 42px;
+}
+
+.menuIcon {
+    display: none;
+    cursor: pointer;
+    font-size: larger;
+    color: var(--primary-fill-color);
+}
+
+@media only screen and (max-width: 1023px) {
+    .navContainer {
+        display: none;
+    }
+
+    .menuIcon {
+        display: block;
+    }
+}

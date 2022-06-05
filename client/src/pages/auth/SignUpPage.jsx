@@ -8,6 +8,9 @@ import Button from "../../components/design/Button";
 
 import img from "../../assets/images/sign-up.svg";
 
+// constants
+import { colors } from "../../constants/colors.constants";
+
 const SignUpPage = () => {
   return (
     <div className={styles.container}>
@@ -20,7 +23,17 @@ const SignUpPage = () => {
           <div className={styles.heading}>Sign Up</div>
             <EmailField required={true}/>
             <PasswordField required={true}/>
-            <Button value="Sign Up"/>
+            <Button 
+              value="Sign Up"
+              customStyles={{
+                backgroundColor: colors.PRIMARY_ORANGE,
+                borderRadius: "10px",
+                width: "100%",
+                border: "0",
+                marginTop: "10px",
+                marginBottom: "10px",
+              }}
+            />
             <div>
               <span className={styles.text}>Already have an account?</span> <Link to="/" className={styles.link}>Sign In</Link>
             </div>

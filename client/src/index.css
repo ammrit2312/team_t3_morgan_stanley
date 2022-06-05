@@ -1,6 +1,8 @@
 :root{
   --gutter:  0 3vw;
-  --yellow: #fcc900
+  --yellow: #fcc900;
+  --white: #fff;
+  --nav-height: 88px;
 }
 
 body {

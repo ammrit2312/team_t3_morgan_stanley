@@ -2,7 +2,7 @@
   box-sizing: border-box;
   width: 100%;
   padding: var(--gutter);
-  height: 100vh;
+  height: calc(100vh - var(--nav-height));
   display: flex;
   flex-direction: column;
   background-image: url("../../assets/textured_paper.png");

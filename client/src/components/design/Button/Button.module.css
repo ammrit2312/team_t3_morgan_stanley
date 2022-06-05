@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 32px;
-  border: 2px solid var(--primary-fill-color);
+  border: 2px solid var(--yellow);
   background-color: transparent;
   outline: none;
   font-family: var(--heading-font);
@@ -22,36 +22,36 @@
   cursor: not-allowed;
   background-color: var(--grey-500);
   border-color: var(--grey-500);
-  color: var(--primary-white);
+  color: var(--white);
 }
 
 .button:disabled,
 .button[disabled]:hover {
   background-color: var(--grey-400);
   border-color: var(--grey-400);
-  color: var(--primary-white);
+  color: var(--white);
 }
 
 .primary {
-  background-color: var(--primary-fill-color);
-  color: var(--primary-white);
+  background-color: var(--yellow);
+  color: var(--white);
 }
 
 .secondary {
-  color: var(--primary-fill-color);
+  color: var(--yellow);
 }
 
 .secondary:hover {
-  background-color: var(--primary-fill-color);
-  color: var(--primary-white);
+  background-color: var(--yellow);
+  color: var(--white);
 }
 
 .tertiary {
   border-width: 0;
-  color: var(--primary-fill-color);
+  color: var(--yellow);
 }
 
 .tertiary:hover {
-  color: var(--primary-fill-color);
+  color: var(--yellow);
   text-decoration: underline;
 }
