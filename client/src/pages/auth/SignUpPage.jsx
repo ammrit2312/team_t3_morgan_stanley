@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./auth.module.css";
+import styles from "./Auth.module.css";
 import { Link } from "react-router-dom";
 
 import EmailField from "../../components/design/FormComponents/EmailField";

@@ -58,7 +58,6 @@ const SignedOutNavbar = ({ navLinks }) => {
                 anchor="right"
                 open={isDrawerOpen}
                 onClose={() => setIsDrawerOpen(false)}
-                className={styles.drawer}
             >
                 <Menu menu={navLinks} />
                 <Divider />
