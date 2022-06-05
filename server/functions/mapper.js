@@ -1,56 +1,3 @@
-// const user =[{
-//     id:new Object("xyz"),
-//     name:'user1',
-//     language_preference:['english','tamil'],
-//     availability:['weekend','weekday'],
-//     preferred_volunteer:['on-ground'],
-//     location:['outside mumbai'],
-//     skills : ['playing' , 'teaching' , 'story telling']
-//     },
-//     {
-//         id:new Object("abc"),
-//         name:'user2',
-//         language_preference:['hindi'],
-//         availability:['weekend'],
-//         preferred_volunteer:['on-ground'],
-//         location:['navi mumbai'],
-//         skills : ['playing' , 'teaching']
-//     },
-//     {
-//         id:new Object("mnh"),
-//         name:'user3',
-//         language_preference:['hindi'],
-//         availability:['weekend'],
-//         preferred_volunteer:['on-ground'],
-//         location:['navu mumbai'],
-//         skills : ['playing' , 'teaching']
-//     }
-
-// ]
-// const adminReq=[{
-//     id:new Object("pow"),
-//     volunteering_type:['on-ground'],
-//     mode:"on-ground",
-//     activity_name:['story-telling'],
-//     activity_category:['play2learn'],
-//     language_preference:['tamil'],
-//     preffered_skill:['story telling'],
-//     availability :['weekend'],
-//     location: ['navi mumbai']
-// },
-// {
-//     id:new Object("lki"),
-//     mode:"online",
-//     volunteering_type:['online'],
-//     activity_name:['coding'],
-//     activity_category:['play2learn'],
-//     language_preference:['marathi'],
-//     preffered_skill:['logical thinking'],
-//     availability :['weekend'],
-//     location: ['outside mumbai']
-// }]
-
-
 const getBareReqScore=(userData,admin,mode)=>{
     let score=0;
     if (containsAll(admin.Language_Preference,userData.Volunteer_Languages))
@@ -102,7 +49,6 @@ const getBestActivitiesForUser=(userDict,userObject,adminReq)=>{
     
     let id=userObject._id.toString();
     getMatchScoreForUser(id,userDict,userObject,adminReq);
-    console.log("hello from")
     var keys=Object.keys(userDict[id]);
     largest = Math.max(...keys.map(x => userDict[id][x]));
     keys=keys.reduce((result, key) => { if (userDict[id][key] === largest){ result.push(key); } return result; }, []);
