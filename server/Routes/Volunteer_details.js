@@ -61,5 +61,31 @@ router.get("/get-reccomended-activities",async (req,res)=> {
     }
 })
 
+router.get("/checkExists/:username",async(req,res)=>{
+    try
+    {
+        let username=req.params.username
+        const data=await Volunteers.find({Volunteer_Username:username})
+        if(data.length > 0)
+        {
+            res.status(200).json({"message":"Success"});
+        }
+        else
+        {
+            res.status(404).json({"message":"Not found"});
+        }
+    }
+    catch(e)
+    {
+        console.log(e)
+        res.status(404).json({"message":"Not found"});
+    }
+})
+
+
+
+
+
+
 
 module.exports = router

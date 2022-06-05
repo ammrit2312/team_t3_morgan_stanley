@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./layouts.module.css";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
@@ -16,7 +17,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 // constants
 // import { signedInBrandNavLinks } from "../constants/navbar.constants";
 
-export default function SignedInBrandLayout() {
+export default function SignedInLayout() {
     const [showDrawer, setShowDrawer] = useState(false);
 
     return (

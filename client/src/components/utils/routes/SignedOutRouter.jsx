@@ -16,7 +16,6 @@ import SignedOutLayout from "../../../layouts/SignedOutLayout";
 
 // constants
 import { entireRoutes, routes } from "../../../constants/routes";
-import { accountTypes } from "../../../constants/accounts.constants";
 
 export default function SignedOutRouter() {
     return useRoutes([
