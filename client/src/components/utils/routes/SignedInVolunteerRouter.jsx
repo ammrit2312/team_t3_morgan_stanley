@@ -1,5 +1,6 @@
 import React from "react";
-import { useRoutes } from "react-router-dom";
+import { lazy } from "react";
+import { Navigate, useRoutes } from "react-router-dom";
 
 /**
  * 
