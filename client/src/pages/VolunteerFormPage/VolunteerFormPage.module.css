@@ -1,0 +1,34 @@
+.container{
+    height: calc(100vh - var(--nav-height));
+    background-image: url("../../assets/textured_paper.png");
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainContainer{
+    padding: var(--gutter);
+    display: flex;
+    height: 100%;
+}
+
+.leftContainer{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid red;
+}
+
+.rightContainer{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid blue;
+}

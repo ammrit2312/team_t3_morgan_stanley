@@ -7,6 +7,7 @@ import PasswordField from "../../components/design/FormComponents/PasswordField"
 import Button from "../../components/design/Button";
 
 import img from "../../assets/images/sign-in.png";
+import Wave from "../../assets/Top_wave.svg";
 
 // constants
 import { colors } from "../../constants/colors.constants";
