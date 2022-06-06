@@ -43,10 +43,9 @@ const addReccomendation = async(volunteer,rec) => {
 }
 
 //Route for getting the reccomended activities on the volunteer side
-router.get("/get-reccomended-activities",async (req,res)=> {
-    let activitity_rec_arr = []
+router.get("/get-reccomended-activities/:userid",async (req,res)=> {
     try{
-        const {Reccomendation_ActivityID} = await Reccomendation.findOne({UserId:req.body.userid},{_id:0,Reccomendation_ActivityID:1});
+        const {Reccomendation_ActivityID} = await Reccomendation.findOne({UserId:req.params.userid},{_id:0,Reccomendation_ActivityID:1});
         
         const reccomended_act = await Promise.all(
             Reccomendation_ActivityID.map((activityId) => {

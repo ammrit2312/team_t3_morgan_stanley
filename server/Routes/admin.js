@@ -60,10 +60,14 @@ router.put("/updateList/:id/:uid",async(req,res)=>{
         console.log(e);
     }
 })
-//filter out the other mapping when assigned
-//volunteer drops=> remove activity from assign=> assign new volunteer
+//prefer
+//Take care of capacity
 //timeout for volunteer to view 
 
+//Re=[]
+//attendance
+//chat 
+//volunteer drops=> remove activity from assign => assign new volunteer
 module.exports =router
 
 //
