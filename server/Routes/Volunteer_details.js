@@ -46,14 +46,21 @@ const addReccomendation = async(volunteer,rec) => {
 router.get("/get-reccomended-activities",async (req,res)=> {
     let activitity_rec_arr = []
     try{
-        const {Reccomendation_ActivityID} = await Reccomendation.findOne({UserId:req.body.userid},{_id:0,Reccomendation_ActivityID:1});
-        
-        const reccomended_act = await Promise.all(
-            Reccomendation_ActivityID.map((activityId) => {
-                return Activity.findById(activityId,{_id:1,ActivityName:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1,Activty_Description:1});
-            })
-        )
-        res.status(200).json(reccomended_act)
+        const {Reccomendation_ActivityID,User_Activity_Select} = await Reccomendation.findOne({UserId:req.body.userid},{_id:0,Reccomendation_ActivityID:1,User_Activity_Select:1});
+        console.log(User_Activity_Select);
+        if(!User_Activity_Select)
+        {
+
+            const reccomended_act = await Promise.all(
+                Reccomendation_ActivityID.map((activityId) => {
+                    return Activity.findById(activityId,{_id:1,ActivityName:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1,Activty_Description:1});
+                })
+            )
+            res.status(200).json(reccomended_act)
+        }
+        else{
+            res.json({"message":"User already selected activity"});
+        }
     }
     catch(err){
         console.log(err);

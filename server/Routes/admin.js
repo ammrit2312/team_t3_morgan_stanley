@@ -42,7 +42,7 @@ router.get("/list-all-activities",async(req,res)=> {
 })
 // get all the recommended activities
 router.get("/list-all-recommended-activities",(req,res)=>{
-    Reccomendation.find({},(err,activities)=>{
+    Reccomendation.find({User_Activity_Select:false},(err,activities)=>{
         res.json(activities);
     })
 })
@@ -52,15 +52,18 @@ router.put("/updateList/:id/:uid",async(req,res)=>{
     id=req.params.id 
     userID=req.params.uid
     const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID}});
-    res.json(data);
+    const status=await Reccomendation.updateMany({UserId:userID},{User_Activity_Select:true});
+    res.json(status);
     }
     catch(e)
     {
         console.log(e);
     }
 })
-
-
+//filter out the other mapping when assigned
+//volunteer drops=> remove activity from assign=> assign new volunteer
+//timeout for volunteer to view 
 
 module.exports =router
-//module.exports=getAllActiv    ities
+
+//
