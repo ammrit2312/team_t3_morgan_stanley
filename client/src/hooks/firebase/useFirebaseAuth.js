@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-// firebase functions
+// firebase functions 
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -24,7 +24,7 @@ import { setUser, resetUser } from "../../redux/ducks/userDuck";
 
 // utils
 import showNotification from "../../utils/notifications.utils";
-import { setCookie, deleteCookie } from "../../utils/auth.utils";
+// import { setCookie, deleteCookie } from "../../utils/auth.utils";
 
 /**
  * @author Mayank1403 <mayank1403@gmail.com>
@@ -68,7 +68,7 @@ function useFirebaseAuth() {
     signOut(auth)
       .then(() => {
         // reset user in redux
-        dispatch(resetUser());
+        // dispatch(resetUser());
 
         // redirecting to sign in page
         navigate(entireRoutes.BASE);
@@ -129,15 +129,26 @@ function useFirebaseAuth() {
    * @description - Creates a new user with email and password.
    * @param {String} email - Email of the user
    * @param {String} password - Password of the user
+   * @param {integer} accountType - type of account
    */
-  async function signUpWithEmailAndPassword(email, password) {
+  async function signUpWithEmailAndPassword(email, password, accountType) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // signed in
         const { user } = userCredential;
         console.log("user credentials:", userCredential);
+        // set user in redux
+        dispatch(setUser({
+          uid: user.uid,
+          email: user.email,
+          method: "signUp",
+        }));
 
-        // create account in our database
+        showNotification({
+          title: "Sign Up Successful",
+          type: "info",
+        });
+        navigate(entireRoutes.VOLUNTEER_FORM);
       })
       .catch((error) => {
         deleteUserFromFirebase(error);
@@ -157,16 +168,10 @@ function useFirebaseAuth() {
         // signed in
         const { user } = userCredential;
         console.log("user scredentialss:", userCredential);
-
-        // email verification check - unless verified do not allow to sign in
-        if (!user.emailVerified) {
-          showNotification({
-            title: "Email not verified! Verify first to Sign In",
-            type: "warning",
-          });
-          return;
-        }
-        // Retrieve user data from database
+        // set user in redux
+        // check if user exists in our database
+        // if not, rediret to form
+        // if yes, redirect to dashboard
       })
       .catch((error) => {
         console.log("errorrrr", error);

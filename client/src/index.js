@@ -3,11 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
+import './config/firebase.config'
+import 'react-notifications-component/dist/theme.css';
 // redux
-// import { store, persistor } from './redux';
-// import { PersistGate } from "redux-persist/lib/integration/react";
-// import { Provider as ReduxProvider } from "react-redux";
+import { store, persistor } from './redux';
+import { PersistGate } from "redux-persist/lib/integration/react";
+import { Provider as ReduxProvider } from "react-redux";
 
 // others
 import { BrowserRouter as Router } from "react-router-dom";
@@ -21,15 +22,15 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ReactNotifications />
-    {/* <ReduxProvider store={store}> */}
-    {/* <PersistGate loading={null} persistor={persistor}> */}
+    <ReduxProvider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
     <Router>
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
     </Router>
-    {/* </PersistGate> */}
-    {/* </ReduxProvider> */}
+    </PersistGate>
+    </ReduxProvider>
   </React.StrictMode>
 );
 

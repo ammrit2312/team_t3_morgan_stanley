@@ -9,12 +9,21 @@ import Button from "../../components/design/Button";
 import img from "../../assets/images/sign-in.png";
 import Wave from "../../assets/Top_wave.svg";
 
+import useFirebaseAuth from "../../hooks/firebase/useFirebaseAuth";
+
 // constants
 import { colors } from "../../constants/colors.constants";
 
 const SignInPage = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  const { signInUserWithEmailAndPassword } = useFirebaseAuth();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signInUserWithEmailAndPassword(email,password);
+  }
 
   return (
     <div className={styles.container}>
@@ -23,7 +32,7 @@ const SignInPage = () => {
           <img src={img} alt="sign-in" className={styles.imageStyle} />
         </div>
         <div className={styles.rightContainer}>
-          <form className={styles.formWrapper}>
+          <form className={styles.formWrapper} onSubmit={handleSubmit}>
             <div className={styles.heading}>Sign In</div>
             <EmailField required={true} onChange={setEmail} email={email}/>
             <PasswordField required={true} onChange={setPassword} password={password} useRegex={false}/>
@@ -37,6 +46,7 @@ const SignInPage = () => {
                 marginTop: "10px",
                 marginBottom: "10px",
               }}
+              type="submit"
             />
             <div>
               <span className={styles.text}>Not having an account?</span>{" "}
