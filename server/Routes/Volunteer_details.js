@@ -96,9 +96,20 @@ router.get("/checkExists/:username",async(req,res)=>{
     }
 })
 
-
-
-
+//to add preferred activities
+router.get("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
+    try
+    {
+        let userid=req.params.userid
+        let pactivityid=req.params.pactivityid
+        const add = Reccomendation.findOneAndUpdate({UserId:userid},{ $push : {"UserPreferred_Activity": { newItem: pactivityid } }});
+        await add.save();
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+})
 
 
 module.exports = router
