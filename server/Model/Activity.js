@@ -38,7 +38,7 @@ const ActivitySchema = new mongoose.Schema({
         type:String,
         default:''
     },
-    Activty_Description:{
+    Activity_Description:{
         type:String,
         default:''
     },

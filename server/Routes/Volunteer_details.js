@@ -16,7 +16,7 @@ router.post("/submit-volunteer",async(req,res) => {
         const newVolunteer = new Volunteers(req.body);    
         const volunteer = await newVolunteer.save();
        
-        Activity.find({Current_assigned:{$lt:Max_volunteers}},(err,activity)=>{
+        Activity.find({ $expr: { $lt: [ "$Current_assigned" , "$Max_volunteers" ] } },(err,activity)=>{
             if(!err)
             {
             const bestActivitiesIDs=getBestActivitiesForUser(userDict,volunteer,activity);
@@ -54,7 +54,7 @@ router.get("/get-reccomended-activities/:userid",async (req,res)=> {
         )
         res.status(200).json(reccomended_act)
 
-        {Reccomendation_ActivityID,User_Activity_Select} = await Reccomendation.findOne({UserId:req.body.userid},{_id:0,Reccomendation_ActivityID:1,User_Activity_Select:1});
+        Reccomendation_ActivityID = await Reccomendation.findOne({UserId:req.body.userid},{_id:0,Reccomendation_ActivityID:1,User_Activity_Select:1});
         if(!User_Activity_Select)
         {
 
@@ -95,7 +95,6 @@ router.get("/checkExists/:username",async(req,res)=>{
         res.status(404).json({"message":"Not found"});
     }
 })
-
 
 
 

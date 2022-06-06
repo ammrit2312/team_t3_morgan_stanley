@@ -51,7 +51,7 @@ router.put("/updateList/:id/:uid",async(req,res)=>{
     try{
     id=req.params.id 
     userID=req.params.uid
-    const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID}});
+    const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID},$inc:{Current_assigned : 1}});
     const status=await Reccomendation.updateMany({UserId:userID},{User_Activity_Select:true});
     res.json(status);
     }
@@ -61,7 +61,6 @@ router.put("/updateList/:id/:uid",async(req,res)=>{
     }
 })
 //prefer
-//Take care of capacity
 //timeout for volunteer to view 
 
 //Re=[]
