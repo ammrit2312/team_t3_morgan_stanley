@@ -26,6 +26,10 @@ const ActivitySchema = new mongoose.Schema({
         type:Array,
         default:[]
     },
+    Current_assigned:{
+        type:Number,
+        default:0
+    },
     Max_volunteers:{
         type:Number,
         default:0

@@ -16,7 +16,7 @@ router.post("/submit-volunteer",async(req,res) => {
         const newVolunteer = new Volunteers(req.body);    
         const volunteer = await newVolunteer.save();
        
-        Activity.find({},(err,activity)=>{
+        Activity.find({Current_assigned:{$lt:Max_volunteers}},(err,activity)=>{
             if(!err)
             {
             const bestActivitiesIDs=getBestActivitiesForUser(userDict,volunteer,activity);
@@ -53,6 +53,21 @@ router.get("/get-reccomended-activities/:userid",async (req,res)=> {
             })
         )
         res.status(200).json(reccomended_act)
+
+        {Reccomendation_ActivityID,User_Activity_Select} = await Reccomendation.findOne({UserId:req.body.userid},{_id:0,Reccomendation_ActivityID:1,User_Activity_Select:1});
+        if(!User_Activity_Select)
+        {
+
+            const reccomended_act = await Promise.all(
+                Reccomendation_ActivityID.map((activityId) => {
+                    return Activity.findById(activityId,{_id:1,ActivityName:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1,Activty_Description:1});
+                })
+            )
+            res.status(200).json(reccomended_act)
+        }
+        else{
+            res.json({"message":"User already selected activity"});
+        }
     }
     catch(err){
         console.log(err);
