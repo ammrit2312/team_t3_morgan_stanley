@@ -1,17 +1,3 @@
-/**
- * For: Username
- * @type {RegExp}
- * Conditions:
- * - Must be lowercase only. Upper case letters are not allowed.
- * - Must start with a lowercase letter.
- * - Must contain atleast one lowercase letter
- * - Must contain at least one number
- * - Must be atleast 5 characters long
- * - Underscore is allowed
- * - period is allowed
- */
-export const regExpUsername = /^[a-z][a-z0-9_.]{1,29}$/;
-
 export const regExpEmail = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})$/;
 
 /**

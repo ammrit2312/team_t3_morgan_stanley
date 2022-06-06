@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./Auth.module.css";
+import React, { useState } from "react";
+import styles from "./auth.module.css";
 import { Link } from "react-router-dom";
 
 import EmailField from "../../components/design/FormComponents/EmailField";
@@ -13,18 +13,21 @@ import Wave from "../../assets/Top_wave.svg";
 import { colors } from "../../constants/colors.constants";
 
 const SignInPage = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
         <div className={styles.leftContainer}>
-          <img src={img} alt="sign-in" className={styles.imageStyle}/>
+          <img src={img} alt="sign-in" className={styles.imageStyle} />
         </div>
         <div className={styles.rightContainer}>
           <form className={styles.formWrapper}>
-          <div className={styles.heading}>Sign In</div>
-            <EmailField required={true}/>
-            <PasswordField required={true}/>
-            <Button 
+            <div className={styles.heading}>Sign In</div>
+            <EmailField required={true} onChange={setEmail} email={email}/>
+            <PasswordField required={true} onChange={setPassword} password={password} useRegex={false}/>
+            <Button
               value="Login"
               customStyles={{
                 backgroundColor: colors.PRIMARY_ORANGE,
@@ -36,7 +39,10 @@ const SignInPage = () => {
               }}
             />
             <div>
-              <span className={styles.text}>Not having an account?</span> <Link to="/volunteer/sign-up" className={styles.link}>Sign Up</Link>
+              <span className={styles.text}>Not having an account?</span>{" "}
+              <Link to="/volunteer/sign-up" className={styles.link}>
+                Sign Up
+              </Link>
             </div>
           </form>
         </div>

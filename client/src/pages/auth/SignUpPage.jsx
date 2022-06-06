@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./Auth.module.css";
+import React, {useState} from "react";
+import styles from "./auth.module.css";
 import { Link } from "react-router-dom";
 
 import EmailField from "../../components/design/FormComponents/EmailField";
@@ -12,6 +12,10 @@ import img from "../../assets/images/sign-up.svg";
 import { colors } from "../../constants/colors.constants";
 
 const SignUpPage = () => {
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
@@ -21,8 +25,8 @@ const SignUpPage = () => {
         <form className={styles.rightContainer}>
           <div className={styles.formWrapper}>
           <div className={styles.heading}>Sign Up</div>
-            <EmailField required={true}/>
-            <PasswordField required={true}/>
+          <EmailField required={true} onChange={setEmail} email={email}/>
+            <PasswordField required={true} onChange={setPassword} password={password}/>
             <Button 
               value="Sign Up"
               customStyles={{

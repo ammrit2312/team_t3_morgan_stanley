@@ -53,11 +53,11 @@ export default function SignedOutRouter() {
 
 // Generic Pages
 const SignUpPage = Loadable(
-    lazy(() => import("../../../pages/Auth/SignUpPage"))
+    lazy(() => import("../../../pages/auth/SignUpPage"))
 );
 
 const SignInPage = Loadable(
-    lazy(()=>import("../../../pages/Auth/SignInPage")),
+    lazy(()=>import("../../../pages/auth/SignInPage")),
 );
 
 const ContactUsPage = Loadable(

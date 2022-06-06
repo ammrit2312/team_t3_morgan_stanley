@@ -10,7 +10,6 @@ import showNotification from "../../utils/notifications.utils";
 
 /**
  * @author Mayank1403 <mayank1403@gmail.com>
- * @author tanishqvyas <tanishqvyas069@gmail.com>
  * @description - Custom useErrorHandlers hook to handle firebase errors side-effects.
  * @returns {Object} - Object containing various error handlers. A list of which is as follows:
  *  - firebaseErrorHandler
