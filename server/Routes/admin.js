@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Activity = require('../Model/Activity');
 const Reccomendation = require('../Model/Reccomendation');
+const Volunteers = require('../Model/Volunteers');
 //route for admin to submit an activity
 router.post("/submit-activity",async (req,res) => {
     try{
@@ -54,6 +55,7 @@ router.put("/updateList/:id/:uid",async(req,res)=>{
     userID=req.params.uid
     const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID},$inc:{Current_assigned : 1}});
     const status=await Reccomendation.updateMany({UserId:userID},{User_Activity_Select:true});
+    await Volunteers.updateOne({_id:userID},{assigned:true});
     res.status(200).json({"message":"Assigned successfully"});
     }
     catch(e)

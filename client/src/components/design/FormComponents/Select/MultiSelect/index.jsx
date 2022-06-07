@@ -6,6 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
+import TextFieldComp from "../../TextField";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -19,7 +20,9 @@ const MenuProps = {
 };
 
 const MultiSelect = ({ list, item, setItem, label, required=false}) => {
+  const [textVal, setTextVal] = React.useState("");
   const handleChange = (event) => {
+    event.stopPropagation()
     const {
       target: { value },
     } = event;
@@ -49,11 +52,14 @@ const MultiSelect = ({ list, item, setItem, label, required=false}) => {
               <ListItemText primary={name} />
             </MenuItem>
           ))}
-          {/* <MenuItem key={name} value={name}>
-              <Checkbox checked={item.indexOf(name) > -1} />
-              <ListItemText primary={name} />
+          {/* <MenuItem value={"Other"}>
+            <Checkbox checked={item.indexOf("Other") > -1}/>
+            <ListItemText primary={"Other"} />
           </MenuItem> */}
         </Select>
+        {/* <div>
+          {item.indexOf("Other") > -1 && <TextFieldComp label={"Metion the other options (put ',' between different values)"} variant={"outlined"} required={true} value={textVal} onChange={setTextVal}/>}
+        </div> */}
       </FormControl>
     </div>
   );
