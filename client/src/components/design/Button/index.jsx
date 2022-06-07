@@ -11,10 +11,10 @@ import styles from './Button.module.css';
  * @param {Object} customStyles An object containing the custom styles to be applied to the button.
  * @returns A custom Button component
  */
-function Button({ value, type = 'button', onClick, disabled, btnType = 'primary', customStyles={} }) {
+function Button({ value, type = 'button', onClick, disabled, btnType = 'primary', customStyles={}, icon }) {
   return (
     <button className={`${styles.button} ${styles[btnType]}`} type={type} disabled={disabled} onClick={onClick} style={customStyles}>
-      {value}
+      {icon} {value}
     </button>
   );
 }

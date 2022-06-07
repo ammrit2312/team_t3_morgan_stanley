@@ -36,6 +36,10 @@ export default function SignedOutRouter() {
                 //     element: <VolunteerFormPage />
                 // },
                 {
+                    path: entireRoutes.VOLUNTEER,
+                    element: <Dashboard />
+                },
+                {
                     path: entireRoutes.SIGN_UP,
                     element: <SignUpPage />
                 },
@@ -80,4 +84,8 @@ const VolunteerFormPage = Loadable(
 
 const UploadActivityForm = Loadable(
     lazy(()=>import("../../../pages/UploadActivityFormPage")),
+);
+
+const Dashboard = Loadable(
+    lazy(()=>import("../../../pages/Dashboards"))
 );

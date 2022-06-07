@@ -12,8 +12,18 @@ export const signedOutNavbarLinks = [
     ...navLinks,
 ];
 
-// export const signedInVolunteerLinks = [
-//     {
-
-//     }
-// ]
+export const signedInVolunteerLinks = [
+    {
+        name: "Home",
+        path: entireRoutes.BASE,
+    },
+    {
+        name: "Upcoming Activities",
+        path: entireRoutes.VOLUNTEER_UPCOMING_ACTIVITIES,
+    },
+    {
+        name: "Profile",
+        path: entireRoutes.ACCOUNT_PROFILE,
+    },
+    ...navLinks,
+]

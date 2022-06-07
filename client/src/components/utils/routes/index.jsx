@@ -37,5 +37,4 @@ export default function Router() {
       return <SignedInVolunteerRouter/>;
   else
       return <div>No Idea Man</div>;
-  return <SignedOutRouter />;
 }

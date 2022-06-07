@@ -18,7 +18,7 @@ import SignedOutNavbar from "../components/design/Navbars/SignedOutNavbar";
 export default function SignedOutLayout() {
   return (
     <main className={styles.container}>
-      <SignedOutNavbar navLinks={signedOutNavbarLinks} />
+      <SignedOutNavbar navLinks={signedOutNavbarLinks} signedOut={true}/>
       <Outlet />
     </main>
   );

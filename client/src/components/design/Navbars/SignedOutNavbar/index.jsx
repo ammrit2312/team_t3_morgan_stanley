@@ -19,7 +19,7 @@ import Divider from "@mui/material/Divider";
 import NavLink from "../NavLink";
 import Button from "../../Button";
 
-const SignedOutNavbar = ({ navLinks }) => {
+const SignedOutNavbar = ({ navLinks, signedOut }) => {
 
     const navigate = useNavigate();
 
@@ -40,8 +40,8 @@ const SignedOutNavbar = ({ navLinks }) => {
                     ))}
                 </nav>
                 <Button
-                    value="Sign In"
-                    onClick={() => navigate(entireRoutes.BASE)}
+                    value={signedOut?"Sign In":"Sign Out"}
+                    onClick={signedOut?() => navigate(entireRoutes.BASE) : ()=>alert("Sign Out")}
                     customStyles={{
                         backgroundColor: colors.PRIMARY_ORANGE,
                         borderRadius: "10px",
@@ -62,8 +62,8 @@ const SignedOutNavbar = ({ navLinks }) => {
                 <Menu menu={navLinks} />
                 <Divider />
                 <Button 
-                    value="Sign In" 
-                    onClick={() => navigate(entireRoutes.BASE)} 
+                    value={signedOut?"Sign In":"Sign Out"}
+                    onClick={signedOut?() => navigate(entireRoutes.BASE) : ()=>alert("Sign Out")}
                     customStyles={{
                         backgroundColor: colors.PRIMARY_ORANGE,
                         borderRadius: "10px",

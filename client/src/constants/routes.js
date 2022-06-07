@@ -19,6 +19,7 @@ export const routes = {
     FORM: "form",
     UPLOAD_ACTIVITY: "upload-activity",
     SHOW_VOLUNTEERS: "show-volunteers",
+    UPCOMING_ACTIVITIES: "upcoming-activities",
 };
 
 export const entireRoutes = {
@@ -27,6 +28,8 @@ export const entireRoutes = {
     SIGN_IN: entirepath(routes.SIGN_IN),
     SIGN_UP: entirepath(routes.VOLUNTEER, routes.SIGN_UP),
     VOLUNTEER_FORM: entirepath(routes.VOLUNTEER, routes.FORM),
+    VOLUNTEER_UPCOMING_ACTIVITIES: entirepath(routes.VOLUNTEER, routes.UPCOMING_ACTIVITIES),
+    ADMIN_UPCOMING_ACTIVITIES: entirepath(routes.ADMIN, routes.UPCOMING_ACTIVITIES),
     ADMIN_UPLOAD_ACTIVITY: entirepath(routes.ADMIN, routes.UPLOAD_ACTIVITY),
     ADMIN_SHOW_VOLUNTEERS: entirepath(routes.ADMIN, routes.SHOW_VOLUNTEERS),
     ACCOUNT: entirepath(routes.ACCOUNT),

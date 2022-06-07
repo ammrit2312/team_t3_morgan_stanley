@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./layouts.module.css";
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
+
+// components
+import SignedOutNavbar from "../components/design/Navbars/SignedOutNavbar";
 
 /**
  * 
@@ -9,33 +11,12 @@ import { useState } from "react";
  * @return Signedin layout for the page
  */
 
-// componenets
-import Drawer from "@mui/material/Drawer";
-// import Menu from "../components/design/Navbars/Menu";
-import { GiHamburgerMenu } from "react-icons/gi";
-
-// constants
-// import { signedInBrandNavLinks } from "../constants/navbar.constants";
-
-export default function SignedInLayout() {
-    const [showDrawer, setShowDrawer] = useState(false);
+export default function SignedInLayout({navLinks}) {
 
     return (
         <main className={styles.container}>
-        {/* <Drawer
-            anchor="left"
-            open={showDrawer}
-            onClose={() => setShowDrawer(false)}
-        >
-            <Menu items={signedInBrandNavLinks} />
-        </Drawer>
-        <div className={styles.header}>
-            <GiHamburgerMenu onClick={()=>setShowDrawer(!showDrawer)}/>
-            <div>
-            Navbar
-            </div>
-        </div> */}
-        <Outlet />
+            <SignedOutNavbar navLinks={navLinks} signedOut={false}/>
+            <Outlet />
         </main>
     );
 }

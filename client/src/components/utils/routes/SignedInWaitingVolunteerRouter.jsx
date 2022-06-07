@@ -10,7 +10,7 @@ import { Navigate, useRoutes } from "react-router-dom";
 
 // constants
 import { entireRoutes, routes } from "../../../constants/routes";
-import { signedInVolunteerLinks } from "../../../constants/navbar.constants";
+import { signedOutNavbarLinks } from "../../../constants/navbar.constants";
 
 // components
 import { Loadable } from "./Loadable";
@@ -18,16 +18,16 @@ import { Loadable } from "./Loadable";
 // layouts
 import SignedInLayout from "../../../layouts/SignedInLayout";
 
-export default function SignedInVolunteerRouter() {
+export default function SignedInWaitingVolunteerRouter() {
   return useRoutes([
     {
       path: entireRoutes.BASE,
-      element: <SignedInLayout navLinks={signedInVolunteerLinks}/>,
+      element: <SignedInLayout navLinks={signedOutNavbarLinks}/>,
       children: [
-        {
-          path: entireRoutes.VOLUNTEER_FORM,
-          element: <VolunteerFormPage />,
-        },
+        // {
+        //   path: entireRoutes.VOLUNTEER_FORM,
+        //   element: <VolunteerFormPage />,
+        // },
         {
           element: <VolunteerFormPage/>,
           index: true,

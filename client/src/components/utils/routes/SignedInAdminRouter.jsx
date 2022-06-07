@@ -10,6 +10,7 @@ import { Navigate, useRoutes } from "react-router-dom";
 
 // constants
 import { entireRoutes, routes } from "../../../constants/routes";
+import { signedInVolunteerLinks } from "../../../constants/navbar.constants";
 
 // components
 import { Loadable } from "./Loadable";
@@ -21,7 +22,7 @@ export default function SignedInAdminRouter() {
     return useRoutes([
         {
             path: entireRoutes.BASE,
-            element: <SignedInLayout />,
+            element: <SignedInLayout navLinks={signedInVolunteerLinks}/>,
             children: [
                 {
                     path: entireRoutes.ADMIN_UPLOAD_ACTIVITY,
