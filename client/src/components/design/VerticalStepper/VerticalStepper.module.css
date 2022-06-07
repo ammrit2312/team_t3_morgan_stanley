@@ -1,0 +1,20 @@
+.stepIcon{
+    font-size: 2rem;
+}
+
+.stepIconCompleted{
+    fill: var(--green);
+}
+
+.label{
+    font-size: 1.2rem;
+}
+
+.content{
+    font-size: 0.8rem;
+}
+
+.btnGrp{
+    display: flex;
+    justify-content: space-between;
+}

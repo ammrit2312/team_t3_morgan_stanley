@@ -39,6 +39,7 @@
 
 .secondary {
   color: var(--yellow);
+  border: 2px solid var(--yellow);
 }
 
 .secondary:hover {

@@ -5,12 +5,14 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .mainContainer{
     padding: var(--gutter);
     display: flex;
     height: 100%;
+    z-index: 2;
 }
 
 .leftContainer{
@@ -20,7 +22,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid red;
 }
 
 .rightContainer{
@@ -30,5 +31,31 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid blue;
+}
+
+.wave{
+    position: absolute;
+    bottom: 0;
+    /* width: 100%;
+    height: 100%; */
+    /* background-image: url("../../assets/wave.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; */
+    z-index: 0;
+}
+
+.formContainer{
+    width: 70%;
+    padding: 2.5rem 3rem;
+    box-sizing: border-box;
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.btnGrp{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
