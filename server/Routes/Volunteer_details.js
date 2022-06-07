@@ -4,16 +4,15 @@ const Activity = require('../Model/Activity');
 const Reccomendation = require('../Model/Reccomendation');
 
 const getBestActivitiesForUser=require('../functions/mapper');
-
+const getNewVolunteer=require('../functions/getVolunteer');
 var userDict={};
-
+var activityDict={};
 // Route for submitting the volunteer form
 router.post("/submit-volunteer",async(req,res) => {
     try{
 
         const newVolunteer = new Volunteers(req.body);    
         const volunteer = await newVolunteer.save();
-       
         Activity.find({ $expr: { $lt: [ "$Current_assigned" , "$Max_volunteers" ] } },(err,activity)=>{
             if(!err)
             {
@@ -100,7 +99,7 @@ router.get("/checkExists/:username",async(req,res)=>{
     catch(e)
     {
         console.log(e)
-        res.status(404).json({"message":"Not found"});
+        res.status(500).json({"message":e});
     }
 })
 
@@ -125,6 +124,7 @@ router.put("/opt-out/:uID/:actID",async(req,res)=>{
         let userID=req.params.uID;
         let activityID=req.params.actID;
         const data=await Activity.updateOne({_id:activityID},{$pull:{AssignedTo:userID},$inc:{Current_assigned : -1}});
+        await Volunteers.updateOne({_id:userID},{assigned:false});
         if(data.modifiedCount)
             res.status(200).json({"message":"Opted out successfully"})
         else
@@ -137,25 +137,30 @@ router.put("/opt-out/:uID/:actID",async(req,res)=>{
     }
 });
 
-router.get("/get-new-user/:actID",async(req,res)=>{
+router.put("/get-new-user/:actID",async(req,res)=>{
     try{
         let activityID=req.params.actID
-        let actObj=await Activity.find({_id:activityID})
+        let actObj=await Activity.findOne({_id:activityID})
         let users=await Volunteers.find({assigned:false})
-        let userID=getNewVolunteer(users,actObj);
+        let userID=getNewVolunteer(activityDict,actObj,users);
+        console.log(userID)
         if(userID===undefined)
         {
             res.status(500).json({"message":"No such user present"});
         }
         else
         {
-            await Reccomendation.updateOne({userId:userID},{$push:{Reccomendation_ActivityID:actID}});
+            const x=await Reccomendation.updateOne({userId:userID},{$push:{Reccomendation_ActivityID:activityID}});
+            console.log(x)
+            await Activity.updateOne({_id:activityID},{$push:{AssignedTo:userID}});
+            await Volunteers.updateOne({_id:userID},{assigned:true})
             res.status(200).json({"message":"New Volunteer mapping recommended"});
         }
 
     }
     catch(e)
     {
+        console.log(e)
         res.status(500).json({"message":e});
     }
 })
@@ -164,7 +169,7 @@ router.get("/get-new-user/:actID",async(req,res)=>{
 //Frontend send another request to backend to get new volunteer for this activity => backend finds new user for this activity 
 //=> if present backend queries the Recommendation db and pushes the activityID for the userID => volunteer is updated of this
 // by refreshing the page because he keeps querying the recommendation db on every page reload. Admin is also updated on page 
-// reload because he too queries recommendation db on page reload. 
+// reload because he too queries recommendation db on page reload.          
 
 
 //Activity cancellation:
