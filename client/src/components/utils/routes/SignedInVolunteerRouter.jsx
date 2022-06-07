@@ -3,7 +3,7 @@ import { lazy } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 
 /**
- * 
+ *
  * @author ammrit2312 <amriteshc101@icloud.com>
  * @returns the signed in route for volunteer
  */
@@ -18,24 +18,30 @@ import { Loadable } from "./Loadable";
 import SignedInLayout from "../../../layouts/SignedInLayout";
 
 export default function SignedInVolunteerRouter() {
-    return useRoutes([
+  return useRoutes([
+    {
+      path: entireRoutes.BASE,
+      element: <SignedInLayout />,
+      children: [
         {
-            path: entireRoutes.BASE,
-            element: <SignedInLayout />,
-            children: [
-                {
-                    path: entireRoutes.VOLUNTEER_FORM,
-                    // element: <SignInPage />
-                },
-                {path: entireRoutes.NOT_FOUND, element: <NotFoundPage />},
-            ],
+          path: entireRoutes.VOLUNTEER_FORM,
+          element: <VolunteerFormPage />,
         },
-        { path: "*", element: <Navigate to={entireRoutes.NOT_FOUND} replace /> },
-    ])
+        {
+          element: <VolunteerFormPage/>,
+          index: true,
+        },
+        { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
+      ],
+    },
+    { path: "*", element: <Navigate to={entireRoutes.NOT_FOUND} replace /> },
+  ]);
 }
 
 // Generic Pages
 
-const NotFoundPage = Loadable(
-    lazy(()=>import("../../../pages/NotFound")),
+const NotFoundPage = Loadable(lazy(() => import("../../../pages/NotFound")));
+
+const VolunteerFormPage = Loadable(
+  lazy(() => import("../../../pages/VolunteerFormPage"))
 );

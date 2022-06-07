@@ -24,8 +24,8 @@ export default function SignedInAdminRouter() {
             element: <SignedInLayout />,
             children: [
                 {
-                    path: entireRoutes.VOLUNTEER_FORM,
-                    // element: <SignInPage />
+                    path: entireRoutes.ADMIN_UPLOAD_ACTIVITY,
+                    element: <UploadActivityForm />
                 },
                 {path: entireRoutes.NOT_FOUND, element: <NotFoundPage />},
             ],
@@ -38,4 +38,8 @@ export default function SignedInAdminRouter() {
 
 const NotFoundPage = Loadable(
     lazy(()=>import("../../../pages/NotFound")),
+);
+
+const UploadActivityForm = Loadable(
+    lazy(()=>import("../../../pages/UploadActivityFormPage")),
 );

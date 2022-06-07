@@ -18,7 +18,8 @@ export const resetUser = () => ({
  * A set user contains the following fields:
  * uid
  * email
- * method
+ * formFilled : true/false
+ * accountType: volunteer/admin
  */
 
 // User Reducer

@@ -31,10 +31,10 @@ export default function SignedOutRouter() {
                 //     path: entireRoutes.SIGN_IN,
                 //     element: <SignInPage />
                 // },
-                {
-                    path: entireRoutes.VOLUNTEER_FORM,
-                    element: <VolunteerFormPage />
-                },
+                // {
+                //     path: entireRoutes.VOLUNTEER_FORM,
+                //     element: <VolunteerFormPage />
+                // },
                 {
                     path: entireRoutes.SIGN_UP,
                     element: <SignUpPage />
@@ -42,6 +42,11 @@ export default function SignedOutRouter() {
                 {
                     path: entireRoutes.CONTACT_US,
                     element: <ContactUsPage />
+                },
+                // Check
+                {
+                    path: entireRoutes.ADMIN_UPLOAD_ACTIVITY,
+                    element: <UploadActivityForm />
                 },
                 {path: entireRoutes.NOT_FOUND, element: <NotFoundPage />},
             ],
@@ -71,4 +76,8 @@ const NotFoundPage = Loadable(
 // check
 const VolunteerFormPage = Loadable(
     lazy(()=>import("../../../pages/VolunteerFormPage")),
+);
+
+const UploadActivityForm = Loadable(
+    lazy(()=>import("../../../pages/UploadActivityFormPage")),
 );

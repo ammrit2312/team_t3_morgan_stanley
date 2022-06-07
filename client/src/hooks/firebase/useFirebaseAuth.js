@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-// firebase functions 
+// firebase functions
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -18,6 +18,7 @@ import useFirebaseErrorHandler from "./useFirebaseErrorHandler";
 
 // constants
 import { entireRoutes, routes } from "../../constants/routes";
+import { accountTypes } from "../../constants/accounts.constants";
 
 // redux actions
 import { setUser, resetUser } from "../../redux/ducks/userDuck";
@@ -137,18 +138,24 @@ function useFirebaseAuth() {
         // signed in
         const { user } = userCredential;
         console.log("user credentials:", userCredential);
-        // set user in redux
-        dispatch(setUser({
-          uid: user.uid,
-          email: user.email,
-          method: "signUp",
-        }));
-
+        
         showNotification({
           title: "Sign Up Successful",
           type: "info",
         });
         navigate(entireRoutes.VOLUNTEER_FORM);
+        
+        // set user in redux
+        if (accountType === accountTypes.VOLUNTEER) {
+          dispatch(
+            setUser({
+              uid: user.uid,
+              email: user.email,
+              formFilled: false,
+              accountType: accountTypes.VOLUNTEER, 
+            })
+          );
+        }
       })
       .catch((error) => {
         deleteUserFromFirebase(error);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // css
-import styles from "./VolunteerFormPage.module.css";
+import styles from "./UploadActivityFormPage.module.css";
 
 //assets
 import Wave from "../../assets/Top_wave.svg";
@@ -13,18 +13,18 @@ import FormCard from './FormCard';
 // later
 const steps = [
     {
-      label: 'Personal Details',
+      label: 'Activity Details',
       description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque omnis temporibus eius eveniet deserunt laboriosam labore explicabo, architecto sequi et, quae aliquam fugit optio quam deleniti vitae commodi a suscipit beatae? Pariatur error sunt eligendi esse perspiciatis`,
       button: false
     },
     {
-      label: 'Organization Details',
+      label: 'Basic Requirements',
       description:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque omnis temporibus eius eveniet deserunt laboriosam labore explicabo',
         button: false
     },
     {
-      label: 'Volunteer Details',
+      label: 'Optional Requirements',
       description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque omnis temporibus eius eveniet deserunt laboriosam labore explicabo, architecto sequi et, quae aliquam fugit optio quam deleniti vitae commodi a suscipit beatae? Pariatur error sunt eligendi esse perspiciatis`,
         button: false
     },

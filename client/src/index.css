@@ -1,9 +1,30 @@
 :root{
   --gutter:  0 3vw;
   --yellow: #fcc900;
+  --dark-yellow: #ddb100;
   --white: #fff;
   --green: #00b300;
   --nav-height: 88px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--yellow); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-yellow); 
 }
 
 body {
