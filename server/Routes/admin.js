@@ -47,6 +47,7 @@ router.get("/list-all-recommended-activities",async(req,res)=>{
     res.status(200).json(activities);
 });
 
+// route to update the AssignedTo list
 router.put("/updateList/:id/:uid",async(req,res)=>{
     try{
     id=req.params.id 
@@ -60,6 +61,25 @@ router.put("/updateList/:id/:uid",async(req,res)=>{
         console.log(e);
     }
 })
+
+// route for getting the uptime since the reccomendation has been given to the volunteer
+router.get("/get-uptime/:uid",async(req,res) => {
+    let current_time = new Date();
+    try{
+        const {createdAt} = await Reccomendation.findOne({UserId:req.params.uid},{_id:0,createdAt:1})
+        total = current_time.getTime() - createdAt.getTime()
+        const hours = (Math.floor((total)/1000))/3600;
+        console.log(Math.round(hours));
+        res.json({"message":"works"})
+    }
+    catch(err){
+        console.log(err);
+    }
+})
+
+
+//prefer
+//timeout for volunteer to view 
 
 // to update the array saying "I don't want to volunteer"
 //get all the users who have not been assigned

@@ -42,21 +42,25 @@ const addReccomendation = async(volunteer,rec) => {
 
 //Route for getting the reccomended activities on the volunteer side
 router.get("/get-reccomended-activities/:userid",async (req,res)=> {
+    let userid = req.params.userid
     try{
-        const {Reccomendation_ActivityID} = await Reccomendation.findOne({UserId:req.params.userid},{_id:0,Reccomendation_ActivityID:1});
-        
-        const reccomended_act = await Promise.all(
-            Reccomendation_ActivityID.map((activityId) => {
-                return Activity.findById(activityId,{_id:1,ActivityName:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1,Activty_Description:1});
-            })
-        )
-        res.status(200).json(reccomended_act)
+        const {Reccomendation_ActivityID,User_Activity_Select} = await Reccomendation.findOne({UserId:userid},{_id:0,Reccomendation_ActivityID:1,User_Activity_Select:1});
 
-        Reccomendation_ActivityID = await Reccomendation.findOne({UserId:req.body.userid},{_id:0,Reccomendation_ActivityID:1,User_Activity_Select:1});
         if(!User_Activity_Select)
         {
+                // calculating the uptime
+                let current_time = new Date();
+                const {createdAt} = await Reccomendation.findOne({UserId:req.params.userid},{_id:0,createdAt:1})
+                total = current_time.getTime() - createdAt.getTime()
+                const hours = (Math.floor((total)/1000))/3600;
 
-            const reccomended_act = await Promise.all(
+                //here 5 is the number of hours after which the admin will chose the activity for the user (in case user dosen't prefer anythin)
+                if(Math.round(hours) >= 5){
+                    exceededUptime(Reccomendation_ActivityID,userid);
+                    return res.json({"message":"uptime exceeded. Admin will assign you the activity"})
+                }
+
+                const reccomended_act = await Promise.all(
                 Reccomendation_ActivityID.map((activityId) => {
                     return Activity.findById(activityId,{_id:1,ActivityName:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1,Activty_Description:1});
                 })
@@ -72,6 +76,12 @@ router.get("/get-reccomended-activities/:userid",async (req,res)=> {
         res.status(500);
     }
 })
+
+// function to add the activities from prefered list if it exceeds uptime
+const exceededUptime = async(activity_ids,uid) => {
+   await Reccomendation.findOneAndUpdate({UserId:uid},{ $push : {"UserPreferred_Activity": {$each:activity_ids} }});
+}
+
 
 router.get("/checkExists/:username",async(req,res)=>{
     try

@@ -1,5 +1,10 @@
 .container{
     box-sizing: border-box;
     width: 100%;
-    padding: 2vh 2vw;
+    padding: 2vh 0;
+}
+
+.eyeicon{
+    cursor: pointer;
+    font-size: 1.25rem;
 }

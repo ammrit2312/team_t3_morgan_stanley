@@ -3,13 +3,16 @@ import createSagaMiddleware from "redux-saga";
 import { composeWithDevTools } from "redux-devtools-extension";
 import storage from "redux-persist/lib/storage";
 
+// Reducers
+import userReducer  from "./ducks/userDuck";
+
 // Add persister
 import { persistStore, persistReducer } from "redux-persist";
 
-import { watcherSaga } from "./sagas";
-
 // Combining all the reducers
-const reducer = combineReducers({});
+const reducer = combineReducers({
+  user: userReducer,
+});
 
 const persistConfig = {
   key: "root",
@@ -33,5 +36,5 @@ export const store = createStore(
 export const persistor = persistStore(store);
 
 // Starting the Watcher Saga to listen redux actions
-sagaMiddleware.run(watcherSaga);
+// sagaMiddleware.run(watcherSaga);
 
