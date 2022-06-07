@@ -12,7 +12,6 @@ import styles from "../VolunteerFormPage.module.css";
 
 const FormCard = ({activeStep, len, continueStepper, backStepper, submitResp=()=>{} }) => {
   const [name, setName] = useState("");
-  const [userName, setUserName] = useState("");
   const [address, setAddress] = useState("");
   const [college, setCollege] = useState("");
     const [email, setEmail] = useState("");
@@ -39,13 +38,6 @@ const FormCard = ({activeStep, len, continueStepper, backStepper, submitResp=()=
       required: true,
       value: name,
       setVar: setName,
-    },
-    {
-        input: "input",
-        label: "Username",
-        required: true,
-        value: userName,
-        setVar: setUserName,
     },
     {
       input: "textarea",

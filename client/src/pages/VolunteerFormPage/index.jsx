@@ -13,18 +13,18 @@ import FormCard from './FormCard';
 // later
 const steps = [
     {
-      label: 'Select campaign settings',
+      label: 'Fill personal details',
       description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque omnis temporibus eius eveniet deserunt laboriosam labore explicabo, architecto sequi et, quae aliquam fugit optio quam deleniti vitae commodi a suscipit beatae? Pariatur error sunt eligendi esse perspiciatis`,
       button: false
     },
     {
-      label: 'Create an ad group',
+      label: 'Tell us more about you',
       description:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque omnis temporibus eius eveniet deserunt laboriosam labore explicabo',
         button: false
     },
     {
-      label: 'Create an ad',
+      label: 'Relevant skills and details',
       description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque omnis temporibus eius eveniet deserunt laboriosam labore explicabo, architecto sequi et, quae aliquam fugit optio quam deleniti vitae commodi a suscipit beatae? Pariatur error sunt eligendi esse perspiciatis`,
         button: false
     },
@@ -47,6 +47,7 @@ const VolunteerFormPage = () => {
             <div className={styles.mainContainer}>
                 <div className={styles.leftContainer}>
                     {/*https://stackoverflow.com/questions/41078478/css-animated-checkmark*/}
+                    <h1 className={styles.heading}>Volunteer Form</h1>
                     <VerticalStepper 
                         data = {steps}
                         activeStep = {activeStep}
