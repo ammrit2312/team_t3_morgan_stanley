@@ -78,6 +78,11 @@ const VolunteerSchema = new mongoose.Schema({
         type:Array,
         require:true,
         default:[]
+    },
+    assigned:{
+        type:Boolean,
+        require:true,
+        default:false
     }
 
 },{timestamps:true}
