@@ -38,10 +38,9 @@ const getMatchScoreForUser=(userID,userDict,userData,admin)=>{
     userDict[userID]={};
     admin.forEach((adminObj)=>{
         let score = 0;
-        let id=adminObj._id.toString();
+        let activityID=adminObj._id.toString();
         score=(adminObj.Activity_Mode[0]==="online")?handleScore(userData,adminObj,1):handleScore(userData,adminObj,0);
-        userDict[userID][id]=score;
-      
+        userDict[userID][activityID]=score;
     });
 
 }
@@ -56,6 +55,3 @@ const getBestActivitiesForUser=(userDict,userObject,adminReq)=>{
 }
 
 module.exports=getBestActivitiesForUser;
-
-//TODO:
-//Take care of capacity
