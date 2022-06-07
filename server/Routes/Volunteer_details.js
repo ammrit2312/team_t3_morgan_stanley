@@ -7,10 +7,8 @@ const getBestActivitiesForUser=require('../functions/mapper');
 
 var userDict={};
 
-
 // Route for submitting the volunteer form
 router.post("/submit-volunteer",async(req,res) => {
-    let activities=[]
     try{
 
         const newVolunteer = new Volunteers(req.body);    
@@ -110,6 +108,60 @@ router.get("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
         console.log(err);
     }
 })
+
+
+router.put("/opt-out/:uID/:actID",async(req,res)=>{
+    try{
+        let userID=req.params.uID;
+        let activityID=req.params.actID;
+        const data=await Activity.updateOne({_id:activityID},{$pull:{AssignedTo:userID},$inc:{Current_assigned : -1}});
+        if(data.modifiedCount)
+            res.status(200).json({"message":"Opted out successfully"})
+        else
+            res.status(500).json({"message":"Opt out unsucessful"});
+    }
+    catch(e)
+    {
+        console.log(e);
+        res.status(500).json({"message":e});
+    }
+});
+
+router.get("/get-new-user/:actID",async(req,res)=>{
+    try{
+        let activityID=req.params.actID
+        let actObj=await Activity.find({_id:activityID})
+        let users=await Volunteers.find({assigned:false})
+        let userID=getNewVolunteer(users,actObj);
+        if(userID===undefined)
+        {
+            res.status(500).json({"message":"No such user present"});
+        }
+        else
+        {
+            await Reccomendation.updateOne({userId:userID},{$push:{Reccomendation_ActivityID:actID}});
+            res.status(200).json({"message":"New Volunteer mapping recommended"});
+        }
+
+    }
+    catch(e)
+    {
+        res.status(500).json({"message":e});
+    }
+})
+//How it works now:
+//Volunteer opts out by a button => fires backend request => backend removes his assignment => send response "he is removed"
+//Frontend send another request to backend to get new volunteer for this activity => backend finds new user for this activity 
+//=> if present backend queries the Recommendation db and pushes the activityID for the userID => volunteer is updated of this
+// by refreshing the page because he keeps querying the recommendation db on every page reload. Admin is also updated on page 
+// reload because he too queries recommendation db on page reload. 
+
+
+//Activity cancellation:
+//Admin cancels by button => fires backend => delete the record from db => have to notify 
+
+//Broadcast schema and post to this=>name of the activity => broadcast it in the forum tab
+
 
 
 module.exports = router
