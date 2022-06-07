@@ -39,3 +39,46 @@
     color: var(--black);
 }
 
+.iconTitle{
+    font-size: 1.2rem;
+    color: var(--black);
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.iconContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.iconContain{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 1rem 2rem;
+}
+
+.iconDetails{
+    margin: 0;
+    font-size: 1rem;
+    color: var(--yellow);
+    font-weight: bold;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.locationStyler{
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
