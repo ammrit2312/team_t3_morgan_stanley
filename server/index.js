@@ -10,6 +10,7 @@ const morgan = require('morgan');
 const adminRoutes = require("./Routes/admin")
 const volunteerRoutes=require("./Routes/Volunteer_details")
 const userRoutes = require("./Routes/users");
+const notificationRoutes = require("./Routes/notification");
 
 const uri="mongodb+srv://raghav-tiruvallur:qwertyDUDE@cluster0.1npdfrx.mongodb.net/test";
 
@@ -27,6 +28,9 @@ mongoose.connect(uri,{useNewUrlParser:true,useUnifiedTopology:true},()=>{
 app.use("/api/admin",adminRoutes);
 app.use("/api/admin",volunteerRoutes);
 app.use("/api/user",userRoutes);
+app.use("/api/admin",notificationRoutes);
+
+
 app.listen(8800,() => {
     console.log("backend running");
 })
