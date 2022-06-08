@@ -66,6 +66,21 @@ router.put("/updateList/:id/:uid",async(req,res)=>{
     }
 })
 
+// route to update the Attendance
+router.put("/updateList/:aid/:uid",async(req,res)=>{
+    try{
+    aid=req.params.aid 
+    uid=req.params.uid
+    const data =await Volunteers.updateOne({UserID:uid},{$inc:{Volunteer_Number_Of_Activities_Attended : 1}});
+    const status=await Activity.findOneAndUpdate({ActivityID:aid},{ $push : {"Activity_Attendance": { newItem: uid } }});
+    res.status(200).json({"message":"Attendance updated successfully"});
+    }
+    catch(e)
+    {
+        console.log(e);
+    }
+})
+
 // route for getting the uptime since the reccomendation has been given to the volunteer
 router.get("/get-uptime/:uid",async(req,res) => {
     let current_time = new Date();
