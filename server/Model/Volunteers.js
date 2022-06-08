@@ -59,9 +59,9 @@ const VolunteerSchema = new mongoose.Schema({
     },
 
     Volunteer_Platform:{
-        type:Array,
+        type:String,
         require:true,
-        default:[]
+        default:""
     },
 
     Volunteer_Preferred_Locations:{
