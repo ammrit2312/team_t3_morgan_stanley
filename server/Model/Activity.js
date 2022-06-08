@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+//ActivityType,Date,Time,Duration
 const ActivitySchema = new mongoose.Schema({
     ActivityName:{
         type:String,

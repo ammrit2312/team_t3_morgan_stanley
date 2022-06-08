@@ -8,7 +8,7 @@ const getNewVolunteer=require('../functions/getVolunteer');
 var userDict={};
 var activityDict={};
 // Route for submitting the volunteer form
-router.post("/submit-volunteer",async(req,res) => {
+router.post("/submit-volunteer/:uid",async(req,res) => {
     try{
 
         const newVolunteer = new Volunteers(req.body);    
@@ -80,16 +80,16 @@ router.get("/get-reccomended-activities/:userid",async (req,res)=> {
 const exceededUptime = async(activity_ids,uid) => {
    await Reccomendation.findOneAndUpdate({UserId:uid},{ $push : {"UserPreferred_Activity": {$each:activity_ids} }});
 }
-
-
-router.get("/checkExists/:username",async(req,res)=>{
+//route for adding user to Users collection
+//modify
+router.get("/checkExists/:userID",async(req,res)=>{
     try
     {
-        let username=req.params.username
-        const data=await Volunteers.find({Volunteer_Username:username})
+        let username=req.params.userID
+        const data=await Users.find({Volunteer_Username:username})
         if(data.length > 0)
         {
-            res.status(200).json({"message":"Success"});
+            res.status(200).json({"message":data});
         }
         else
         {
@@ -171,9 +171,6 @@ router.put("/get-new-user/:actID",async(req,res)=>{
 // by refreshing the page because he keeps querying the recommendation db on every page reload. Admin is also updated on page 
 // reload because he too queries recommendation db on page reload.          
 
-
-//Activity cancellation:
-//Admin cancels by button => fires backend => delete the record from db => have to notify 
 
 //Broadcast schema and post to this=>name of the activity => broadcast it in the forum tab
 

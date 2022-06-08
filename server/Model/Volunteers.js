@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
 const VolunteerSchema = new mongoose.Schema({
+    Volunteer_ID:{
+        type:String,
+        require:true,
+        default:"",
+        unique:true
+    },
     Volunteer_Name:{
         type:String,
         require:true,
