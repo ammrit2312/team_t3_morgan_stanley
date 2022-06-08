@@ -18,7 +18,7 @@ export const GET = (url, headers) =>
   axiosInstance({
     method: "get",
     url,
-    headers: headers ?? {},
+    headers: headers || {},
   });
 
 /**
@@ -33,6 +33,6 @@ export const POST = (url, body, headers) =>
   axiosInstance({
     method: "post",
     url,
-    headers: headers ?? {},
-    data: body ?? {},
+    headers: headers || {},
+    data: body || {},
   });

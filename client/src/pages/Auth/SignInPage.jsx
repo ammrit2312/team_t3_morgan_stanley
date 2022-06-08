@@ -13,6 +13,8 @@ import useFirebaseAuth from "../../hooks/firebase/useFirebaseAuth";
 
 // constants
 import { colors } from "../../constants/colors.constants";
+import { entireRoutes } from "../../constants/routes";
+import { accountTypes } from "../../constants/accounts.constants";
 
 const SignInPage = () => {
   const [email, setEmail] = useState();
@@ -22,8 +24,8 @@ const SignInPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signInUserWithEmailAndPassword(email,password);
-  }
+    signInUserWithEmailAndPassword(email, password);
+  };
 
   return (
     <div className={styles.container}>
@@ -34,8 +36,16 @@ const SignInPage = () => {
         <div className={styles.rightContainer}>
           <form className={styles.formWrapper} onSubmit={handleSubmit}>
             <div className={styles.heading}>Sign In</div>
-            <EmailField required={true} onChange={setEmail} email={email}/>
-            <PasswordField required={true} onChange={setPassword} password={password} useRegex={false}/>
+            <EmailField required={true} onChange={setEmail} email={email} />
+            <PasswordField
+              required={true}
+              onChange={setPassword}
+              password={password}
+              useRegex={false}
+            />
+            <Link to={entireRoutes.FORGOT_PASSWORD} className={styles.link}>
+              Forgot Password?
+            </Link>
             <Button
               value="Login"
               customStyles={{
@@ -50,7 +60,7 @@ const SignInPage = () => {
             />
             <div>
               <span className={styles.text}>Not having an account?</span>{" "}
-              <Link to="/volunteer/sign-up" className={styles.link}>
+              <Link to={entireRoutes.SIGN_UP} className={styles.link}>
                 Sign Up
               </Link>
             </div>

@@ -86,7 +86,7 @@ function useFirebaseErrorHandler() {
       title: `Email already in use! Sign In instead.`,
       type: "info",
     });
-    navigate(entireRoutes.INFLUENCER_SIGN_IN);
+    navigate(entireRoutes.SIGN_IN);
   }
 
   function handleInvalidEmail() {
@@ -98,7 +98,7 @@ function useFirebaseErrorHandler() {
       title: "User not found! Sign Up instead.",
       type: "warning",
     });
-    navigate(entireRoutes.INFLUENCER_SIGN_IN);
+    navigate(entireRoutes.SIGN_IN);
   }
 
   function handleWeakPassword() {
@@ -110,7 +110,7 @@ function useFirebaseErrorHandler() {
 
   function handleWrongPassword() {
     showNotification({ title: "Wrong Password! Try again.", type: "danger" });
-    navigate(entireRoutes.INFLUENCER_SIGN_IN);
+    navigate(entireRoutes.SIGN_IN);
   }
 
   function handleIdTokenExpired() {
@@ -118,7 +118,7 @@ function useFirebaseErrorHandler() {
       title: "Session expired! Sign In again.",
       type: "warning",
     });
-    navigate(entireRoutes.INFLUENCER_SIGN_IN);
+    navigate(entireRoutes.SIGN_IN);
   }
 
   function handleIdTokenRevoked() {
@@ -126,7 +126,7 @@ function useFirebaseErrorHandler() {
       title: "Session revoked! Sign In again.",
       type: "warning",
     });
-    navigate(entireRoutes.INFLUENCER_SIGN_IN);
+    navigate(entireRoutes.SIGN_IN);
   }
 
   function handleInsufficientPermission() {

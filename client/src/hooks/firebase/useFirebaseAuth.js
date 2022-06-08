@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   deleteUser,
+  sendEmailVerification,
   sendPasswordResetEmail,
 } from "firebase/auth";
 
@@ -26,6 +27,9 @@ import { setUser, resetUser } from "../../redux/ducks/userDuck";
 // utils
 import showNotification from "../../utils/notifications.utils";
 // import { setCookie, deleteCookie } from "../../utils/auth.utils";
+
+// api
+import { createNewAccount, getExistingAccount } from "../../api/accounts.api";
 
 /**
  * @author Mayank1403 <mayank1403@gmail.com>
@@ -69,7 +73,7 @@ function useFirebaseAuth() {
     signOut(auth)
       .then(() => {
         // reset user in redux
-        // dispatch(resetUser());
+        dispatch(resetUser());
 
         // redirecting to sign in page
         navigate(entireRoutes.BASE);
@@ -106,23 +110,22 @@ function useFirebaseAuth() {
 
   function forgotUserPassword(email) {
     try {
-      if (auth.currentUser !== null) {
-        sendPasswordResetEmail(auth, email).then(() => {
-          showNotification({
-            title: "Password reset email sent",
-            type: "success",
-          });
-        });
-      } else {
-        // if you reset password after clearing cookies, it will throw error
+      sendPasswordResetEmail(auth, email).then(() => {
         showNotification({
-          title: "Try to Sign In or Sign Up first",
-          type: "warning",
+          title: "Password reset email sent",
+          type: "success",
         });
-      }
+      });
     } catch (error) {
       firebaseErrorHandler(error);
     }
+  }
+
+  function sendUserVerificationEmail() {
+    sendEmailVerification(auth.currentUser, {
+      url: `${window.location.origin}${entireRoutes.BASE}`,
+    });
+    navigate(entireRoutes.EMAIL_VERIFICATION);
   }
 
   /**
@@ -138,24 +141,37 @@ function useFirebaseAuth() {
         // signed in
         const { user } = userCredential;
         console.log("user credentials:", userCredential);
-        
-        showNotification({
-          title: "Sign Up Successful",
-          type: "info",
-        });
-        navigate(entireRoutes.VOLUNTEER_FORM);
-        
-        // set user in redux
-        if (accountType === accountTypes.VOLUNTEER) {
-          dispatch(
-            setUser({
-              uid: user.uid,
-              email: user.email,
-              formFilled: false,
-              accountType: accountTypes.VOLUNTEER, 
-            })
-          );
-        }
+
+        let userData = {
+          UserID: user.uid,
+          Email: user.email,
+          Filled_Form: false,
+          AccountType: accountType,
+        };
+
+        // create account in our database
+        createNewAccount(userData)
+          .then((res) => {
+            if (res.status === 200) {
+              // send verification email
+              sendUserVerificationEmail(user);
+              showNotification({
+                title: "Sign Up Successful",
+                message: "Please verify your email before signin in",
+                type: "info",
+              });
+              navigate(entireRoutes.EMAIL_VERIFICATION);
+            } else {
+              showNotification({
+                title: "Internal server error",
+                type: "danger",
+              });
+              deleteUserFromFirebase();
+            }
+          })
+          .catch((error) => {
+            deleteUserFromFirebase(error);
+          });
       })
       .catch((error) => {
         deleteUserFromFirebase(error);
@@ -172,16 +188,22 @@ function useFirebaseAuth() {
   async function signInUserWithEmailAndPassword(email, password) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // signed in
         const { user } = userCredential;
         console.log("user scredentialss:", userCredential);
-        // set user in redux
-        // check if user exists in our database
-        // if not, rediret to form
-        // if yes, redirect to dashboard
+
+        if (!user.emailVerified) {
+          showNotification({
+            title: "Email not verified! Verify first to Sign In",
+            type: "warning",
+          });
+          return;
+        }
+
+        // Call the backend to get the user details
       })
       .catch((error) => {
         console.log("errorrrr", error);
+        firebaseErrorHandler(error);
       });
   }
 

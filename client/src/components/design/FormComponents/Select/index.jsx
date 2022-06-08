@@ -13,7 +13,7 @@ const SelectMenu = ({
   setVar,
   required
 }) => {
-  console.log("options", options);
+  // console.log("options", options);
   return (
     <div className={styles.container}>
       {/* <InputLabel id="demo-multiple-checkbox-label">{label}</InputLabel>
