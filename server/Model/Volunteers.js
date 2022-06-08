@@ -53,6 +53,11 @@ const VolunteerSchema = new mongoose.Schema({
         default:0
     },
 
+    Volunteer_Number_Of_Activities_Attended:{
+        type:Number,
+        default:0
+    },
+
     Volunteer_Platform:{
         type:Array,
         require:true,
