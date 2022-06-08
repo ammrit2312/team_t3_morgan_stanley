@@ -42,6 +42,7 @@ router.get("/list-all-activities",async(req,res)=> {
     }
     catch(err){
         console.log(err)
+        res.status(500).json({"message":err})
     }
 })
 // get all the recommended activities
@@ -63,6 +64,7 @@ router.put("/updateList/:id/:uid",async(req,res)=>{
     catch(e)
     {
         console.log(e);
+        res.status(500).json({"message":e});
     }
 })
 
@@ -78,6 +80,7 @@ router.put("/updateList/:aid/:uid",async(req,res)=>{
     catch(e)
     {
         console.log(e);
+        res.status(500).json({"message":e})
     }
 })
 
@@ -93,6 +96,7 @@ router.get("/get-uptime/:uid",async(req,res) => {
     }
     catch(err){
         console.log(err);
+        res.status(500).json({"message":err})
     }
 })
 

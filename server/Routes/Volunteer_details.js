@@ -29,6 +29,7 @@ router.post("/submit-volunteer/:uid",async(req,res) => {
     }
     catch(err){
         console.log(err);
+        res.status(500).json({"message":err});
     }
 })
 
@@ -82,7 +83,7 @@ router.get("/get-reccomended-activities/:userid",async (req,res)=> {
     }
     catch(err){
         console.log(err);
-        res.status(500);
+        res.status(500).json({"message":err});
     }
 })
 
@@ -125,6 +126,7 @@ router.get("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
     catch(err)
     {
         console.log(err);
+        res.status(500).json({"message":err});
     }
 })
 

@@ -10,6 +10,7 @@ router.post("/post-user-details",async(req,res) => {
     }
     catch(err){
         console.log(err)
+        res.status(500).json({"message":err});
     }
 })
 
@@ -28,6 +29,7 @@ router.get("/get-user-details/:uid",async(req,res) => {
     }
     catch(err){
         console.log(err);
+        res.status(500).json({"message":err});
     }
 })
 
