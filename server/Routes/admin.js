@@ -2,6 +2,8 @@ const router = require('express').Router();
 const Activity = require('../Model/Activity');
 const Reccomendation = require('../Model/Reccomendation');
 const Volunteers = require('../Model/Volunteers');
+
+
 //route for admin to submit an activity
 router.post("/submit-activity",async (req,res) => {
     try{

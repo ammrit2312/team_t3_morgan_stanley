@@ -2,17 +2,21 @@ const router = require('express').Router();
 const Volunteers = require('../Model/Volunteers')
 const Activity = require('../Model/Activity');
 const Reccomendation = require('../Model/Reccomendation');
+const User = require('../Model/User');
 
 const getBestActivitiesForUser=require('../functions/mapper');
 const getNewVolunteer=require('../functions/getVolunteer');
+
 var userDict={};
 var activityDict={};
+
 // Route for submitting the volunteer form
 router.post("/submit-volunteer/:uid",async(req,res) => {
     try{
-
+        req.body.UserID = req.params.uid
         const newVolunteer = new Volunteers(req.body);    
         const volunteer = await newVolunteer.save();
+        filledForm(req.params.uid)
         Activity.find({ $expr: { $lt: [ "$Current_assigned" , "$Max_volunteers" ] } },(err,activity)=>{
             if(!err)
             {
@@ -28,11 +32,17 @@ router.post("/submit-volunteer/:uid",async(req,res) => {
     }
 })
 
+// function for updating the filled form attribute in user-schema
+const filledForm = async(uid) => {
+    await User.updateOne({UserID:uid},{$set:{Filled_Form:true}})
+}
+
+
 
 // function to store the reccomendation in the database
 const addReccomendation = async(volunteer,rec) => {
     const newRec = new Reccomendation({
-            UserId:volunteer._id,
+            UserId:volunteer.UserID,
             Name:volunteer.Volunteer_Name,
             Reccomendation_ActivityID:rec
         })
