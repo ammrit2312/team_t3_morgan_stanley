@@ -11,7 +11,7 @@ router.post('/post-notification',async(req,res) => {
     }
     catch(err){
         console.log(err)
-        res.status(500).json({"message":err});
+        res.status(500).json({"message":"encountered a server error"});
     }
 })
 
@@ -23,7 +23,7 @@ router.get('/get-all-notification',async(req,res) => {
     }
     catch(err){
         console.log(err);
-        res.status(500).json({"message":err});
+        res.status(500).json({"message":"encountered a server error"});
     }
 })
 

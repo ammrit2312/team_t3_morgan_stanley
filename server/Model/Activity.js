@@ -11,14 +11,8 @@ const ActivitySchema = new mongoose.Schema({
         require:true,
         default:""
     },
-    ActivityID:{
-        type:String,
-        require:true,
-        default:"",
-        unique:true
-    },
     ActivityDate:{
-        type:Date,
+        type:String,
         require:true,
     },
     ActivityTime:{
@@ -57,7 +51,7 @@ const ActivitySchema = new mongoose.Schema({
     },
     Max_volunteers:{
         type:Number,
-        default:0
+        default:5
     },
     Activity_Address:{
         type:String,
