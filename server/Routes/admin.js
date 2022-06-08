@@ -22,7 +22,7 @@ router.post("/submit-activity",async (req,res) => {
 async function getAllActivities(){
     try
     {
-    const activities = await Activity.find({},{_id:1,ActivityName:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1});
+    const activities = await Activity.find({},{_id:1,ActivityName:1,ActivityDate:1,ActivityTime:1,ActivityType:1,ActivityDurationInMinutes:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1});
     console.log(activities)
     }
     catch(e)
@@ -35,7 +35,7 @@ async function getAllActivities(){
 // api to get list of all activities
 router.get("/list-all-activities",async(req,res)=> {
     try{
-        const activities = await Activity.find({},{_id:1,ActivityName:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1});
+        const activities = await Activity.find({},{_id:1,ActivityName:1,ActivityDate:1,ActivityTime:1,ActivityType:1,ActivityDurationInMinutes:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1});
         res.status(200).json(activities);
     }
     catch(err){
