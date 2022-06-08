@@ -67,6 +67,11 @@ const ActivitySchema = new mongoose.Schema({
         type:String,
         default:''
     },
+
+    Activity_Attendance:{
+        type:Array,
+        default:[]
+    },
     AssignedTo:{
         type:Array,
         default:[]
