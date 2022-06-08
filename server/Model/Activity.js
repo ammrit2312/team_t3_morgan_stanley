@@ -4,8 +4,32 @@ const ActivitySchema = new mongoose.Schema({
     ActivityName:{
         type:String,
         require:true,
+        default:""
+    },
+    ActivityType:{
+        type:String,
+        require:true,
+        default:""
+    },
+    ActivityID:{
+        type:String,
+        require:true,
         default:"",
         unique:true
+    },
+    ActivityDate:{
+        type:Date,
+        require:true,
+    },
+    ActivityTime:{
+        type:String,
+        require:true,
+        default:""
+    },
+    ActivityDurationInMinutes:{
+        type:Number,
+        require:true,
+        default:""
     },
     Activity_Location:{
         type:Array,
