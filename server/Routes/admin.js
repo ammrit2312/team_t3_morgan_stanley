@@ -4,6 +4,12 @@ const Reccomendation = require('../Model/Reccomendation');
 const Volunteers = require('../Model/Volunteers');
 
 
+// const io=require('socket.io')(8800,{
+//     cors:{
+//         origin:['http://localhost:3000']
+//     }
+// })
+
 //route for admin to submit an activity
 router.post("/submit-activity",async (req,res) => {
     try{
@@ -75,6 +81,7 @@ router.put("/updateAttendance/:aid/:uid",async(req,res)=>{
     uid=req.params.uid
     const data =await Volunteers.updateOne({UserID:uid},{$inc:{Volunteer_Number_Of_Activities_Attended : 1}});
     const status=await Activity.findOneAndUpdate({ActivityID:aid},{ $push : {"Activity_Attendance": { newItem: uid } }});
+    await Reccomendation.updateOne({UserId:uid},{User_Activity_Select:true})
     res.status(200).json({"message":"Attendance updated successfully"});
     }
     catch(e)
@@ -99,15 +106,36 @@ router.get("/get-uptime/:uid",async(req,res) => {
         res.status(500).json({"message":"encountered a server error"})
     }
 })
-
-
-//prefer
-//timeout for volunteer to view 
-
-// to update the array saying "I don't want to volunteer"
-//get all the users who have not been assigned
-//find user where highest score exists for this activity
-
+// var messages={}
+// io.on("connection",socket=>{
+//     console.log(socket.id)
+//     let room
+//     socket.on("join-room",({adminID,userID},callback)=>{
+//         room=adminID.toString()+"-"+userID.toString();
+//         socket.join(room);
+//         callback();
+//     })
+//     socket.on("message",({message,senderID})=>{
+//         socket.broadcast.to(room).emit("message",message);
+//         let messageObj={
+//             message,
+//             senderID,
+//             time:new Date().getTime()
+//         }
+//         messages[room].push(messageObj)
+//     })
+    
+// })
+// router.get("/chat/:adminID/:volunteerID",(req,res)=>{
+//     let adminID=req.params.adminID
+//     let volunteerID=req.params.volunteerID
+//     let room=adminID+"-"+volunteerID
+//     let messagesForRoom=messages[room]
+//     messagesForRoom.sort((x,y)=>{
+//         return x.time - y.time;
+//     })
+//     return res.status(200).json({"message":messagesForRoom})
+// })
 
 module.exports =router
 
