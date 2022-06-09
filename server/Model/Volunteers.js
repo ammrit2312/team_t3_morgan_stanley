@@ -47,6 +47,11 @@ const VolunteerSchema = new mongoose.Schema({
         default:''
     },
 
+    Volunteer_Preferred_Mode:{
+        type:String,
+        default:''
+    },
+
     Volunteer_Number:{
         type:Number,
         require:true,
