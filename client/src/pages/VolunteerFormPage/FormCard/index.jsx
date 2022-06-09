@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from "react-redux";
 // components
 import Form from "../../../components/design/Form";
 import Button from "../../../components/design/Button";
+import showNotification from "../../utils/notifications.utils";
 
 // constants
 import { colors } from "../../../constants/colors.constants";
@@ -256,6 +257,10 @@ const FormCard = ({
     }
     dispatch(setFormDetails(formData));
     submitVolunteerForm(currUser.uid,formData).then(res=>{
+      showNotification({
+        title: "Form Submitted Successfully",
+        type: "success",
+      });
       dispatch(setFormFilled(true));
     });
   }
