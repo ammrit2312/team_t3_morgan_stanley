@@ -75,7 +75,7 @@ router.put("/updateList/:id/:uid",async(req,res)=>{
 })
 
 // route to update the Attendance
-router.put("/updateAttendance/:aid/:uid",async(req,res)=>{
+router.put("/update-attendance/:aid/:uid",async(req,res)=>{
     try{
     aid=req.params.aid 
     uid=req.params.uid

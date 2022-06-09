@@ -26,7 +26,7 @@ router.post("/submit-volunteer/:uid",async(req,res) => {
             res.status(200).json({"message":"succesfuly mapped volunteer"});
             }
             else{
-                res.json({"message":"the activity max capacity is fileld"})
+                res.json({"message":"the activity max capacity is filled"})
             }
         }) 
     }
@@ -119,7 +119,7 @@ router.get("/checkExists/:userID",async(req,res)=>{
 })
 
 //to add preferred activities
-router.get("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
+router.put("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
     try
     {
         let userid=req.params.userid
