@@ -16,6 +16,7 @@
     background-color: var(--primary-fill-color);
     height: calc(var(--nav-height) - 20px);
     width: auto;
+    cursor: pointer;
 }
 
 .navContainer {

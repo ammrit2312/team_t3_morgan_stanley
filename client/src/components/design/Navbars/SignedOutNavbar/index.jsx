@@ -34,6 +34,7 @@ const SignedOutNavbar = ({ navLinks, signedOut }) => {
                 src = {Logo}
                 alt = "Toybank"
                 className={styles.logo}
+                onClick={() => navigate(entireRoutes.BASE)}
             />
             <div className={styles.navContainer}>
                 <nav className={styles.nav}>
