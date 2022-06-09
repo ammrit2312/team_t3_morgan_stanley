@@ -21,7 +21,11 @@
 .leftContainer{
     display: flex;
     flex-direction: column;
+    width: 100%;
     justify-content: center;
+}
+
+.leftContainerWidth{
     width: 75%;
     margin-right: 3rem;
 }

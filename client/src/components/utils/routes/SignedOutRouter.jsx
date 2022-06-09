@@ -40,6 +40,10 @@ export default function SignedOutRouter() {
                     element: <Dashboard />
                 },
                 {
+                    path: entireRoutes.VOLUNTEER_UPCOMING_ACTIVITIES,
+                    element: <ApprovedActivites />
+                },
+                {
                     path: entireRoutes.SIGN_UP,
                     element: <SignUpPage />
                 },
@@ -77,15 +81,14 @@ const NotFoundPage = Loadable(
     lazy(()=>import("../../../pages/NotFound")),
 );
 
-// check
-const VolunteerFormPage = Loadable(
-    lazy(()=>import("../../../pages/VolunteerFormPage")),
-);
-
 const UploadActivityForm = Loadable(
     lazy(()=>import("../../../pages/UploadActivityFormPage")),
 );
 
 const Dashboard = Loadable(
     lazy(()=>import("../../../pages/Dashboards"))
+);
+
+const ApprovedActivites = Loadable(
+    lazy(()=>import("../../../pages/ApprovedActivities"))
 );
