@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from "react-redux";
 // components
 import Form from "../../../components/design/Form";
 import Button from "../../../components/design/Button";
-import showNotification from "../../utils/notifications.utils";
+import showNotification from "../../../utils/notifications.utils";
 
 // constants
 import { colors } from "../../../constants/colors.constants";
