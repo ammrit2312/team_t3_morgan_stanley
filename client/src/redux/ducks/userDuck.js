@@ -32,7 +32,7 @@ const userReducer = (state = initialUserState, action) => {
       return action.user;
     case SET_FORM_FILLED:
       return {
-        ...user,
+        ...state,
         formFilled: action.status,
       }
     case RESET_USER:

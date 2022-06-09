@@ -52,7 +52,7 @@ export default function SignedInVolunteerRouter() {
 const NotFoundPage = Loadable(lazy(() => import("../../../pages/NotFound")));
 
 const VolunteerDashboard = Loadable(
-  lazy(() => import("../../../pages/Dashboards/Volunteer"))
+  lazy(() => import("../../../pages/Dashboards"))
 );
 
 const ProfilePage = Loadable(
