@@ -101,7 +101,7 @@ router.get("/checkExists/:userID",async(req,res)=>{
     try
     {
         let username=req.params.userID
-        const data=await Users.find({Volunteer_Username:username})
+        const data=await User.find({Volunteer_Username:username})
         if(data.length > 0)
         {
             res.status(200).json({"message":data});
@@ -145,6 +145,24 @@ router.put("/opt-out/:uID/:actID",async(req,res)=>{
             res.status(200).json({"message":"Opted out successfully"})
         else
             res.status(500).json({"message":"Opt out unsucessful"});
+    }
+    catch(e)
+    {
+        console.log(e);
+        res.status(500).json({"message":"encountered a server error"});
+    }
+});
+
+//api for rejecting activities
+router.put("/reject-activity/:uID/:actID",async(req,res)=>{
+    try{
+        let userID=req.params.uID;
+        let activityID=req.params.actID;
+        const data=await Reccomendation.updateOne({UserId:userID},{$pull:{Reccomendation_ActivityID:activityID}});
+        if(data.modifiedCount)
+            res.status(200).json({"message":"Rejected successfully"})
+        else
+            res.status(500).json({"message":"Rejection unsucessful"});
     }
     catch(e)
     {
