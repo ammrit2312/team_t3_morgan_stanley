@@ -247,12 +247,12 @@ const FormCard = ({
       Volunteer_Languages:language,
       Volunteer_Preferred_Locations:toybankLocation,
       Volunteer_Organization:oragnization,
-      Volunteer_Platform:mode,
+      Volunteer_Platform:platform,
       Volunteer_Availability:availability,
       Volunteer_Skills:skills,
       Volunteer_Preferred_Activity:preferences,
       Volunteer_Occupation:occupation,
-      // VOlunteer_Where_did_you_hear:platform,
+      Volunteer_Preferred_Mode:mode,
     }
     dispatch(setFormDetails(formData));
     submitVolunteerForm(currUser.uid,formData).then(res=>{
