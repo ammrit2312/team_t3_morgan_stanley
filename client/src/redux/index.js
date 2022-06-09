@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 
 // Reducers
 import userReducer  from "./ducks/userDuck";
+import formDetailsReducer  from "./ducks/formDetailsDuck";
 
 // Add persister
 import { persistStore, persistReducer } from "redux-persist";
@@ -12,6 +13,7 @@ import { persistStore, persistReducer } from "redux-persist";
 // Combining all the reducers
 const reducer = combineReducers({
   user: userReducer,
+  formDetails: formDetailsReducer,
 });
 
 const persistConfig = {

@@ -60,6 +60,10 @@ export default function SignedOutRouter() {
         //   path: entireRoutes.ADMIN_UPLOAD_ACTIVITY,
         //   element: <UploadActivityForm />,
         // },
+        {
+          element: <ProfilePage/>,
+          path: entireRoutes.ACCOUNT_PROFILE,
+        },
         { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
       ],
     },
@@ -82,17 +86,6 @@ const ContactUsPage = Loadable(
 
 const NotFoundPage = Loadable(lazy(() => import("../../../pages/NotFound")));
 
-// check
-const VolunteerFormPage = Loadable(
-  lazy(() => import("../../../pages/VolunteerFormPage"))
-);
-
-const UploadActivityForm = Loadable(
-  lazy(() => import("../../../pages/UploadActivityFormPage"))
-);
-
-const Dashboard = Loadable(lazy(() => import("../../../pages/Dashboards")));
-
 const ForgotPasswordPage = Loadable(
   lazy(() => import("../../../pages/Auth/ForgotPasswordPage"))
 );
@@ -100,3 +93,19 @@ const ForgotPasswordPage = Loadable(
 const EmailVerificationPage = Loadable(
   lazy(() => import("../../../pages/Auth/EmailVerificationPage"))
 );
+
+// check
+const VolunteerFormPage = Loadable(
+  lazy(() => import("../../../pages/VolunteerFormPage"))
+);
+const ProfilePage = Loadable(
+  lazy(() => import("../../../pages/ProfilePage"))
+)
+
+const UploadActivityForm = Loadable(
+  lazy(() => import("../../../pages/UploadActivityFormPage"))
+);
+
+const Dashboard = Loadable(lazy(() => import("../../../pages/Dashboards")));
+
+

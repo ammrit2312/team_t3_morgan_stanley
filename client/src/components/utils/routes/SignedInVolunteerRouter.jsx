@@ -28,6 +28,10 @@ export default function SignedInVolunteerRouter() {
           element: <VolunteerDashboard/>,
           index: true,
         },
+        {
+          element: <ProfilePage/>,
+          path: entireRoutes.ACCOUNT_PROFILE,
+        },
         { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
       ],
     },
@@ -42,3 +46,7 @@ const NotFoundPage = Loadable(lazy(() => import("../../../pages/NotFound")));
 const VolunteerDashboard = Loadable(
   lazy(() => import("../../../pages/Dashboards/Volunteer"))
 );
+
+const ProfilePage = Loadable(
+  lazy(() => import("../../../pages/ProfilePage"))
+)
