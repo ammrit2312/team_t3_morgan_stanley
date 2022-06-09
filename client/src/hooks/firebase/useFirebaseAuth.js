@@ -200,6 +200,27 @@ function useFirebaseAuth() {
         }
 
         // Call the backend to get the user details
+        getExistingAccount(user.uid).then((res) => {
+          if (res.status === 200) {
+            // set user in redux
+            dispatch(
+              setUser({
+                email: res.data.Email,
+                accountType: res.data.AccountType,
+                uid: res.data.UserID,
+                formFilled: res.data.Filled_Form,
+              })
+            );
+            // redirecting to dashboard
+            navigate(entireRoutes.BASE);
+          } else {
+            showNotification({
+              title: "Internal server error",
+              type: "danger",
+            });
+            signOutFirebaseUser();
+          }
+        });
       })
       .catch((error) => {
         console.log("errorrrr", error);

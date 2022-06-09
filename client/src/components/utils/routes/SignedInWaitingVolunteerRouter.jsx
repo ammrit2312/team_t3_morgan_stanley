@@ -24,13 +24,13 @@ export default function SignedInWaitingVolunteerRouter() {
       path: entireRoutes.BASE,
       element: <SignedInLayout navLinks={signedOutNavbarLinks}/>,
       children: [
-        // {
-        //   path: entireRoutes.VOLUNTEER_FORM,
-        //   element: <VolunteerFormPage />,
-        // },
         {
           element: <VolunteerFormPage/>,
           index: true,
+        },
+        {
+          element: <ContactUsPage/>,
+          path: entireRoutes.CONTACT_US,
         },
         { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
       ],
@@ -45,4 +45,8 @@ const NotFoundPage = Loadable(lazy(() => import("../../../pages/NotFound")));
 
 const VolunteerFormPage = Loadable(
   lazy(() => import("../../../pages/VolunteerFormPage"))
+);
+
+const ContactUsPage = Loadable(
+  lazy(() => import("../../../pages/ContactUsPage"))
 );

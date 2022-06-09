@@ -31,14 +31,14 @@ export default function SignedOutRouter() {
             path: entireRoutes.SIGN_IN,
             element: <SignInPage />
         },
-        {
-            path: entireRoutes.VOLUNTEER_FORM,
-            element: <VolunteerFormPage />
-        },
-        {
-          path: entireRoutes.VOLUNTEER,
-          element: <Dashboard />,
-        },
+        // {
+        //     path: entireRoutes.VOLUNTEER_FORM,
+        //     element: <VolunteerFormPage />
+        // },
+        // {
+        //   path: entireRoutes.VOLUNTEER,
+        //   element: <Dashboard />,
+        // },
         {
           path: entireRoutes.SIGN_UP,
           element: <SignUpPage />,
@@ -56,10 +56,10 @@ export default function SignedOutRouter() {
           element: <ForgotPasswordPage />,
         },
         // Check
-        {
-          path: entireRoutes.ADMIN_UPLOAD_ACTIVITY,
-          element: <UploadActivityForm />,
-        },
+        // {
+        //   path: entireRoutes.ADMIN_UPLOAD_ACTIVITY,
+        //   element: <UploadActivityForm />,
+        // },
         { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
       ],
     },
