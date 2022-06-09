@@ -8,6 +8,10 @@ const getBareReqScore=(userData,admin,mode)=>{
         {
             score += 10 + 5*mode;
         }
+    if (containsAll(admin.ActivityType,userData.Volunteer_Interested_Activity_Type))
+        {
+            score += 10;
+        }
     if (mode===0 && containsAll(admin.Activity_Location,userData.Volunteer_Preferred_Locations))
         {
             score += 10;
