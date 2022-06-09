@@ -1,6 +1,6 @@
 # team_t3_morgan_stanley
 
-**Postman collection link for other apis**
+**Postman collection link for other apis updated**
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.postman.co/run-collection/403eb677cb9d024c741d?action=collection%2Fimport)
 
