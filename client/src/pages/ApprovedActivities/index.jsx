@@ -15,7 +15,8 @@ const ApprovedActivites = () => {
     const currUser = useSelector((state) => state.user);
     return (
         <main className={styles.container}>
-            <VolunteerApprovedActivities />
+            {currUser.accountType === accountTypes.ADMIN && <AdminApprovedActivities/>}
+            {currUser.accountType === accountTypes.VOLUNTEER && <VolunteerApprovedActivities />}
         </main>
     );
 }
