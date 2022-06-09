@@ -7,9 +7,9 @@ const ActivitySchema = new mongoose.Schema({
         default:""
     },
     ActivityType:{
-        type:String,
+        type:Array,
         require:true,
-        default:""
+        default:[]
     },
     ActivityDate:{
         type:String,
