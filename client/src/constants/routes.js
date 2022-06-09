@@ -20,6 +20,8 @@ export const routes = {
     UPLOAD_ACTIVITY: "upload-activity",
     SHOW_VOLUNTEERS: "show-volunteers",
     UPCOMING_ACTIVITIES: "upcoming-activities",
+    EMAIL_VERIFICATION: "email-verification",
+    FORGOT_PASSWORD: "forgot-password",
 };
 
 export const entireRoutes = {
@@ -36,4 +38,6 @@ export const entireRoutes = {
     ACCOUNT_PROFILE: entirepath(routes.ACCOUNT, routes.PROFILE),
     CONTACT_US: entirepath(routes.CONTACT_US),
     NOT_FOUND: entirepath(routes.NOT_FOUND),
+    EMAIL_VERIFICATION: entirepath(routes.EMAIL_VERIFICATION),
+    FORGOT_PASSWORD: entirepath(routes.FORGOT_PASSWORD),
 };

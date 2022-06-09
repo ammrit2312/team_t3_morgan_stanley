@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import {useSelector, useDispatch} from "react-redux";
 
 // components
 import Form from "../../../components/design/Form";
 import Button from "../../../components/design/Button";
+import showNotification from "../../../utils/notifications.utils";
 
 // constants
 import { colors } from "../../../constants/colors.constants";
 
 // css
 import styles from "../VolunteerFormPage.module.css";
+
+// api
+import {submitVolunteerForm} from "../../../api/forms.api"
+import {setFormDetails} from "../../../redux/ducks/formDetailsDuck"
+import {setFormFilled} from "../../../redux/ducks/userDuck"
 
 const FormCard = ({
   activeStep,
@@ -28,10 +35,14 @@ const FormCard = ({
   const [toybankLocation, setToybankLocation] = useState([]);
   const [oragnization, setOragnization] = useState("");
   const [platform, setPlatform] = useState([]);
-  const [availability, setAvailability] = useState("");
+  const [mode, setMode] = useState("");
+  const [availability, setAvailability] = useState([]);
   const [skills, setSkills] = useState([]);
   const [preferences, setPreferences] = useState([]);
   const [occupation, setOccupation] = useState("");
+
+  const dispatch = useDispatch();
+  const currUser = useSelector(state => state.user);
 
   const form_component1 = [
     {
@@ -172,24 +183,29 @@ const FormCard = ({
     {
       input: "select",
       label: "When would you prefer to Volunteer?",
+      multiple: true,
+      required: true,
+      options: ["Weekdays", "Weekends"],
+      value: availability,
+      setVar: setAvailability,
+    },
+    {
+      input: "select",
+      label: "Preferred Mode of Volunteering",
       multiple: false,
       required: true,
       options: [
         {
-          label: "Weekdays",
-          value: "weekdays",
+          label: "Online",
+          value: "Online",
         },
         {
-          label: "Weekends",
-          value: "weekend",
-        },
-        {
-          label: "Both",
-          value: "both",
+          label: "Offline",
+          value: "Offline",
         },
       ],
-      value: availability,
-      setVar: setAvailability,
+      value: mode,
+      setVar: setMode,
     },
     {
       input: "select",
@@ -219,8 +235,37 @@ const FormCard = ({
     },
   ];
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData ={
+      Volunteer_Name : name,
+      Volunteer_Address :address,
+      Volunteer_College:college,
+      Volunteer_email:email,
+      Volunteer_Number:phone,
+      Volunteer_Nationality:nationality,
+      Volunteer_Academic_Qualifications:academicQualification,
+      Volunteer_Languages:language,
+      Volunteer_Preferred_Locations:toybankLocation,
+      Volunteer_Organization:oragnization,
+      Volunteer_Platform:platform,
+      Volunteer_Availability:availability,
+      Volunteer_Skills:skills,
+      Volunteer_Preferred_Activity:preferences,
+      Volunteer_Occupation:occupation,
+      Volunteer_Preferred_Mode:mode,
+    }
+    dispatch(setFormDetails(formData));
+    submitVolunteerForm(currUser.uid,formData).then(res=>{
+      showNotification({
+        title: "Form Submitted Successfully",
+        type: "success",
+      });
+      dispatch(setFormFilled(true));
+    });
+  }
   return (
-    <form className={styles.formContainer}>
+    <form className={styles.formContainer} onSubmit={handleSubmit}>
       {activeStep === 0 && <Form form_construct={form_component1} />}
       {activeStep === 1 && <Form form_construct={form_component2} />}
       {activeStep === 2 && <Form form_construct={form_component3} />}
@@ -236,6 +281,7 @@ const FormCard = ({
             paddingY: "0.7rem",
             paddingX: "0.2rem",
           }}
+          type = {activeStep === len - 1 ? "submit" : ""}
         />
         {activeStep === 0 ? null : (
           <Button

@@ -14,7 +14,7 @@ const Volunteers = require('../Model/Volunteers');
 router.post("/submit-activity",async (req,res) => {
     try{
         const newActivity = new Activity(req.body);    
-        const activity = await newActivity.save();
+        await newActivity.save();
         res.status(200).json({"message":"successfully created activity"});
     
     }
@@ -70,7 +70,7 @@ router.put("/updateList/:id/:uid",async(req,res)=>{
     catch(e)
     {
         console.log(e);
-        res.status(500).json({"message":e});
+        res.status(500).json({"message":"encountered a server error"});
     }
 })
 
@@ -87,7 +87,7 @@ router.put("/updateList/:aid/:uid",async(req,res)=>{
     catch(e)
     {
         console.log(e);
-        res.status(500).json({"message":e})
+        res.status(500).json({"message":"encountered a server error"})
     }
 })
 
@@ -103,7 +103,7 @@ router.get("/get-uptime/:uid",async(req,res) => {
     }
     catch(err){
         console.log(err);
-        res.status(500).json({"message":err})
+        res.status(500).json({"message":"encountered a server error"})
     }
 })
 // var messages={}

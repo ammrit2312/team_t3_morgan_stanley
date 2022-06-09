@@ -22,15 +22,23 @@ export default function SignedInVolunteerRouter() {
   return useRoutes([
     {
       path: entireRoutes.BASE,
-      element: <SignedInLayout navLinks={signedInVolunteerLinks}/>,
+      element: <SignedInLayout navLinks={signedInVolunteerLinks} />,
       children: [
         {
-          path: entireRoutes.VOLUNTEER_FORM,
-          element: <VolunteerFormPage />,
+          element: <VolunteerDashboard />,
+          index: true,
         },
         {
-          element: <VolunteerFormPage/>,
-          index: true,
+          element: <ProfilePage/>,
+          path: entireRoutes.ACCOUNT_PROFILE,
+        },
+        {
+          path: entireRoutes.VOLUNTEER_UPCOMING_ACTIVITIES,
+          element: <ApprovedActivites />,
+        },
+        {
+          element: <ContactUsPage />,
+          path: entireRoutes.CONTACT_US,
         },
         { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
       ],
@@ -43,6 +51,18 @@ export default function SignedInVolunteerRouter() {
 
 const NotFoundPage = Loadable(lazy(() => import("../../../pages/NotFound")));
 
-const VolunteerFormPage = Loadable(
-  lazy(() => import("../../../pages/VolunteerFormPage"))
+const VolunteerDashboard = Loadable(
+  lazy(() => import("../../../pages/Dashboards"))
+);
+
+const ProfilePage = Loadable(
+  lazy(() => import("../../../pages/ProfilePage"))
+)
+
+const ApprovedActivites = Loadable(
+  lazy(() => import("../../../pages/ApprovedActivities"))
+);
+
+const ContactUsPage = Loadable(
+  lazy(() => import("../../../pages/ContactUsPage"))
 );

@@ -5,49 +5,66 @@ import styles from "../Dashboards.module.css";
 
 // components
 import VolunteerDashboardCard from "../../../components/design/Cards/VolunteerDashboardCard";
+import IconCard from "../../../components/design/Cards/IconCard";
 
-// test
-const testData = [
-    {
-        title: "Story Telling",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut expedita vero, odio quam eum dolore. Quidem temporibus et, magnam voluptates suscipit ullam dicta delectus tempora quas voluptatum in earum corrupti natus similique possimus odio placeat doloribus excepturi odit, libero aliquam eos ducimus itaque accusamus. Tenetur?",
-        date: "23/06/2022",
-        time: "11 am",
-        mode: "online",
-        duration: "1 hour",
-    },
-    {
-        title: "Meeting the kids",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut expedita vero, odio quam eum dolore. Quidem temporibus et, magnam voluptates suscipit ullam dicta delectus tempora quas voluptatum in earum",
-        date: "02/06/2022",
-        time: "1 pm",
-        mode: "offline",
-        duration: "2 hours",
-        location: "Gokuldham Complex, Powder Gali, Goregaon East, Mumbai,Maharashtra - 400063",
-    },
-    {
-        title: "Office Work",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut expedita vero, odio quam eum dolore. Quidem temporibus et, magnam voluptates suscipit ullam dicta delectus tempora quas voluptatum in earum",
-        date: "15/06/2022",
-        time: "12 pm",
-        mode: "offline",
-        duration: "4 hours",
-        location: "Gokuldham Complex, Powder Gali, Goregaon East, Mumbai,Maharashtra - 400063",
-    },
-]
+// constants
+import { colors } from "../../../constants/colors.constants";
+import { testData } from "../../../constants/test.constants";
+
+// icons
+import { BsBookmarkCheckFill, BsStack } from "react-icons/bs";
+import { ImCross } from "react-icons/im";
+import { IoTime } from "react-icons/io5";
+import { GiSandsOfTime } from "react-icons/gi";
+import { BsCalendarDateFill } from "react-icons/bs";
+import { BiWifiOff } from "react-icons/bi";
+import { BiWifi } from "react-icons/bi";
+import { ImLocation } from "react-icons/im";
 
 const VolunteerDashboard = () => {
 
-    // send onAccept and onReject to VolunteerDashboardCard
-    
-    return (
-        <div>
-            <h1>Volunteer Dashboard</h1>
-            {testData.map((data, index) => (
-                <VolunteerDashboardCard key={index} {...data} />
-            ))}
-        </div>
-    );
-}
- 
+  const buttons = [
+    {
+      value: "Accept",
+      onClick: () => {},
+      icon: <BsBookmarkCheckFill size={20} />,
+      customStyles: {
+        backgroundColor: colors.PRIMARY_GREEN,
+        borderRadius: "10px",
+        border: "0",
+        fontWeight: "bold",
+        fontSize: "0.9rem",
+        paddingY: "0.7rem",
+        paddingX: "0.2rem",
+      },
+    },
+    {
+      value: "Reject",
+      onClick: () => {},
+      icon: <ImCross size={18} />,
+      customStyles: {
+        marginTop: "2rem",
+        backgroundColor: colors.PRIMARY_RED,
+        borderRadius: "10px",
+        border: "0",
+        fontSize: "0.9rem",
+        paddingY: "0.7rem",
+        paddingX: "0.2rem",
+      },
+    },
+  ];
+
+  // send onAccept and onReject to VolunteerDashboardCard
+
+  return (
+    <div>
+      <h1>Mapping for Activities</h1>
+      <p>Please confirm your decision as soon as possible</p>
+      {testData.map((data, index) => (
+        <VolunteerDashboardCard key={index} buttons={buttons} {...data} />
+      ))}
+    </div>
+  );
+};
+
 export default VolunteerDashboard;

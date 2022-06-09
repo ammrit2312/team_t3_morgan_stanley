@@ -7,6 +7,9 @@ import styles from "./SignedOutNavbar.module.css";
 // assets
 import Logo from "../../../../assets/images/logo.png";
 
+// hooks
+import useFirebaseAuth from "../../../../hooks/firebase/useFirebaseAuth";
+
 // constants 
 import { entireRoutes } from "../../../../constants/routes";
 import { colors } from "../../../../constants/colors.constants";
@@ -24,13 +27,14 @@ const SignedOutNavbar = ({ navLinks, signedOut }) => {
     const navigate = useNavigate();
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+    const {signOutFirebaseUser} = useFirebaseAuth();
     return (
         <header className={styles.container}>
             <img
                 src = {Logo}
                 alt = "Toybank"
                 className={styles.logo}
+                onClick={() => navigate(entireRoutes.BASE)}
             />
             <div className={styles.navContainer}>
                 <nav className={styles.nav}>
@@ -41,7 +45,7 @@ const SignedOutNavbar = ({ navLinks, signedOut }) => {
                 </nav>
                 <Button
                     value={signedOut?"Sign In":"Sign Out"}
-                    onClick={signedOut?() => navigate(entireRoutes.BASE) : ()=>alert("Sign Out")}
+                    onClick={signedOut?() => navigate(entireRoutes.BASE) : ()=>signOutFirebaseUser()}
                     customStyles={{
                         backgroundColor: colors.PRIMARY_ORANGE,
                         borderRadius: "10px",
@@ -63,7 +67,7 @@ const SignedOutNavbar = ({ navLinks, signedOut }) => {
                 <Divider />
                 <Button 
                     value={signedOut?"Sign In":"Sign Out"}
-                    onClick={signedOut?() => navigate(entireRoutes.BASE) : ()=>alert("Sign Out")}
+                    onClick={signedOut?() => navigate(entireRoutes.BASE) : ()=>signOutFirebaseUser()}
                     customStyles={{
                         backgroundColor: colors.PRIMARY_ORANGE,
                         borderRadius: "10px",
