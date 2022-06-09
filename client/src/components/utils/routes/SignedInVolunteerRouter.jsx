@@ -22,11 +22,19 @@ export default function SignedInVolunteerRouter() {
   return useRoutes([
     {
       path: entireRoutes.BASE,
-      element: <SignedInLayout navLinks={signedInVolunteerLinks}/>,
+      element: <SignedInLayout navLinks={signedInVolunteerLinks} />,
       children: [
         {
-          element: <VolunteerDashboard/>,
+          element: <VolunteerDashboard />,
           index: true,
+        },
+        {
+          path: entireRoutes.VOLUNTEER_UPCOMING_ACTIVITIES,
+          element: <ApprovedActivites />,
+        },
+        {
+          element: <ContactUsPage />,
+          path: entireRoutes.CONTACT_US,
         },
         { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
       ],
@@ -41,4 +49,12 @@ const NotFoundPage = Loadable(lazy(() => import("../../../pages/NotFound")));
 
 const VolunteerDashboard = Loadable(
   lazy(() => import("../../../pages/Dashboards/Volunteer"))
+);
+
+const ApprovedActivites = Loadable(
+  lazy(() => import("../../../pages/ApprovedActivities"))
+);
+
+const ContactUsPage = Loadable(
+  lazy(() => import("../../../pages/ContactUsPage"))
 );
