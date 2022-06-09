@@ -118,6 +118,26 @@ router.get("/checkExists/:userID",async(req,res)=>{
     }
 })
 
+//get all upcoming activity details
+router.get("/upcoming-activities/:userID",async(req,res)=>{
+    try
+    {
+        let userid=req.params.userID
+        const {Confirmed_ActivityID} = await Volunteers.findOne({UserId:userid},{Upcoming_Activities:1});
+        const return_act = await Promise.all(
+            Confirmed_ActivityID.map((activityId) => {
+                return Activity.findById(activityId,{_id:1,ActivityName:1,Activity_Location:1,ActivityType:1,Activity_Description:1,ActivityDate:1,ActivityTime:1,ActivityDurationInMinutes:1});
+            }))
+        res.status(200).json(return_act)
+        
+    }
+    catch(e)
+    {
+        console.log(e)
+        res.status(500).json({"message":"encountered a server error"});
+    }
+})
+
 //to add preferred activities
 router.put("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
     try
