@@ -22,14 +22,14 @@ export default function SignedInWaitingVolunteerRouter() {
   return useRoutes([
     {
       path: entireRoutes.BASE,
-      element: <SignedInLayout navLinks={signedOutNavbarLinks}/>,
+      element: <SignedInLayout navLinks={signedOutNavbarLinks} />,
       children: [
         {
-          element: <VolunteerFormPage/>,
+          element: <VolunteerFormPage />,
           index: true,
         },
         {
-          element: <ContactUsPage/>,
+          element: <ContactUsPage />,
           path: entireRoutes.CONTACT_US,
         },
         { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
