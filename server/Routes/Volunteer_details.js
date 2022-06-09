@@ -13,7 +13,7 @@ var activityDict={};
 // Route for submitting the volunteer form
 router.post("/submit-volunteer/:uid",async(req,res) => {
     try{
-        req.body.UserID = req.params.uid
+        req.body["UserID"] = req.params.uid
         const newVolunteer = new Volunteers(req.body);    
         const volunteer = await newVolunteer.save();
         filledForm(req.params.uid)
@@ -25,11 +25,14 @@ router.post("/submit-volunteer/:uid",async(req,res) => {
             addReccomendation(volunteer,bestActivitiesIDs);
             res.status(200).json({"message":"succesfuly mapped volunteer"});
             }
+            else{
+                res.json({"message":"the activity max capacity is fileld"})
+            }
         }) 
     }
     catch(err){
         console.log(err);
-        res.status(500).json({"message":err});
+        res.status(500).json({"message":"encountered a server error"});
     }
 })
 
@@ -65,14 +68,14 @@ router.get("/get-reccomended-activities/:userid",async (req,res)=> {
                 const hours = (Math.floor((total)/1000))/3600;
 
                 //here 5 is the number of hours after which the admin will chose the activity for the user (in case user dosen't prefer anythin)
-                if(Math.round(hours) >= 5){
-                    exceededUptime(Reccomendation_ActivityID,userid);
-                    return res.json({"message":"uptime exceeded. Admin will assign you the activity"})
-                }
+                // if(Math.round(hours) >= 5){
+                //     exceededUptime(Reccomendation_ActivityID,userid);
+                //     return res.json({"message":"uptime exceeded. Admin will assign you the activity"})
+                // }
 
                 const reccomended_act = await Promise.all(
                 Reccomendation_ActivityID.map((activityId) => {
-                    return Activity.findById(activityId,{_id:1,ActivityName:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1,Activty_Description:1});
+                    return Activity.findById(activityId,{_id:1,ActivityName:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,ActivityType:1,Activity_availability:1,Activity_Description:1,ActivityDate:1,ActivityTime:1,ActivityDurationInMinutes:1});
                 })
             )
             res.status(200).json(reccomended_act)
@@ -83,7 +86,7 @@ router.get("/get-reccomended-activities/:userid",async (req,res)=> {
     }
     catch(err){
         console.log(err);
-        res.status(500).json({"message":err});
+        res.status(500).json({"message":"encountered a server error"});
     }
 })
 
@@ -91,7 +94,8 @@ router.get("/get-reccomended-activities/:userid",async (req,res)=> {
 const exceededUptime = async(activity_ids,uid) => {
    await Reccomendation.findOneAndUpdate({UserId:uid},{ $push : {"UserPreferred_Activity": {$each:activity_ids} }});
 }
-//route for adding user to Users collection
+
+
 //modify
 router.get("/checkExists/:userID",async(req,res)=>{
     try
@@ -110,7 +114,7 @@ router.get("/checkExists/:userID",async(req,res)=>{
     catch(e)
     {
         console.log(e)
-        res.status(500).json({"message":e});
+        res.status(500).json({"message":"encountered a server error"});
     }
 })
 
@@ -126,7 +130,7 @@ router.get("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
     catch(err)
     {
         console.log(err);
-        res.status(500).json({"message":err});
+        res.status(500).json({"message":"encountered a server error"});
     }
 })
 
@@ -145,7 +149,7 @@ router.put("/opt-out/:uID/:actID",async(req,res)=>{
     catch(e)
     {
         console.log(e);
-        res.status(500).json({"message":e});
+        res.status(500).json({"message":"encountered a server error"});
     }
 });
 
@@ -173,7 +177,7 @@ router.put("/get-new-user/:actID",async(req,res)=>{
     catch(e)
     {
         console.log(e)
-        res.status(500).json({"message":e});
+        res.status(500).json({"message":"encountered a server error"});
     }
 })
 //How it works now:

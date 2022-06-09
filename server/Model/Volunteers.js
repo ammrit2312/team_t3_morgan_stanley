@@ -76,6 +76,13 @@ const VolunteerSchema = new mongoose.Schema({
         default:[]
     },
 
+    Volunteer_Interested_Activity_Type:{
+        type:Array,
+        require:true,
+        default:[]
+    },
+
+
     Volunteer_Preferred_Activity:{
         type:Array,
         default:[]

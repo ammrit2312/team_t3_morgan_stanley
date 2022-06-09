@@ -1,6 +1,6 @@
 export const accountTypes = {
-    ADMIN: 0,
-    VOLUNTEER: 1,
+    ADMIN: 1,
+    VOLUNTEER: 0,
 };
 
 export const accountTypesNames = {
