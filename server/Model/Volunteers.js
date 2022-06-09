@@ -47,6 +47,11 @@ const VolunteerSchema = new mongoose.Schema({
         default:''
     },
 
+    Volunteer_Preferred_Mode:{
+        type:String,
+        default:''
+    },
+
     Volunteer_Number:{
         type:Number,
         require:true,
@@ -59,9 +64,9 @@ const VolunteerSchema = new mongoose.Schema({
     },
 
     Volunteer_Platform:{
-        type:String,
+        type:Array,
         require:true,
-        default:""
+        default:[]
     },
 
     Volunteer_Preferred_Locations:{
