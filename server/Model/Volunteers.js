@@ -69,6 +69,11 @@ const VolunteerSchema = new mongoose.Schema({
         default:[]
     },
 
+    Upcoming_Activities:{
+        type:Array,
+        default:[]
+    },
+
     Volunteer_Preferred_Locations:{
         type:Array,
         require:true,
