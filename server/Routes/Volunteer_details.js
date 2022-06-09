@@ -35,7 +35,7 @@ router.post("/submit-volunteer/:uid",async(req,res) => {
 
 // function for updating the filled form attribute in user-schema
 const filledForm = async(uid) => {
-    await User.updateOne({UserID:uid},{$set:{Filled_Form:true}})
+    await User.updateOne({UserID:uid},{Filled_Form:true})
 }
 
 
