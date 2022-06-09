@@ -10,6 +10,7 @@ import { accountTypes } from "../../../constants/accounts.constants";
 import SignedOutRouter from "./SignedOutRouter";
 import SignedInAdminRouter from "./SignedInAdminRouter";
 import SignedInVolunteerRouter from "./SignedInVolunteerRouter";
+import SignedInWaitingVolunteerRouter from "./SignedInWaitingVolunteerRouter";
 import LoadingRouter from "./LoadingRouter";
 
 // api
@@ -62,6 +63,9 @@ export default function Router() {
   } else if (currUser.accountType === accountTypes.ADMIN) {
     return <SignedInAdminRouter />;
   } else if (currUser.accountType === accountTypes.VOLUNTEER) {
-    return <SignedInVolunteerRouter />;
+    if(currUser.formFilled)
+      return <SignedInVolunteerRouter />;
+    else
+      return <SignedInWaitingVolunteerRouter />;
   } else return <div>No Idea Man</div>;
 }
