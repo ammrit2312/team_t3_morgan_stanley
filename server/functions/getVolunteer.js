@@ -1,4 +1,23 @@
-
+const getBareReqScore=(userData,admin,mode)=>{
+    let score=0;
+    if (containsAll(admin.Language_Preference,userData.Volunteer_Languages))
+        {
+            score += 10 + 5*mode;
+        }
+    if (containsAll(admin.Activity_availability,userData.Volunteer_Availability))
+        {
+            score += 10 + 5*mode;
+        }
+    if (containsAll(admin.ActivityType,userData.Volunteer_Interested_Activity_Type))
+        {
+            score += 10;
+        }
+    if (mode===0 && containsAll(admin.Activity_Location,userData.Volunteer_Preferred_Locations))
+        {
+            score += 10;
+        }
+        return score;
+}
 
 const containsAll =(arr1,arr2)=> {
     const result = arr1.every(element => arr2.includes(element));
