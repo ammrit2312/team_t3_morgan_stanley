@@ -35,10 +35,10 @@ export default function SignedOutRouter() {
         //     path: entireRoutes.VOLUNTEER_FORM,
         //     element: <VolunteerFormPage />
         // },
-        // {
-        //   path: entireRoutes.VOLUNTEER,
-        //   element: <Dashboard />,
-        // },
+        {
+          path: entireRoutes.VOLUNTEER,
+          element: <Dashboard />,
+        },
         {
           path: entireRoutes.SIGN_UP,
           element: <SignUpPage />,
