@@ -1,0 +1,171 @@
+* {
+  /* colors */
+  --vyas-react-table-grey-1: #d1d1d1;
+  --vyas-react-table-grey-2: #f3f3f3;
+  --vyas-react-table-grey-3: #979797;
+  --vyas-react-table-bg-color: #fff;
+  --vyas-thumb-scroll-color: #888;
+
+  /* dimensions */
+  --container-padding: 5px;
+  --min-column-width: 170px;
+  --cell-border-radius: 2px;
+  --cell-padding: 8px;
+}
+
+.tableHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--cell-padding);
+  color: var(--vyas-react-table-grey-3);
+}
+
+.tableName {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+}
+
+.button {
+  padding: 4px 8px;
+  border: 1px solid black;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-left: 5px;
+  background-color: var(--vyas-react-table-bg-color);
+}
+
+.button:hover {
+  color: var(--vyas-react-table-bg-color);
+  background-color: black;
+}
+
+/* CONTAINER */
+.container {
+  display: inline-block;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: var(--vyas-react-table-bg-color);
+  border-radius: var(--cell-border-radius);
+  padding: var(--container-padding);
+}
+
+.statsContainer {
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--cell-padding);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: scroll;
+}
+
+.statsContainer::-webkit-scrollbar {
+  height: 0;
+}
+
+.statsDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.statsDiv > div {
+  margin-right: 16px;
+}
+
+.statsInput {
+  border: 1px solid var(--vyas-react-table-grey-1);
+  padding: 5px;
+  outline: none;
+  margin: 0 5px;
+  border-radius: var(--cell-border-radius);
+  width: 42px;
+  transition: all 0.3s ease-in-out;
+}
+
+.statsInput:focus {
+  box-shadow: 0 0 1px black;
+}
+
+/* TABLE */
+.table {
+  border-collapse: separate;
+}
+
+/* Input */
+.filterContainer {
+  cursor: default;
+  text-align: left;
+}
+
+.vyasInput {
+  box-sizing: border-box;
+  width: var(--min-column-width);
+  width: 100%;
+  padding: var(--cell-padding);
+  border: 1px solid var(--vyas-react-table-grey-1);
+  border-radius: var(--cell-border-radius);
+  outline: none;
+  background-color: var(--vyas-react-table-bg-color);
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.vyasInput:focus {
+  box-shadow: 0 0 2px black;
+}
+
+.headRow {
+  cursor: default;
+  text-align: left;
+}
+
+.th {
+  padding: var(--cell-padding);
+  background-color: var(--vyas-react-table-grey-1);
+  border-radius: var(--cell-border-radius);
+}
+
+.resizable {
+  resize: horizontal;
+  overflow: auto;
+  min-width: var(--min-column-width) !important;
+}
+
+/* FILTER CONTAINER  */
+
+/* BODY */
+.tr {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.td {
+  padding: var(--cell-padding);
+  text-align: left;
+  border-radius: var(--cell-border-radius);
+  max-width: 200px;
+  overflow-x: scroll;
+}
+
+.td::-webkit-scrollbar {
+  height: 2px;
+}
+
+.td::-webkit-scrollbar-thumb {
+  background: var(--vyas-thumb-scroll-color);
+  border-radius: 2px;
+}
+
+.tr:nth-child(even) {
+  background-color: #f3f3f3;
+}
+
+.tr:hover {
+  background-color: var(--vyas-react-table-grey-1);
+}

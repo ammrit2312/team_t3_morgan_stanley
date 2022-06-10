@@ -98,12 +98,6 @@ const VolunteerSchema = new mongoose.Schema({
         default:[]
     },
 
-//activities selected by the user from reccomendations
-    Volunteer_Preferred_Activity:{
-        type:Array,
-        default:[]
-    },
-
     Volunteer_Languages:{
         type:Array,
         default:[]

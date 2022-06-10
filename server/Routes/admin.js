@@ -52,12 +52,27 @@ router.get("/list-all-activities",async(req,res)=> {
     }
 })
 
-// get all the recommended activities
-//dummy api
-router.get("/list-all-recommended-activities",async(req,res)=>{
-    const activities=await Reccomendation.find({User_Activity_Select:false})
-    res.status(200).json(activities);
-});
+// get all volunteers who have preferred activity given activity id
+router.get("/list-all-users-for-activity/:activityid",async(req,res)=>{
+    try{
+        id=req.params.activityid
+        list=[]
+        if(id in Reccomendation.UserPreferred_Activity && User_Activity_Select===false){
+            list.$push(UserId);
+        }
+        const return_user = await Promise.all(
+            list.map((UserId) => {
+                return Volunteers.findById(UserId,{_id:1,Volunteer_Name:1,Volunteer_Academic_Qualifications:1,Volunteer_Languages:1,Volunteer_Skills:1});
+            }))
+        res.status(200).json(return_user)
+    }
+    catch(e)
+    {
+        console.log(e);
+        res.status(500).json({"message":"encountered a server error"});
+    }
+
+})
 
 // route to assign volunteers to the activity
 //updates AssignedTo list in Activity Schema by pushing userid
@@ -98,6 +113,22 @@ router.put("/update-attendance/:aid/:uid",async(req,res)=>{
         res.status(500).json({"message":"encountered a server error"})
     }
 })
+
+//api to get all information of the user
+router.get("/get-all-volunteer-info/:userID",async(req,res)=>{
+    try
+    {
+        let userid=req.params.userID
+        const data=await Promise.all(Volunteers.findById(userid,{UserID:1,Volunteer_Name:1,Volunteer_Academic_Qualifications:1,Volunteer_Occupation:1,Volunteer_email:1,Volunteer_Number:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1}));
+        res.status(200).json(data);
+    }
+    catch(e)
+    {
+        console.log(e)
+        res.status(500).json({"message":"encountered a server error"});
+    }
+})
+
 
 // route for getting the uptime since the reccomendation has been given to the volunteer
 router.get("/get-uptime/:uid",async(req,res) => {
