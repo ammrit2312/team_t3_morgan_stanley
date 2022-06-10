@@ -59,7 +59,7 @@ router.get("/list-all-recommended-activities",async(req,res)=>{
     res.status(200).json(activities);
 });
 
-// route to update the AssignedTo list
+// route to assign volunteers to the activity
 router.put("/updateList/:id/:uid",async(req,res)=>{
     try{
     id=req.params.id 
@@ -77,7 +77,7 @@ router.put("/updateList/:id/:uid",async(req,res)=>{
     }
 })
 
-// route to update the Attendance
+// route to update the Attendance after the activity
 router.put("/update-attendance/:aid/:uid",async(req,res)=>{
     try{
     aid=req.params.aid 
