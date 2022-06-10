@@ -63,13 +63,13 @@ router.get("/list-all-recommended-activities",async(req,res)=>{
 //updates AssignedTo list in Activity Schema by pushing userid
 //updates User_Activity_Select indicating the user is selected
 //updates Upcoming_Activities list for volunteer by pushing activity id
-router.put("/updateList/:id/:uid",async(req,res)=>{
+router.put("/updateList/:activityid/:uid",async(req,res)=>{
     try{
-    id=req.params.id 
+    id=req.params.activityid 
     userID=req.params.uid
     const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID},$inc:{Current_assigned : 1}});
     const status=await Reccomendation.updateMany({UserId:userID},{User_Activity_Select:true});
-    const update=await Volunteers.findOneAndUpdate({UserID:userID},{ $push : {"Upcoming_Activities": { newItem: id } }});
+    const update=await Volunteers.findOneAndUpdate({UserID:userID},{ $push : {"Upcoming_Activities": id }});
     await Volunteers.updateOne({_id:userID},{assigned:true});
     res.status(200).json({"message":"Assigned successfully"});
     }
@@ -88,7 +88,7 @@ router.put("/update-attendance/:aid/:uid",async(req,res)=>{
     aid=req.params.aid 
     uid=req.params.uid
     const data = await Volunteers.updateOne({UserID:uid},{$inc:{Volunteer_Number_Of_Activities_Attended : 1}});
-    const status= await Activity.findOneAndUpdate({ActivityID:aid},{ $push : {"Activity_Attendance": { newItem: uid } }});
+    const status= await Activity.findOneAndUpdate({_id:aid},{ $push : {"Activity_Attendance": uid}});
     await Reccomendation.updateOne({UserId:uid},{User_Activity_Select:true})
     res.status(200).json({"message":"Attendance updated successfully"});
     }
@@ -114,6 +114,26 @@ router.get("/get-uptime/:uid",async(req,res) => {
         res.status(500).json({"message":"encountered a server error"})
     }
 })
+
+// route for getting all the users mapped to a particular activity on the admnin side
+router.get("/get-all-mapped-users/:activityid",async(req,res) => {
+    try{
+        const {Preferred_Users} = await Activity.findById(req.params.activityid,{_id:0,Preferred_Users:1});
+        const user_details = await Promise.all(
+            Preferred_Users.map((uid) => {
+                return Volunteers.find({UserID:uid},{_id:0})
+            })
+        )
+        res.status(200).json(user_details);
+    }
+    catch(err){
+        res.status(500).json({"message":"encountered a server error"})
+    }
+    
+})
+
+
+
 // var messages={}
 // io.on("connection",socket=>{
 //     console.log(socket.id)

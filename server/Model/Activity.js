@@ -72,6 +72,11 @@ const ActivitySchema = new mongoose.Schema({
     AssignedTo:{
         type:Array,
         default:[]
+    },
+    // All the userid who have prefered this activity
+    Preferred_Users:{
+        type:Array,
+        default:[]
     }
 },{timestamps:true}
 )

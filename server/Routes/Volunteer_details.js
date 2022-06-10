@@ -124,7 +124,6 @@ router.get("/upcoming-activities/:userID",async(req,res)=>{
     {
         let userid=req.params.userID
         const Confirmed_ActivityID = await Volunteers.findOne({UserID:userid},{Upcoming_Activities:1});
-        console.log(Confirmed_ActivityID)
         if(Confirmed_ActivityID.length > 0)
         {
             const return_act = await Promise.all(
@@ -147,13 +146,19 @@ router.get("/upcoming-activities/:userID",async(req,res)=>{
 
 //route to push activityid to preferred activities from the reccomended activity after volunteer selects it 
 //pushes activity id to UserPreferred_Activity
+//pushes the userid in Preferred_Users in the activity schema
 router.put("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
     try
     {
         let userid=req.params.userid
         let pactivityid=req.params.pactivityid
-        const add = Reccomendation.findOneAndUpdate({UserId:userid},{ $push : {"UserPreferred_Activity": { newItem: pactivityid } }});
-        await add.save();
+        const add = await Reccomendation.findOneAndUpdate({UserId:userid},{ $push : {"UserPreferred_Activity": pactivityid}});
+
+        //pushing userid in the Preferred_Users in the activity schema
+        await Activity.findOneAndUpdate({_id:pactivityid},{$push:{"Preferred_Users":userid}})
+
+        // await add.save();
+        res.json({"message":"added to preffered list"});
     }
     catch(err)
     {
@@ -195,7 +200,7 @@ router.put("/reject-activity/:uID/:actID",async(req,res)=>{
         if(data.modifiedCount)
             res.status(200).json({"message":"Rejected successfully"})
         else
-            res.status(500).json({"message":"Rejection unsucessful"});
+            res.status(200).json({"message":"Rejection unsucessful"});
     }
     catch(e)
     {
