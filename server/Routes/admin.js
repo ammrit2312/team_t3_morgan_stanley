@@ -51,7 +51,9 @@ router.get("/list-all-activities",async(req,res)=> {
         res.status(500).json({"message":err})
     }
 })
+
 // get all the recommended activities
+//dummy api
 router.get("/list-all-recommended-activities",async(req,res)=>{
     const activities=await Reccomendation.find({User_Activity_Select:false})
     res.status(200).json(activities);

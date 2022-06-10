@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
 //ActivityType,Date,Time,Duration
 const ActivitySchema = new mongoose.Schema({
-    activityId:{
-        type:Number,
-        require:true,
-        unique:true,
-        default:0
-    },
     ActivityName:{
         type:String,
         require:true,
