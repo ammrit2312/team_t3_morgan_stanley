@@ -51,13 +51,18 @@ router.get("/list-all-activities",async(req,res)=> {
         res.status(500).json({"message":err})
     }
 })
+
 // get all the recommended activities
+//dummy api
 router.get("/list-all-recommended-activities",async(req,res)=>{
     const activities=await Reccomendation.find({User_Activity_Select:false})
     res.status(200).json(activities);
 });
 
-// route to update the AssignedTo list
+// route to assign volunteers to the activity
+//updates AssignedTo list in Activity Schema by pushing userid
+//updates User_Activity_Select indicating the user is selected
+//updates Upcoming_Activities list for volunteer by pushing activity id
 router.put("/updateList/:id/:uid",async(req,res)=>{
     try{
     id=req.params.id 
@@ -75,7 +80,9 @@ router.put("/updateList/:id/:uid",async(req,res)=>{
     }
 })
 
-// route to update the Attendance
+// route to update the Attendance after the activity for volunteer by admin
+//updates Volunteer_Number_Of_Activities_Attended in volunteer schema
+//updates Activity_Attendance in Activity schema by pushing userid
 router.put("/update-attendance/:aid/:uid",async(req,res)=>{
     try{
     aid=req.params.aid 

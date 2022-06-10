@@ -37,6 +37,7 @@ const ActivitySchema = new mongoose.Schema({
         type:Array,
         default:[]
     },
+    //weekend or weekday used for mapping 
     Activity_availability:{
         type:Array,
         default:[]
@@ -45,6 +46,7 @@ const ActivitySchema = new mongoose.Schema({
         type:Array,
         default:[]
     },
+    //number of volunteers already confirmed
     Current_assigned:{
         type:Number,
         default:0
@@ -66,6 +68,7 @@ const ActivitySchema = new mongoose.Schema({
         type:Array,
         default:[]
     },
+    //volunteer ids who are confirmed by admin
     AssignedTo:{
         type:Array,
         default:[]
