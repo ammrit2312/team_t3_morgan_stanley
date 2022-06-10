@@ -12,6 +12,10 @@ const getBareReqScore=(userData,admin,mode)=>{
         {
             score += 10;
         }
+    if (containsAll(admin.Activity_Mode,userData.Volunteer_Preferred_Mode))
+        {
+            score += 10;
+        }
     if (mode===0 && containsAll(admin.Activity_Location,userData.Volunteer_Preferred_Locations))
         {
             score += 10;

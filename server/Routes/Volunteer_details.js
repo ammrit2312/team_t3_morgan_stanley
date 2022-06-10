@@ -26,7 +26,7 @@ router.post("/submit-volunteer/:uid",async(req,res) => {
             res.status(200).json({"message":"succesfuly mapped volunteer"});
             }
             else{
-                res.json({"message":"the activity max capacity is fileld"})
+                res.json({"message":"the activity max capacity is filled"})
             }
         }) 
     }
@@ -36,9 +36,9 @@ router.post("/submit-volunteer/:uid",async(req,res) => {
     }
 })
 
-// function for updating the filled form attribute in user-schema
+// function for updating the filled form attribute in user-schema to ensure volunteer has filled form before assigning activities
 const filledForm = async(uid) => {
-    await User.updateOne({UserID:uid},{$set:{Filled_Form:true}})
+    await User.updateOne({UserID:uid},{Filled_Form:true})
 }
 
 
@@ -96,12 +96,12 @@ const exceededUptime = async(activity_ids,uid) => {
 }
 
 
-//modify
+//api to check if the username exists in the database
 router.get("/checkExists/:userID",async(req,res)=>{
     try
     {
         let username=req.params.userID
-        const data=await Users.find({Volunteer_Username:username})
+        const data=await User.find({Volunteer_Username:username})
         if(data.length > 0)
         {
             res.status(200).json({"message":data});
@@ -118,14 +118,47 @@ router.get("/checkExists/:userID",async(req,res)=>{
     }
 })
 
-//to add preferred activities
-router.get("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
+//get all upcoming activity details that admin has approved in volunteer side
+router.get("/upcoming-activities/:userID",async(req,res)=>{
+    try
+    {
+        let userid=req.params.userID
+        const Confirmed_ActivityID = await Volunteers.findOne({UserID:userid},{Upcoming_Activities:1});
+        if(Confirmed_ActivityID.length > 0)
+        {
+            const return_act = await Promise.all(
+                Confirmed_ActivityID.map((activityId) => {
+                    return Activity.findById(activityId,{_id:1,ActivityName:1,Activity_Location:1,ActivityType:1,Activity_Description:1,ActivityDate:1,ActivityTime:1,ActivityDurationInMinutes:1});
+                }))
+            res.status(200).json(return_act)
+        }
+        else{
+            res.status(200).json({"message":"no upcoming activities found"});
+        }
+        
+    }
+    catch(e)
+    {
+        console.log(e)
+        res.status(500).json({"message":"encountered a server error"});
+    }
+})
+
+//route to push activityid to preferred activities from the reccomended activity after volunteer selects it 
+//pushes activity id to UserPreferred_Activity
+//pushes the userid in Preferred_Users in the activity schema
+router.put("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
     try
     {
         let userid=req.params.userid
         let pactivityid=req.params.pactivityid
-        const add = Reccomendation.findOneAndUpdate({UserId:userid},{ $push : {"UserPreferred_Activity": { newItem: pactivityid } }});
-        await add.save();
+        const add = await Reccomendation.findOneAndUpdate({UserId:userid},{ $push : {"UserPreferred_Activity": pactivityid}});
+
+        //pushing userid in the Preferred_Users in the activity schema
+        await Activity.findOneAndUpdate({_id:pactivityid},{$push:{"Preferred_Users":userid}})
+
+        // await add.save();
+        res.json({"message":"added to preffered list"});
     }
     catch(err)
     {
@@ -134,12 +167,16 @@ router.get("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
     }
 })
 
-
+//route to opt out of the confirmed activity from the volunteer side
+//removes user id from AssignedTo list in activity schema
+//decrements Current_assigned (number of volunteers asigned to ativity)
+//increments Volunteer_Number_Of_Activities_Opted_Out
 router.put("/opt-out/:uID/:actID",async(req,res)=>{
     try{
         let userID=req.params.uID;
         let activityID=req.params.actID;
         const data=await Activity.updateOne({_id:activityID},{$pull:{AssignedTo:userID},$inc:{Current_assigned : -1}});
+        const updates=await Volunteers.updateOne({_id:userID},{$inc:{Volunteer_Number_Of_Activities_Opted_Out : 1}});
         await Volunteers.updateOne({_id:userID},{assigned:false});
         if(data.modifiedCount)
             res.status(200).json({"message":"Opted out successfully"})
@@ -153,6 +190,26 @@ router.put("/opt-out/:uID/:actID",async(req,res)=>{
     }
 });
 
+//route for rejecting reccomended activities from volunteer side
+// removes activity id from the Reccomendation_ActivityID for the user
+router.put("/reject-activity/:uID/:actID",async(req,res)=>{
+    try{
+        let userID=req.params.uID;
+        let activityID=req.params.actID;
+        const data=await Reccomendation.updateOne({UserId:userID},{$pull:{Reccomendation_ActivityID:activityID}});
+        if(data.modifiedCount)
+            res.status(200).json({"message":"Rejected successfully"})
+        else
+            res.status(200).json({"message":"Rejection unsucessful"});
+    }
+    catch(e)
+    {
+        console.log(e);
+        res.status(500).json({"message":"encountered a server error"});
+    }
+});
+
+//route for getting new volunteer for the activity after volunteer opts out
 router.put("/get-new-user/:actID",async(req,res)=>{
     try{
         let activityID=req.params.actID
