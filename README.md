@@ -4,6 +4,11 @@
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.postman.co/run-collection/403eb677cb9d024c741d?action=collection%2Fimport)
 
+
+**Postman collection link for additional api's added on 10/06/2022 (below link)**
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.postman.co/run-collection/403eb677cb9d024c741d?action=collection%2Fimport)
+
 ## API Documnetation and use case
 
 ### Signup a user
