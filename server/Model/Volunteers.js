@@ -48,8 +48,8 @@ const VolunteerSchema = new mongoose.Schema({
     },
 
     Volunteer_Preferred_Mode:{
-        type:String,
-        default:''
+        type:Array,
+        default:[]
     },
 
     Volunteer_Number:{
@@ -62,6 +62,12 @@ const VolunteerSchema = new mongoose.Schema({
         type:Number,
         default:0
     },
+
+    Volunteer_Number_Of_Activities_Opted_Out:{
+        type:Number,
+        default:0
+    },
+
 
     Volunteer_Platform:{
         type:Array,

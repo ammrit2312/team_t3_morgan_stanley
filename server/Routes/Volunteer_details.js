@@ -96,7 +96,7 @@ const exceededUptime = async(activity_ids,uid) => {
 }
 
 
-//modify
+//api to check if the username exists in the database
 router.get("/checkExists/:userID",async(req,res)=>{
     try
     {
@@ -118,7 +118,7 @@ router.get("/checkExists/:userID",async(req,res)=>{
     }
 })
 
-//get all upcoming activity details
+//get all upcoming activity details that admin has approved in volunteer side
 router.get("/upcoming-activities/:userID",async(req,res)=>{
     try
     {
@@ -138,7 +138,7 @@ router.get("/upcoming-activities/:userID",async(req,res)=>{
     }
 })
 
-//to add preferred activities
+//route to push activityid to preferred activities from the reccomended activity after volunteer selects it 
 router.put("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
     try
     {
@@ -154,12 +154,13 @@ router.put("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
     }
 })
 
-
+//route to opt out of the confirmed activity from the volunteer side
 router.put("/opt-out/:uID/:actID",async(req,res)=>{
     try{
         let userID=req.params.uID;
         let activityID=req.params.actID;
         const data=await Activity.updateOne({_id:activityID},{$pull:{AssignedTo:userID},$inc:{Current_assigned : -1}});
+        const updates=await Volunteers.updateOne({_id:userID},{$inc:{Volunteer_Number_Of_Activities_Opted_Out : 1}});
         await Volunteers.updateOne({_id:userID},{assigned:false});
         if(data.modifiedCount)
             res.status(200).json({"message":"Opted out successfully"})
@@ -173,7 +174,7 @@ router.put("/opt-out/:uID/:actID",async(req,res)=>{
     }
 });
 
-//api for rejecting activities
+//route for rejecting reccomended activities from volunteer side
 router.put("/reject-activity/:uID/:actID",async(req,res)=>{
     try{
         let userID=req.params.uID;
@@ -191,6 +192,7 @@ router.put("/reject-activity/:uID/:actID",async(req,res)=>{
     }
 });
 
+//route for getting new volunteer for the activity after volunteer opts out
 router.put("/get-new-user/:actID",async(req,res)=>{
     try{
         let activityID=req.params.actID
