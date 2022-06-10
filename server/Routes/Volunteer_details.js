@@ -36,7 +36,7 @@ router.post("/submit-volunteer/:uid",async(req,res) => {
     }
 })
 
-// function for updating the filled form attribute in user-schema
+// function for updating the filled form attribute in user-schema to ensure volunteer has filled form before assigning activities
 const filledForm = async(uid) => {
     await User.updateOne({UserID:uid},{Filled_Form:true})
 }
@@ -139,6 +139,7 @@ router.get("/upcoming-activities/:userID",async(req,res)=>{
 })
 
 //route to push activityid to preferred activities from the reccomended activity after volunteer selects it 
+//pushes activity id to UserPreferred_Activity
 router.put("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
     try
     {
@@ -155,6 +156,9 @@ router.put("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
 })
 
 //route to opt out of the confirmed activity from the volunteer side
+//removes user id from AssignedTo list in activity schema
+//decrements Current_assigned (number of volunteers asigned to ativity)
+//increments Volunteer_Number_Of_Activities_Opted_Out
 router.put("/opt-out/:uID/:actID",async(req,res)=>{
     try{
         let userID=req.params.uID;
@@ -175,6 +179,7 @@ router.put("/opt-out/:uID/:actID",async(req,res)=>{
 });
 
 //route for rejecting reccomended activities from volunteer side
+// removes activity id from the Reccomendation_ActivityID for the user
 router.put("/reject-activity/:uID/:actID",async(req,res)=>{
     try{
         let userID=req.params.uID;

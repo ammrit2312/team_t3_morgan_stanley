@@ -46,35 +46,35 @@ const VolunteerSchema = new mongoose.Schema({
         type:String,
         default:''
     },
-
+//online or offline
     Volunteer_Preferred_Mode:{
         type:Array,
         default:[]
     },
-
+//phone number
     Volunteer_Number:{
         type:Number,
         require:true,
         default:0
     },
-
+//number of activities updated by attendance
     Volunteer_Number_Of_Activities_Attended:{
         type:Number,
         default:0
     },
-
+//number of activities opted out after approved by admin
     Volunteer_Number_Of_Activities_Opted_Out:{
         type:Number,
         default:0
     },
 
-
+//where did they hear about toybank from
     Volunteer_Platform:{
         type:Array,
         require:true,
         default:[]
     },
-
+//activities confirmed by admin after user selects it
     Upcoming_Activities:{
         type:Array,
         default:[]
@@ -85,20 +85,20 @@ const VolunteerSchema = new mongoose.Schema({
         require:true,
         default:[]
     },
-
+//weekend or weekdays
     Volunteer_Availability:{
         type:Array,
         require:true,
         default:[]
     },
-
+//activity types present in form
     Volunteer_Interested_Activity_Type:{
         type:Array,
         require:true,
         default:[]
     },
 
-
+//activities selected by the user from reccomendations
     Volunteer_Preferred_Activity:{
         type:Array,
         default:[]
