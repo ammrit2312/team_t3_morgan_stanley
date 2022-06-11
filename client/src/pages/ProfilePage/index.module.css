@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - var(--nav-height));
+  box-sizing: border-box;
+  padding: var(--gutter);
+  background-image: url("../../assets/textured_paper.png");
+  overflow-y: hidden;
+}
+
+.detailsContainer {
+  padding: 2vh 2vw;
+  margin: 2vh 2vw;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  height: 75%;
+  overflow-y: auto;
+  max-width: 70%;
+}
+
+.detail {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 4vh;
+  padding: 5px;
+}
+
+.key {
+  font-size: 1.2rem;
+  color: var(--black);
+  font-weight: bold;
+  margin-right: 1vw;
+  text-transform: capitalize;
+}
+
+.value {
+  font-size: 1.2rem;
+  color: var(--black);
+  margin-left: 1vw;
+  text-transform: capitalize;
+}
