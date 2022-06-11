@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    height: calc(100vh - var(--nav-height));
+    background-image: url("../../assets/textured_paper.png");
+}
+
+.innerCoontainer{
+    width: 50%;
+    padding: 4vh 4vw;
+    /* border: 1px solid red; */
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: white;
+}
