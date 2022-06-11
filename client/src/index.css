@@ -5,6 +5,19 @@
   --white: #fff;
   --green: #00b300;
   --nav-height: 88px;
+
+  /*table*/
+  --container-padding: 2rem;
+  --min-column-width: 100px;
+  --cell-border-radius: 2px;
+  --cell-padding: 8px;
+
+
+  --vyas-react-table-grey-1: #d1d1d1;
+  --vyas-react-table-grey-2: #f3f3f3;
+  --vyas-react-table-grey-3: #979797;
+  --vyas-react-table-bg-color: #fff;
+  --vyas-thumb-scroll-color: #888;
 }
 
 ::-webkit-scrollbar {

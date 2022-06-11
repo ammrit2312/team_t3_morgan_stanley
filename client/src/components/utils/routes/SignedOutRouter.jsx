@@ -36,8 +36,12 @@ export default function SignedOutRouter() {
         //     element: <VolunteerFormPage />
         // },
         {
-          path: entireRoutes.VOLUNTEER,
-          element: <Dashboard />,
+          path: entireRoutes.ADMIN_SHOW_VOLUNTEERS,
+          element: <ListVolunteers />,
+        },
+        {
+          path: entireRoutes.VOLUNTEER + "/:id",
+          element: <ShowProfileVolunteers />,
         },
         {
           path: entireRoutes.SIGN_UP,
@@ -107,5 +111,9 @@ const UploadActivityForm = Loadable(
 );
 
 const Dashboard = Loadable(lazy(() => import("../../../pages/Dashboards")));
+
+const ShowProfileVolunteers = Loadable(lazy(() => import("../../../pages/ShowProfileVolunteers")));
+
+const ListVolunteers = Loadable(lazy(() => import("../../../pages/ListVolunteers")));
 
 
