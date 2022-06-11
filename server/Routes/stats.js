@@ -116,7 +116,7 @@ router.get("/get-places-stats",async(req,res) => {
     }
 })
 
-//route to get stats for places preferred by volunteers
+//route to get stats for mode preferred by volunteers
 router.get("/get-mode-stats",async(req,res) => {
     try {
         const data = await Volunteers.find({},{_id:0,Volunteer_Preferred_Mode:1})
