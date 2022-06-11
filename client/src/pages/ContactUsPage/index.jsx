@@ -21,6 +21,7 @@ const ContactUsPage = () => {
   return (
     <div className={styles.container}>
       <form className={styles.innerCoontainer} onSubmit={handleSubmit}>
+        <h1>Contact Us</h1>
         <EmailField required={true} onChange={setEmail} email={email} />
         <TextField
           label="Title"

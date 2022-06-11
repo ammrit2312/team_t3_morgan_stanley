@@ -1,32 +1,58 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 // css
 import styles from "../Dashboards.module.css";
 
 // components
 import VolunteerDashboardCard from "../../../components/design/Cards/VolunteerDashboardCard";
-import IconCard from "../../../components/design/Cards/IconCard";
+import showNotification from "../../../utils/notifications.utils";
 
 // constants
 import { colors } from "../../../constants/colors.constants";
-import { testData } from "../../../constants/test.constants";
 
 // icons
 import { BsBookmarkCheckFill, BsStack } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
-import { IoTime } from "react-icons/io5";
-import { GiSandsOfTime } from "react-icons/gi";
-import { BsCalendarDateFill } from "react-icons/bs";
-import { BiWifiOff } from "react-icons/bi";
-import { BiWifi } from "react-icons/bi";
-import { ImLocation } from "react-icons/im";
+
+// api
+import {
+  getVolunteerDashboardData,
+  volunteerAcceptsActivity,
+  volunteerRejectsActivity,
+} from "../../../api/volunteerDashboard.api";
 
 const VolunteerDashboard = () => {
+  const [apiData, setAPIData] = useState(null);
+  const currUser = useSelector((state) => state.user);
+
+  useEffect(() => {
+    getVolunteerDashboardData(currUser.uid).then((data) => {
+      console.table(data.data);
+      setAPIData(data.data);
+    });
+  }, []);
 
   const buttons = [
     {
       value: "Accept",
-      onClick: () => {},
+      onClick: (e) => {
+        e.preventDefault();
+        console.log(e);
+        volunteerAcceptsActivity(currUser.uid, e.target.id).then((data) => {
+          if (data.status === 200) {
+            showNotification({
+              title: "Preference Updated",
+              type: "success",
+            });
+            e.target.disabled = true;
+          } else {
+            showNotification({
+              title: "Something went wrong",
+              type: "error",
+            });
+          }
+        });
+      },
       icon: <BsBookmarkCheckFill size={20} />,
       customStyles: {
         backgroundColor: colors.PRIMARY_GREEN,
@@ -40,7 +66,23 @@ const VolunteerDashboard = () => {
     },
     {
       value: "Reject",
-      onClick: () => {},
+      onClick: (e) => {
+        e.preventDefault();
+        volunteerRejectsActivity(currUser.uid, e.target.id).then((data) => {
+          if (data.status === 200) {
+            showNotification({
+              title: "Preference Updated",
+              type: "success",
+            });
+            e.target.disabled = true;
+          } else {
+            showNotification({
+              title: "Something went wrong",
+              type: "error",
+            });
+          }
+        });
+      },
       icon: <ImCross size={18} />,
       customStyles: {
         marginTop: "2rem",
@@ -55,14 +97,20 @@ const VolunteerDashboard = () => {
   ];
 
   // send onAccept and onReject to VolunteerDashboardCard
-
   return (
     <div>
       <h1>Mapping for Activities</h1>
       <p>Please confirm your decision as soon as possible</p>
-      {testData.map((data, index) => (
-        <VolunteerDashboardCard key={index} buttons={buttons} {...data} />
-      ))}
+      {apiData !== null ? (
+        apiData.map(
+          (data, index) =>
+            data && (
+              <VolunteerDashboardCard key={index} buttons={buttons} {...data} />
+            )
+        )
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   );
 };

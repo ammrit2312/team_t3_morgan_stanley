@@ -24,10 +24,13 @@ const FormCard = ({
   backStepper,
   submitResp = () => {},
 }) => {
+
+  const currUser = useSelector(state => state.user);
+
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [college, setCollege] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(currUser.email);
   const [phone, setPhone] = useState();
   const [nationality, setNationality] = useState("");
   const [academicQualification, setAcademicQualification] = useState("");
@@ -42,7 +45,6 @@ const FormCard = ({
   const [occupation, setOccupation] = useState("");
 
   const dispatch = useDispatch();
-  const currUser = useSelector(state => state.user);
 
   const form_component1 = [
     {
