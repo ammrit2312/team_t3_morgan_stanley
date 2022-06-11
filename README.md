@@ -2,6 +2,7 @@
 
 **postman collection link updated today 11/06/2022 ar 2:14 pm (below link)**
 
+added reject button for admin side and 1 stats api
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.postman.co/run-collection/403eb677cb9d024c741d?action=collection%2Fimport)
 
 
