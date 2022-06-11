@@ -114,13 +114,24 @@ router.put("/update-attendance/:aid/:uid",async(req,res)=>{
     }
 })
 
-//api to get all information of the user
+//api to get basic information of volunteer 
+router.get("/get-volunterer-basic-details",async(req,res) => {
+    try{
+        const basic_details = await Volunteers.find({},{_id:0,UserID:1,Volunteer_Name:1,Volunteer_email:1,Volunteer_Availability:1,Volunteer_Languages:1})
+        res.status(200).json(basic_details);
+    }
+    catch(err){
+        res.status(500).json({"message":"encountered a server error"});
+    }
+})
+
+//api to get all information of the volunteer
 router.get("/get-all-volunteer-info/:userID",async(req,res)=>{
     try
     {
         let userid=req.params.userID
-        const data=await Promise.all(Volunteers.findById(userid,{UserID:1,Volunteer_Name:1,Volunteer_Academic_Qualifications:1,Volunteer_Occupation:1,Volunteer_email:1,Volunteer_Number:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1}));
-        res.status(200).json(data);
+        const all_detail = await Volunteers.findOne({UserID:userid},{_id:0,UserID:1,Volunteer_Name:1,Volunteer_Academic_Qualifications:1,Volunteer_Occupation:1,Volunteer_email:1,Volunteer_Number:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1})
+        res.status(200).json(all_detail);
     }
     catch(e)
     {
