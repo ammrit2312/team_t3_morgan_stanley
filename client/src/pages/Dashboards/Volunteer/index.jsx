@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import {Link} from "react-router-dom";
+
 // css
 import styles from "../Dashboards.module.css";
 
@@ -13,6 +15,12 @@ import { colors } from "../../../constants/colors.constants";
 // icons
 import { BsBookmarkCheckFill, BsStack } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
+import { IoTime } from "react-icons/io5";
+import { GiSandsOfTime } from "react-icons/gi";
+import { BsCalendarDateFill } from "react-icons/bs";
+import { BiWifiOff } from "react-icons/bi";
+import { BiWifi } from "react-icons/bi";
+import { ImLocation } from "react-icons/im";
 
 // api
 import {
@@ -21,13 +29,15 @@ import {
   volunteerRejectsActivity,
 } from "../../../api/volunteerDashboard.api";
 
+import { deleteObject } from "../../../utils/deleteObject.utils";
+
 const VolunteerDashboard = () => {
   const [apiData, setAPIData] = useState(null);
   const currUser = useSelector((state) => state.user);
 
   useEffect(() => {
     getVolunteerDashboardData(currUser.uid).then((data) => {
-      console.table(data.data);
+      console.log(data);
       setAPIData(data.data);
     });
   }, []);
@@ -36,15 +46,13 @@ const VolunteerDashboard = () => {
     {
       value: "Accept",
       onClick: (e) => {
-        e.preventDefault();
-        console.log(e);
         volunteerAcceptsActivity(currUser.uid, e.target.id).then((data) => {
           if (data.status === 200) {
             showNotification({
               title: "Preference Updated",
               type: "success",
             });
-            e.target.disabled = true;
+            setAPIData(deleteObject(apiData, e.target.id));
           } else {
             showNotification({
               title: "Something went wrong",
@@ -67,14 +75,13 @@ const VolunteerDashboard = () => {
     {
       value: "Reject",
       onClick: (e) => {
-        e.preventDefault();
         volunteerRejectsActivity(currUser.uid, e.target.id).then((data) => {
           if (data.status === 200) {
             showNotification({
               title: "Preference Updated",
               type: "success",
             });
-            e.target.disabled = true;
+            setAPIData(deleteObject(apiData, e.target.id));
           } else {
             showNotification({
               title: "Something went wrong",
@@ -100,13 +107,36 @@ const VolunteerDashboard = () => {
   return (
     <div>
       <h1>Mapping for Activities</h1>
-      <p>Please confirm your decision as soon as possible</p>
       {apiData !== null ? (
-        apiData.map(
-          (data, index) =>
-            data && (
-              <VolunteerDashboardCard key={index} buttons={buttons} {...data} />
-            )
+        apiData.message ? (
+          <div>
+            <p>
+            {apiData.message}
+            </p>
+            <p>
+              Visit <Link to="/volunteer/upcoming-activities/">Upcoming Activities</Link> for further details
+            </p>
+          </div>
+        ) : (
+          <div>
+            {apiData.length === 1 && apiData[0] === null ? (
+              <div>No activities mapped. Kindly visit after some time!</div>
+            ) : (
+              <div>
+                <p>Please confirm your decision as soon as possible</p>
+                {apiData.map(
+                  (data, index) =>
+                    data && (
+                      <VolunteerDashboardCard
+                        key={index}
+                        buttons={buttons}
+                        {...data}
+                      />
+                    )
+                )}
+              </div>
+            )}
+          </div>
         )
       ) : (
         <div>Loading...</div>
