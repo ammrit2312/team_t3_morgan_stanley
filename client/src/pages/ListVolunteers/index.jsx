@@ -22,9 +22,9 @@ const ListVolunteers = () => {
 
   const buttons = [
     {
-      onClick: (e) => {
+      onClick: (e, row) => {
         e.stopPropagation();
-        console.log("Message should be done");
+        console.log("Message should be done");console.log(row);
       },
       icon: <BsFillChatFill size={22} />,
       customStyles: {
@@ -40,9 +40,9 @@ const ListVolunteers = () => {
       },
     },
     {
-      onClick: (e) => {
+      onClick: (e, row) => {
         e.stopPropagation();
-        console.log("Delete Volunteer");
+        console.log("Delete Volunteer", row);
       },
       icon: <MdDelete size={22} />,
       customStyles: {
