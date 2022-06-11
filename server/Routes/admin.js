@@ -80,13 +80,21 @@ router.get("/list-all-users-for-activity/:activityid",async(req,res)=>{
 //updates Upcoming_Activities list for volunteer by pushing activity id
 router.put("/updateList/:activityid/:uid",async(req,res)=>{
     try{
-    id=req.params.activityid 
-    userID=req.params.uid
-    const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID},$inc:{Current_assigned : 1}});
-    const status=await Reccomendation.updateMany({UserId:userID},{User_Activity_Select:true});
-    const update=await Volunteers.findOneAndUpdate({UserID:userID},{ $push : {"Upcoming_Activities": id }});
-    await Volunteers.updateOne({_id:userID},{assigned:true});
-    res.status(200).json({"message":"Assigned successfully"});
+    let id=req.params.activityid 
+    let userID=req.params.uid
+    let ok=await Activity.findOne({_id:id,$expr: { $lt: [ "$Current_assigned" , "$Max_volunteers" ] }})
+    let ok1=await Volunteers.findOne({UserID:userID,assigned:false})
+    if(ok && ok1)
+    {
+        const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID},$inc:{Current_assigned : 1}});
+        const status=await Reccomendation.updateMany({UserId:userID},{User_Activity_Select:true});
+        const update=await Volunteers.findOneAndUpdate({UserID:userID},{ $push : {"Upcoming_Activities": id },assigned:true});
+        res.status(200).json({"message":"Assigned successfully"});
+    }
+    else
+    {
+        res.status(500).json({"message":"activity filled up or user assigned to another activity"})
+    }
     }
     catch(e)
     {
