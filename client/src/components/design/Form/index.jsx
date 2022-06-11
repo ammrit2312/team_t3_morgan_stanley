@@ -19,6 +19,7 @@ const Form = ({form_construct}) => {
                         required={form_component.required}
                         onChange={form_component.setVar}
                         value={form_component.value}
+                        type={form_component.type||"input"}
                     />}
                     {form_component.input==="email" && 
                     <EmailField
