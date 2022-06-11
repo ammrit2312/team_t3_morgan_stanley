@@ -16,12 +16,12 @@ const reducer = combineReducers({
   formDetails: formDetailsReducer,
 });
 
-const persistConfig = {
-  key: "root",
-  storage,
-};
+// const persistConfig = {
+//   key: "root",
+//   storage,
+// };
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+// const persistedReducer = persistReducer(persistConfig, reducer);
 
 /* Middlewares */
 const sagaMiddleware = createSagaMiddleware();
@@ -31,11 +31,16 @@ const middlewares = [sagaMiddleware];
 
 // Creating the redux store
 // the second parameter is an enhancer. Since we dont have any thus {}
+// export const store = createStore(
+//   persistedReducer,
+//   composeWithDevTools(applyMiddleware(...middlewares))
+// );
+
 export const store = createStore(
-  persistedReducer,
+  reducer,
   composeWithDevTools(applyMiddleware(...middlewares))
 );
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);
 
 // Starting the Watcher Saga to listen redux actions
 // sagaMiddleware.run(watcherSaga);

@@ -62,7 +62,8 @@ const map_stats_platform = (arr) => {
 
 
 // function for getting the activities registered and its count
-const map_stats_activity = (arr) => {
+//reused for multiple stats
+const map_stats = (arr) => {
     const dict={};
     for(let i=0;i<arr.length;i++)
     {
@@ -88,7 +89,45 @@ router.get("/get-activity-stats",async(req,res) => {
                 array = array.concat(i.Volunteer_Interested_Activity_Type);
             }
         })
-        stats_data = map_stats_activity(arr);
+        stats_data = map_stats(arr);
+        res.status(200).json(stats_data);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({"message":"encountered a server error"});
+    }
+})
+
+//route to get stats for places preferred by volunteers
+router.get("/get-places-stats",async(req,res) => {
+    try {
+        const data = await Volunteers.find({},{_id:0,Volunteer_Preferred_Locations:1})
+        let array = []
+        data.map((i) => {
+            if((i.Volunteer_Preferred_Locations).length > 0)
+            {
+                array = array.concat(i.Volunteer_Preferred_Locations);
+            }
+        })
+        stats_data = map_stats(arr);
+        res.status(200).json(stats_data);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({"message":"encountered a server error"});
+    }
+})
+
+//route to get stats for mode preferred by volunteers
+router.get("/get-mode-stats",async(req,res) => {
+    try {
+        const data = await Volunteers.find({},{_id:0,Volunteer_Preferred_Mode:1})
+        let array = []
+        data.map((i) => {
+            if((i.Volunteer_Preferred_Mode).length > 0)
+            {
+                array = array.concat(i.Volunteer_Preferred_Mode);
+            }
+        })
+        stats_data = map_stats(arr);
         res.status(200).json(stats_data);
     } catch (err) {
         console.log(err);

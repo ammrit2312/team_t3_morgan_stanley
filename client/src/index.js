@@ -23,13 +23,13 @@ root.render(
   <React.StrictMode>
     <ReactNotifications />
     <ReduxProvider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
+    {/* <PersistGate loading={null} persistor={persistor}> */}
     <Router>
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
     </Router>
-    </PersistGate>
+    {/* </PersistGate> */}
     </ReduxProvider>
   </React.StrictMode>
 );

@@ -36,3 +36,17 @@ export const POST = (url, body, headers) =>
     headers: headers || {},
     data: body || {},
   });
+
+/**
+ *
+ * @param {String} url endpoint to which the call has to be made
+ * @param {Object} headers an object containing the headers to be sent
+ * @returns axios instance of POST request
+ * @author Mayank1403 <mayank1403@gmail.com>
+ */
+export const PUT = (url, headers) =>
+  axiosInstance({
+    method: "put",
+    url,
+    headers: headers || {},
+  });
