@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:left;
+}
+.chip{
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 5px 10px;
+    text-align: center;
+    margin: 5px;
+}

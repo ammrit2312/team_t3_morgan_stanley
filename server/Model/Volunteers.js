@@ -107,6 +107,11 @@ const VolunteerSchema = new mongoose.Schema({
         require:true,
         default:[]
     },
+    Volunteer_mapped:{
+        type:Number,
+        require:true,
+        default:0
+    },
     assigned:{
         type:Boolean,
         require:true,
