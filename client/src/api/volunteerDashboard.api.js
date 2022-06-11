@@ -11,3 +11,7 @@ export function volunteerAcceptsActivity(uid, activityId) {
 export function volunteerRejectsActivity(uid, activityId) {
   return PUT(`/api/admin/reject-activity/${uid}/${activityId}`);
 }
+
+export function getVolunteerUpcomingActivities(uid) {
+  return GET(`/api/admin/upcoming-activities/${uid}`);
+}

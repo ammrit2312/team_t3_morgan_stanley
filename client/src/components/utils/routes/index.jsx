@@ -59,7 +59,7 @@ export default function Router() {
   }
 
   if (currUser === null) {
-    return <SignedOutRouter />;
+    return <LoadingRouter />;
   } else if (currUser.accountType === accountTypes.ADMIN) {
     return <SignedInAdminRouter />;
   } else if (currUser.accountType === accountTypes.VOLUNTEER) {
