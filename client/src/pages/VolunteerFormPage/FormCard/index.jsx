@@ -68,15 +68,15 @@ const FormCard = ({
       options: [
         {
           label: "PES University",
-          value: "PESU",
+          value: "PES University",
         },
         {
           label: "RV College of Engineering",
-          value: "RVCE",
+          value: "RV College of Engineering",
         },
         {
           label: "IIT Bombay",
-          value: "IITB",
+          value: "IIT Bombay",
         },
       ],
       value: college,
@@ -137,11 +137,11 @@ const FormCard = ({
       options: [
         {
           label: "Morgan Stanley India",
-          value: "MSIND",
+          value: "Morgan Stanley India",
         },
         {
           label: "Deloitte India",
-          value: "DeloitteIND",
+          value: "Deloitte India",
         },
       ],
       value: oragnization,

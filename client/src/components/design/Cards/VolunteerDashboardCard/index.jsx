@@ -43,7 +43,7 @@ const VolunteerDashboardCard = ({
         <div className={styles.iconContainer}>
           {ActivityDate && (
             <IconCard
-              Icon={
+              icon={
                 <BsCalendarDateFill size={25} color={colors.PRIMARY_GREEN} />
               }
               title="Date"
@@ -52,21 +52,21 @@ const VolunteerDashboardCard = ({
           )}
           {ActivityTime && (
             <IconCard
-              Icon={<IoTime size={30} color={colors.PRIMARY_GREEN} />}
+              icon={<IoTime size={30} color={colors.PRIMARY_GREEN} />}
               title="Time"
               detail={ActivityTime}
             />
           )}
           {ActivityDurationInMinutes && (
             <IconCard
-              Icon={<GiSandsOfTime size={25} color={colors.PRIMARY_GREEN} />}
+              icon={<GiSandsOfTime size={25} color={colors.PRIMARY_GREEN} />}
               title="Duration"
               detail={`${ActivityDurationInMinutes} mins`}
             />
           )}
           {Activity_Mode && (
             <IconCard
-              Icon={
+              icon={
                 Activity_Mode === "online" ? (
                   <BiWifi size={25} color={colors.PRIMARY_GREEN} />
                 ) : (
@@ -82,7 +82,7 @@ const VolunteerDashboardCard = ({
           <div className={styles.locationStyler}>
             {Activity_Location && (
               <IconCard
-                Icon={<ImLocation size={25} color={colors.PRIMARY_GREEN} />}
+                icon={<ImLocation size={25} color={colors.PRIMARY_GREEN} />}
                 title="Location"
                 detail={Activity_Location[0]}
                 customStyles={{

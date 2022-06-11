@@ -1,6 +1,9 @@
 export const deleteObject = (list, objectID) => {
-    const index = list.findIndex(item => item.id === objectID);
-    if (index !== -1) {
-        list.splice(index, 1);
+    for(let i = 0; i < list.length; i++) {
+        if(list[i]._id === objectID) {
+            list.splice(i, 1);
+        }
     }
+    console.log(list)
+    return list;
 }

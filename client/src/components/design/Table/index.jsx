@@ -5,6 +5,12 @@ import styles from "./Table.module.css";
 import { checkInclusion } from "../../../utils/filter.utils";
 import { downloadData } from "../../../utils/download.utils";
 
+// components
+import Button from "../Button";
+
+// constants
+import { colors } from "../../../constants/colors.constants";
+
 /**
  *
  * @param tableName - Name of the table. Defaults to "Data"
@@ -32,6 +38,7 @@ const Table = ({
   filename = "data",
   nullDataPlaceholder = "-",
   onRowClick = (data) => {},
+  buttons
 }) => {
   // Data States
   const [filteredData, setFilteredData] = useState(data);
@@ -147,7 +154,13 @@ const Table = ({
   };
 
   /* handle rendering */
-  const renderData = (data) => data ? data.toString() : nullDataPlaceholder;
+  const renderData = (data) => {
+    // console.log("Stuff", typeof data, data);
+    if(typeof data === "object"){
+      return <div style={{width:"100%", display: "flex", flexDirection: "column", alignItems: "center", justifyItems: "center"}}>{data}</div>;
+    }
+    return data ? data.toString() : nullDataPlaceholder
+  };
 
   return (
     <section className={styles.container}>
@@ -182,24 +195,47 @@ const Table = ({
           </div>
         </div>
 
-        <div>
+        <div className={styles.buttonContainer}>
           {allowDownload && (
-            <button onClick={handleDownload} className={styles.button}>
-              Download
-            </button>
+            <Button 
+              value="Download" 
+              onClick={handleDownload}
+              customStyles= {{
+                backgroundColor: colors.PRIMARY_GREEN,
+                borderRadius: "10px",
+                border: "0",
+                fontWeight: "bold",
+                fontSize: "0.9rem",
+                paddingY: "0.7rem",
+                paddingX: "0.2rem",
+                width: "2rem",
+                marginRight: "0.5rem",
+              }}
+            />
           )}
-
-          <button onClick={clearFilters} className={styles.button}>
-            Clear All Filters
-          </button>
+          <Button 
+            value="Clear All Filters" 
+            onClick={clearFilters}
+            customStyles= {{
+              backgroundColor: colors.PRIMARY_RED,
+              borderRadius: "10px",
+              border: "0",
+              fontWeight: "bold",
+              fontSize: "0.9rem",
+              paddingY: "0.7rem",
+              paddingX: "0.2rem",
+              width: "2rem",
+            }}
+          />
         </div>
       </div>
+      <div className={styles.tableContainer}>
       <table style={{ borderSpacing }} className={styles.table}>
         <thead className={styles.thead}>
           <tr className={styles.headRow}>
             {showSerialNo && (
               <th className={styles.th}>
-                <div className={styles.resizable}>Serial No.</div>
+                <div className={`${styles.serialNo}`}>SNo.</div>
               </th>
             )}
             {Object.keys(tableHeaders).map((header, headerIdx) => (
@@ -209,6 +245,11 @@ const Table = ({
                 </div>
               </th>
             ))}
+            {buttons && (
+              <th className={styles.th}>
+                <div className={styles.resizable}>Actions</div>
+              </th>
+            )}
           </tr>
           {allowFilters && (
             <tr className={styles.filterContainer}>
@@ -253,7 +294,7 @@ const Table = ({
               <tr
                 key={rowIdx}
                 className={styles.tr}
-                onClick={() => onRowClick(row)}
+                onClick={(e) => onRowClick(row, e)}
               >
                 {showSerialNo && (
                   <td className={styles.td}>
@@ -269,10 +310,23 @@ const Table = ({
                       : renderData(row[tableHeaders[header].key])}
                   </td>
                 ))}
+                {buttons && (
+                  <td className={`${styles.td}`}>
+                    <div className={`${styles.buttonCollection}`}>
+                      {buttons.map((button, index) => (
+                        <Button
+                          key={index}
+                          {...button}
+                        />
+                      ))}
+                    </div>
+                  </td>
+                )}
               </tr>
             ))}
         </tbody>
       </table>
+      </div>
     </section>
   );
 };

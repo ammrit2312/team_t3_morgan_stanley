@@ -18,7 +18,6 @@ const Dashboard = () => {
         <main className={styles.container}>
             {currUser.accountType === accountTypes.ADMIN && <AdminDashboard/>}
             {currUser.accountType === accountTypes.VOLUNTEER && <VolunteerDashboard />}
-            {/* <AdminDashboard/> */}
         </main>
     );
 }

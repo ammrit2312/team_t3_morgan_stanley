@@ -127,3 +127,104 @@ export const testData = [
     ],
   },
 ];
+
+
+export const tableData = [
+  {
+    name: "John",
+    email: "25",
+    dob: "2022-03-22",
+    availability: "Weekends",
+    languages: [null, "English"],
+    mode: "Online",
+  },
+  {
+    name: "Jane",
+    email: null,
+    dob: undefined,
+    availability: "Weekdays",
+    languages: ["Hindi", "English", "Urdu"],
+    mode: "Offline"
+  },
+  {
+    name: "Jane",
+    email: "28",
+    dob: "2022-04-22",
+    availability: "Both",
+    languages: ["Marathi"],
+    mode: "Online"
+  },
+  {
+    name: "Jane",
+    email: "28",
+    dob: "2022-04-22",
+    availability: "Both",
+    languages: ["Marathi"],
+    mode: "Online"
+  },
+  {
+    name: "Albus Percival Wulfric Brian Dumbledore",
+    email: "88",
+    dob: "2021-03-22",
+    availability: "Both",
+    languages: ["Hindi", "Urdu"],
+    mode: "Online"
+  },
+  {
+    name: "Albus Percival Wulfric Brian Dumbledore",
+    email: "88",
+    dob: "2021-03-22",
+    availability: "Both",
+    languages: ["Hindi", "Urdu"],
+    mode: "Offline"
+  },
+  {
+    name: "Harry",
+    email: "28",
+    dob: "2022-04-22",
+    availability: "Weekdays",
+    languages: ["Marathi"],
+    mode: "Online"
+  },
+  {
+    name: "Jane",
+    email: "28",
+    dob: "2022-04-22",
+    availability: "Weekdays",
+    languages: ["Marathi"],
+    mode: "Online"
+  },
+];
+
+// require later
+// const buttons = [
+//   {
+//     onClick: (e) => {e.stopPropagation(); console.log("Button was pressed")},
+//     icon: <TiTick size={22} />,
+//     customStyles: {
+//       backgroundColor: colors.PRIMARY_GREEN,
+//       borderRadius: "10px",
+//       border: "0",
+//       fontWeight: "bold",
+//       fontSize: "0.9rem",
+//       marginRight: "1rem",
+//       width: "5px",
+//       minWidth: "0px",
+//       padding: "10px 25px",
+//     },
+//   },
+//   {
+//   //   value: "Cancel",
+//     onClick: (e) => {e.stopPropagation(); console.log("Button was pressed")},
+//     icon: <ImCross size={15} />,
+//     customStyles: {
+//       backgroundColor: colors.PRIMARY_RED,
+//       borderRadius: "10px",
+//       border: "0",
+//       fontSize: "0.5rem",
+//       width: "5px",
+//       minWidth: "0px",
+//       padding: "13px 25px",
+//     },
+//   },
+// ];

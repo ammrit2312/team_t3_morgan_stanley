@@ -4,9 +4,13 @@
     padding: var(--gutter);
     display: flex;
     flex-direction: column;
-    /* height: calc(100vh - var(--nav-height));
-    overflow-y: auto; */
-    min-height: calc(100vh - var(--nav-height));
+    height: calc(100vh - var(--nav-height));
+    overflow-y: auto;
     background-image: url("../../assets/textured_paper.png");
-    min-height: calc(100vh - var(--nav-height));
+    /* padding-top: 2rem; */
+    padding-bottom: 2rem;
+}
+
+.title{
+    text-align: center;
 }

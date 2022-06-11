@@ -1,34 +1,20 @@
-* {
-  /* colors */
-  --vyas-react-table-grey-1: #d1d1d1;
-  --vyas-react-table-grey-2: #f3f3f3;
-  --vyas-react-table-grey-3: #979797;
-  --vyas-react-table-bg-color: #fff;
-  --vyas-thumb-scroll-color: #888;
-
-  /* dimensions */
-  --container-padding: 5px;
-  --min-column-width: 170px;
-  --cell-border-radius: 2px;
-  --cell-padding: 8px;
-}
-
 .tableHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 0 var(--cell-padding);
-  color: var(--vyas-react-table-grey-3);
+  color: var(--yellow);
 }
 
 .tableName {
-  font-size: 24px;
+  font-size: 1.6rem;
   font-weight: bold;
-  color: black;
+  margin-bottom: 20px;
+  color: var(--yellow);
 }
 
-.button {
+/* .button {
   padding: 4px 8px;
   border: 1px solid black;
   border-radius: 16px;
@@ -41,14 +27,14 @@
 .button:hover {
   color: var(--vyas-react-table-bg-color);
   background-color: black;
-}
+} */
 
 /* CONTAINER */
 .container {
   display: inline-block;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   background-color: var(--vyas-react-table-bg-color);
-  border-radius: var(--cell-border-radius);
+  border-radius: 15px;
   padding: var(--container-padding);
 }
 
@@ -79,22 +65,23 @@
 }
 
 .statsInput {
-  border: 1px solid var(--vyas-react-table-grey-1);
+  border: 1px solid var(--yellow);
   padding: 5px;
   outline: none;
   margin: 0 5px;
-  border-radius: var(--cell-border-radius);
+  border-radius: 5px;
   width: 42px;
   transition: all 0.3s ease-in-out;
 }
 
 .statsInput:focus {
-  box-shadow: 0 0 1px black;
+  box-shadow: 0 0 1px var(--yellow);
 }
 
 /* TABLE */
 .table {
   border-collapse: separate;
+  margin-top: 2rem;
 }
 
 /* Input */
@@ -108,16 +95,16 @@
   width: var(--min-column-width);
   width: 100%;
   padding: var(--cell-padding);
-  border: 1px solid var(--vyas-react-table-grey-1);
-  border-radius: var(--cell-border-radius);
+  border: 1px solid var(--yellow);
+  border-radius: 10px;
   outline: none;
-  background-color: var(--vyas-react-table-bg-color);
+  background-color: var(--white);
   font-size: 16px;
   transition: all 0.3s ease-in-out;
 }
 
 .vyasInput:focus {
-  box-shadow: 0 0 2px black;
+  box-shadow: 0 0 2px var(--yellow);
 }
 
 .headRow {
@@ -127,13 +114,14 @@
 
 .th {
   padding: var(--cell-padding);
-  background-color: var(--vyas-react-table-grey-1);
-  border-radius: var(--cell-border-radius);
+  background-color: var(--yellow);
+  border-radius: 10px;
 }
 
 .resizable {
   resize: horizontal;
   overflow: auto;
+  text-align: center;
   min-width: var(--min-column-width) !important;
 }
 
@@ -148,7 +136,8 @@
 .td {
   padding: var(--cell-padding);
   text-align: left;
-  border-radius: var(--cell-border-radius);
+  height: 100%;
+  border-radius: 10px;
   max-width: 200px;
   overflow-x: scroll;
 }
@@ -158,8 +147,8 @@
 }
 
 .td::-webkit-scrollbar-thumb {
-  background: var(--vyas-thumb-scroll-color);
-  border-radius: 2px;
+  background: var(--dark-yellow);
+  border-radius: 10px;
 }
 
 .tr:nth-child(even) {
@@ -168,4 +157,29 @@
 
 .tr:hover {
   background-color: var(--vyas-react-table-grey-1);
+}
+
+.buttonContainer{
+  display: flex;
+}
+
+.serialNo{
+  width: 50px !important;
+}
+
+.buttonCollection{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.tableContainer{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  flex-direction: column;
 }
