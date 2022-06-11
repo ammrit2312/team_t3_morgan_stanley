@@ -1,19 +1,54 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-// css
 import styles from "./ActivityPage.module.css";
 
+// components
+import Chip from "../../components/design/Chip";
+
+// api
+// import { getUserData } from "../../api/userDetails.api";
+
+// data
+import { activityToDisplayValue } from "../../constants/apiData.constants";
+
 const ActivityPage = () => {
+  const currUser = useSelector((state) => state.user);
+  const [userData, setUserData] = useState(null);
 
-    const { activityId } = useParams();
+//   useEffect(() => {
+//     getUserData(currUser.uid).then((res) => {
+//       setUserData(res.data);
+//     });
+//   }, []);
 
-    return (
-        <main className={styles.container}>
-            <h1 className={styles.title}>Activity Page</h1>
-            <div>{activityId}</div>
-        </main>
-    );
-}
- 
+  return (
+    <div className={styles.container}>
+      <h1 className={styles.heading}>Profile Page</h1>
+      <div className={styles.detailsContainer}>
+        {userData !== null ? (
+          Object.keys(userData).map((key, index) => {
+            return (
+              key !== "ActivityID" && (
+                <div key={index} className={styles.detail}>
+                  <span className={styles.key}>{activityToDisplayValue[key]}</span> :{" "}
+                  <span className={styles.value}>
+                    {Array.isArray(userData[key]) ? (
+                      <Chip data={userData[key]} />
+                    ) : (
+                      userData[key]
+                    )}
+                  </span>
+                </div>
+              )
+            );
+          })
+        ) : (
+          <div>Loading...</div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 export default ActivityPage;

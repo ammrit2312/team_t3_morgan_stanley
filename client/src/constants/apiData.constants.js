@@ -44,3 +44,15 @@ export const keyToDisplayValue = {
   Volunteer_Languages: "Languages",
   Volunteer_Skills: "Skills",
 };
+
+export const activityToDisplayValue = {
+  ActivityID: "Activity ID",
+  ActivityName: "Name",
+  ActivityType: "Type",
+  ActivityDate: "Date",
+  ActivityTime: "Time",
+  ActivityDurationInMinutes: "Duration",
+  Activity_Location: "Location",
+  Language_Preference: "Language Preference",
+  Activity_availability: "Availability",
+};
