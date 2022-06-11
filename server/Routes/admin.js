@@ -70,6 +70,10 @@ router.put("/list-delete-volunteer/:uid",async(req,res)=> {
     try{
         uid=req.params.uid
         const details = await Volunteers.find({UserID:uid});
+        if(details.length == 0)
+        {
+           return  res.status(200).json({"message":"the user does not exist"})
+        }
         const newArchive = new Volunteer_archives(details);
         await newArchive.save();
         await Volunteers.findOneAndDelete({UserID:uid});
