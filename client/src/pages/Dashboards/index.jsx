@@ -16,9 +16,8 @@ const Dashboard = () => {
     const currUser = useSelector((state) => state.user);
     return (
         <main className={styles.container}>
-            {/* {currUser.accountType === accountTypes.ADMIN && <AdminDashboard/>}
-            {currUser.accountType === accountTypes.VOLUNTEER && <VolunteerDashboard />} */}
-            <AdminDashboard/>
+            {currUser.accountType === accountTypes.ADMIN && <AdminDashboard/>}
+            {currUser.accountType === accountTypes.VOLUNTEER && <VolunteerDashboard />}
         </main>
     );
 }

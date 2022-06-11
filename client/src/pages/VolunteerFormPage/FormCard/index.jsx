@@ -24,10 +24,13 @@ const FormCard = ({
   backStepper,
   submitResp = () => {},
 }) => {
+
+  const currUser = useSelector(state => state.user);
+
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [college, setCollege] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(currUser.email);
   const [phone, setPhone] = useState();
   const [nationality, setNationality] = useState("");
   const [academicQualification, setAcademicQualification] = useState("");
@@ -42,7 +45,6 @@ const FormCard = ({
   const [occupation, setOccupation] = useState("");
 
   const dispatch = useDispatch();
-  const currUser = useSelector(state => state.user);
 
   const form_component1 = [
     {
@@ -66,15 +68,15 @@ const FormCard = ({
       options: [
         {
           label: "PES University",
-          value: "PESU",
+          value: "PES University",
         },
         {
           label: "RV College of Engineering",
-          value: "RVCE",
+          value: "RV College of Engineering",
         },
         {
           label: "IIT Bombay",
-          value: "IITB",
+          value: "IIT Bombay",
         },
       ],
       value: college,
@@ -135,11 +137,11 @@ const FormCard = ({
       options: [
         {
           label: "Morgan Stanley India",
-          value: "MSIND",
+          value: "Morgan Stanley India",
         },
         {
           label: "Deloitte India",
-          value: "DeloitteIND",
+          value: "Deloitte India",
         },
       ],
       value: oragnization,

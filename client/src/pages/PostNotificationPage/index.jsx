@@ -8,21 +8,37 @@ import Button from "../../components/design/Button";
 import styles from "./styles.module.css";
 import { colors } from "../../constants/colors.constants";
 
+// api
+import { postNotification } from "../../api/notification.api";
+import showNotification from "../../utils/notifications.utils";
+
 const ContactUsPage = () => {
-  const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, title, message);
-  }
+    postNotification({
+      Notification_title: title,
+      Notification_message: message,
+    }).then((res) => {
+      if (res.status === 200) {
+        showNotification({
+          type: "success",
+          title: "Notification sent successfully",
+        });
+        setTitle("");
+        setMessage("");
+      } else {
+        showNotification({ type: "error", title: "Something went wrong" });
+      }
+    });
+  };
 
   return (
     <div className={styles.container}>
       <form className={styles.innerCoontainer} onSubmit={handleSubmit}>
-        <h1>Contact Us</h1>
-        <EmailField required={true} onChange={setEmail} email={email} />
+        <h1>Post Notification</h1>
         <TextField
           label="Title"
           required={true}

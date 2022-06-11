@@ -22,6 +22,7 @@ export const routes = {
     UPCOMING_ACTIVITIES: "upcoming-activities",
     EMAIL_VERIFICATION: "email-verification",
     FORGOT_PASSWORD: "forgot-password",
+    POST_NOTIFICATION: "post-notification",
 };
 
 export const entireRoutes = {
@@ -40,4 +41,5 @@ export const entireRoutes = {
     NOT_FOUND: entirepath(routes.NOT_FOUND),
     EMAIL_VERIFICATION: entirepath(routes.EMAIL_VERIFICATION),
     FORGOT_PASSWORD: entirepath(routes.FORGOT_PASSWORD),
+    POST_NOTIFICATION: entirepath(routes.ADMIN,routes.POST_NOTIFICATION),
 };

@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Activity = require('../Model/Activity');
 const Reccomendation = require('../Model/Reccomendation');
 const Volunteers = require('../Model/Volunteers');
+const Volunteer_archives = require('../Model/Volunteer_archives');
 
 
 // const io=require('socket.io')(8800,{
@@ -52,6 +53,23 @@ router.get("/list-all-activities",async(req,res)=> {
     }
 })
 
+// api to delete volunteer
+router.put("/list-delete-volunteer:uid",async(req,res)=> {
+    try{
+        uid=req.params.uid
+        const details = await Volunteers.findById(UserId,{_id:0,UserID:1,Volunteer_Name:1,Volunteer_Address:1,Volunteer_College:1,Volunteer_Organization:1,Volunteer_Academic_Qualifications:1,Volunteer_Platform:1,Volunteer_Occupation:1,Volunteer_email:1,Volunteer_Nationality:1,Volunteer_Number:1,Volunteer_Preferred_Mode:1,Volunteer_Preferred_Locations:1,Volunteer_Availability:1,Volunteer_Interested_Activity_Type:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1});
+        const newArchive = new Volunteer_archives(details);
+        await newArchive.save();
+        const data = await Volunteers.findByIdAndDelete(uid);
+        await data.save();
+        res.status(200).json({"message":"successfully deleted"});
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).json({"message":err})
+    }
+})
+
 // get all volunteers who have preferred activity given activity id
 router.get("/list-all-users-for-activity/:activityid",async(req,res)=>{
     try{
@@ -80,13 +98,21 @@ router.get("/list-all-users-for-activity/:activityid",async(req,res)=>{
 //updates Upcoming_Activities list for volunteer by pushing activity id
 router.put("/updateList/:activityid/:uid",async(req,res)=>{
     try{
-    id=req.params.activityid 
-    userID=req.params.uid
-    const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID},$inc:{Current_assigned : 1}});
-    const status=await Reccomendation.updateMany({UserId:userID},{User_Activity_Select:true});
-    const update=await Volunteers.findOneAndUpdate({UserID:userID},{ $push : {"Upcoming_Activities": id }});
-    await Volunteers.updateOne({_id:userID},{assigned:true});
-    res.status(200).json({"message":"Assigned successfully"});
+    let id=req.params.activityid 
+    let userID=req.params.uid
+    let ok=await Activity.findOne({_id:id,$expr: { $lt: [ "$Current_assigned" , "$Max_volunteers" ] }})
+    let ok1=await Volunteers.findOne({UserID:userID,assigned:false})
+    if(ok && ok1)
+    {
+        const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID},$inc:{Current_assigned : 1}});
+        const status=await Reccomendation.updateMany({UserId:userID},{User_Activity_Select:true});
+        const update=await Volunteers.findOneAndUpdate({UserID:userID},{ $push : {"Upcoming_Activities": id },assigned:true});
+        res.status(200).json({"message":"Assigned successfully"});
+    }
+    else
+    {
+        res.status(500).json({"message":"activity filled up or user assigned to another activity"})
+    }
     }
     catch(e)
     {
@@ -130,7 +156,7 @@ router.get("/get-all-volunteer-info/:userID",async(req,res)=>{
     try
     {
         let userid=req.params.userID
-        const all_detail = await Volunteers.findOne({UserID:userid},{_id:0,UserID:1,Volunteer_Name:1,Volunteer_Academic_Qualifications:1,Volunteer_Occupation:1,Volunteer_email:1,Volunteer_Number:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1})
+        const all_detail = await Volunteers.findOne({UserID:userid},{_id:0,UserID:1,Volunteer_Name:1,Volunteer_Address:1,Volunteer_College:1,Volunteer_Organization:1,Volunteer_Academic_Qualifications:1,Volunteer_Occupation:1,Volunteer_email:1,Volunteer_Nationality:1,Volunteer_Number:1,Volunteer_Preferred_Mode:1,Volunteer_Preferred_Locations:1,Volunteer_Availability:1,Volunteer_Interested_Activity_Type:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1})
         res.status(200).json(all_detail);
     }
     catch(e)

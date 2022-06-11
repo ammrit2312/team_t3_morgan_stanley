@@ -2,19 +2,19 @@ const getBareReqScore=(userData,admin,mode)=>{
     let score=0;
     if (containsAll(admin.Language_Preference,userData.Volunteer_Languages))
         {
-            score += 10 + 5*mode;
+            score += 10 + 2.5*mode;
         }
     if (containsAll(admin.Activity_availability,userData.Volunteer_Availability))
         {
-            score += 10 + 5*mode;
+            score += 10 + 2.5*mode;
         }
     if (containsAll(admin.ActivityType,userData.Volunteer_Interested_Activity_Type))
         {
-            score += 10;
+            score += 10 + 2.5*mode;
         }
-    if (containsAll(admin.Activity_Mode,userData.Volunteer_Preferred_Mode))
+    if (userData.Volunteer_Preferred_Mode.includes(admin.Activity_Mode))
         {
-            score += 10;
+            score += 10 + 2.5*mode;
         }
     if (mode===0 && containsAll(admin.Activity_Location,userData.Volunteer_Preferred_Locations))
         {
@@ -47,7 +47,7 @@ const getMatchScoreForActivity=(activityID,activityDict,activityData,users)=>{
     users.forEach((userObj)=>{
         let score = 0;
         let userID=userObj._id.toString();
-        score=(activityData.Activity_Mode[0]==="online")?handleScore(activityData,userObj,1):handleScore(activityData,userObj,0);
+        score=(activityData.Activity_Mode==="online")?handleScore(activityData,userObj,1):handleScore(activityData,userObj,0);
         activityDict[activityID][userID]=score;
     });
 

@@ -28,16 +28,20 @@ export default function SignedOutRouter() {
           index: true,
         },
         {
-            path: entireRoutes.SIGN_IN,
-            element: <SignInPage />
+          path: entireRoutes.SIGN_IN,
+          element: <SignInPage />,
         },
         // {
         //     path: entireRoutes.VOLUNTEER_FORM,
         //     element: <VolunteerFormPage />
         // },
         {
-          path: entireRoutes.VOLUNTEER,
-          element: <Dashboard />,
+          path: entireRoutes.ADMIN_SHOW_VOLUNTEERS,
+          element: <ListVolunteers />,
+        },
+        {
+          path: entireRoutes.VOLUNTEER + "/:id",
+          element: <ShowProfileVolunteers />,
         },
         {
           path: entireRoutes.SIGN_UP,
@@ -55,13 +59,17 @@ export default function SignedOutRouter() {
           path: entireRoutes.FORGOT_PASSWORD,
           element: <ForgotPasswordPage />,
         },
+        {
+          path: entireRoutes.POST_NOTIFICATION,
+          element: <PostNotification />,
+        },
         // Check
         // {
         //   path: entireRoutes.ADMIN_UPLOAD_ACTIVITY,
         //   element: <UploadActivityForm />,
         // },
         {
-          element: <ProfilePage/>,
+          element: <ProfilePage />,
           path: entireRoutes.ACCOUNT_PROFILE,
         },
         { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
@@ -95,12 +103,13 @@ const EmailVerificationPage = Loadable(
 );
 
 // check
+const PostNotification = Loadable(
+  lazy(() => import("../../../pages/PostNotificationPage"))
+);
 const VolunteerFormPage = Loadable(
   lazy(() => import("../../../pages/VolunteerFormPage"))
 );
-const ProfilePage = Loadable(
-  lazy(() => import("../../../pages/ProfilePage"))
-)
+const ProfilePage = Loadable(lazy(() => import("../../../pages/ProfilePage")));
 
 const UploadActivityForm = Loadable(
   lazy(() => import("../../../pages/UploadActivityFormPage"))
@@ -108,4 +117,10 @@ const UploadActivityForm = Loadable(
 
 const Dashboard = Loadable(lazy(() => import("../../../pages/Dashboards")));
 
+const ShowProfileVolunteers = Loadable(
+  lazy(() => import("../../../pages/ShowProfileVolunteers"))
+);
 
+const ListVolunteers = Loadable(
+  lazy(() => import("../../../pages/ListVolunteers"))
+);

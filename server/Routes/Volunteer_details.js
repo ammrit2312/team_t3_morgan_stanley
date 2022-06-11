@@ -23,7 +23,7 @@ router.post("/submit-volunteer/:uid",async(req,res) => {
             const bestActivitiesIDs=getBestActivitiesForUser(userDict,volunteer,activity);
             console.log(volunteer.Volunteer_Name,bestActivitiesIDs)
             addReccomendation(volunteer,bestActivitiesIDs);
-            res.status(200).json({"message":"succesfuly mapped volunteer"});
+            res.status(200).json({"message":"successfully mapped volunteer"});
             }
             else{
                 res.json({"message":"the activity max capacity is filled"})
@@ -217,17 +217,15 @@ router.put("/get-new-user/:actID",async(req,res)=>{
         let actObj=await Activity.findOne({_id:activityID})
         let users=await Volunteers.find({assigned:false})
         let userID=getNewVolunteer(activityDict,actObj,users);
-        console.log(userID)
         if(userID===undefined)
         {
             res.status(500).json({"message":"No such user present"});
         }
         else
         {
-            const x=await Reccomendation.updateOne({userId:userID},{$push:{Reccomendation_ActivityID:activityID}});
-            console.log(x)
-            await Activity.updateOne({_id:activityID},{$push:{AssignedTo:userID}});
-            await Volunteers.updateOne({_id:userID},{assigned:true})
+            const x=Reccomendation.updateOne({userId:userID},{$push:{Reccomendation_ActivityID:activityID}});
+            const z=Volunteers.updateOne({_id:userID},{assigned:true})
+            await Promise.all([x,z])
             res.status(200).json({"message":"New Volunteer mapping recommended"});
         }
 
