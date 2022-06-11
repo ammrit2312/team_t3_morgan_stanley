@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import styles from "../ApprovedActivities.module.css";
 
 // components
 import VolunteerDashboardCard from "../../../components/design/Cards/VolunteerDashboardCard";
@@ -77,11 +78,30 @@ function VolunteerApprovedActivities() {
   return (
     <div>
       <h1>Upcoming Activities</h1>
-      <p>These are your upcoming activities</p>
-      {apiData !== null &&
-        apiData.map((data, index) => (
-          <VolunteerDashboardCard key={index} buttons={buttons} {...data} />
-        ))}
+      {apiData !== null ? (
+        apiData.message ? (
+          <p style={{ textTransform: "capitalize" }}>{apiData.message}</p>
+        ) : (
+          <div>
+            {apiData.length === 1 && apiData[0] === null ? (
+              <div>No activities mapped. Kindly visit after some time!</div>
+            ) : (
+              <div>
+                <p>These are your upcoming activities</p>
+                {apiData.map((data, index) => (
+                  <VolunteerDashboardCard
+                    key={index}
+                    buttons={buttons}
+                    {...data}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        )
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   );
 }

@@ -105,7 +105,7 @@ const VolunteerDashboard = () => {
 
   // send onAccept and onReject to VolunteerDashboardCard
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Mapping for Activities</h1>
       {apiData !== null ? (
         apiData.message ? (
