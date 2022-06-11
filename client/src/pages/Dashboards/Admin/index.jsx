@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 // css
 import styles from "../Dashboards.module.css";
 
 // components
 import VolunteerDashboardCard from "../../../components/design/Cards/VolunteerDashboardCard";
-import showNotification from "../../../utils/notifications.utils";
-
 
 // api
-
+import {getAllActivities} from '../../../api/adminDashboard.api'
 
 const AdminDashboard = () => {
   const [apiData, setAPIData] = useState(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
-    
+    getAllActivities().then((data) => {
+      console.log(data);
+      setAPIData(data.data);
+    });
   }, []);
 
   // send onAccept and onReject to VolunteerDashboardCard
@@ -31,7 +32,7 @@ const AdminDashboard = () => {
             {apiData.message}
             </p>
             <p>
-              Visit <Link to="/volunteer/upcoming-activities/">Upcoming Activities</Link> for further details
+              Visit <Link to="/admin/upcoming-activities/">Upcoming Activities</Link> for further details
             </p>
           </div>
         ) : (
@@ -46,8 +47,8 @@ const AdminDashboard = () => {
                     data && (
                       <VolunteerDashboardCard
                         key={index}
-                        // buttons={buttons}
                         {...data}
+                        onClick={() => navigate('/activity/' + data._id)}
                       />
                     )
                 )}
