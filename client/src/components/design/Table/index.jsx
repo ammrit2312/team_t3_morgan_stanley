@@ -317,6 +317,8 @@ const Table = ({
                         <Button
                           key={index}
                           {...button}
+                          onClick={(e) => button.onClick(e, row)}
+                          id={row[0]}
                         />
                       ))}
                     </div>

@@ -23,6 +23,7 @@ export const routes = {
     EMAIL_VERIFICATION: "email-verification",
     FORGOT_PASSWORD: "forgot-password",
     POST_NOTIFICATION: "post-notification",
+    ACTIVITY: "activity",
 };
 
 export const entireRoutes = {
@@ -31,6 +32,7 @@ export const entireRoutes = {
     SIGN_IN: entirepath(routes.SIGN_IN),
     SIGN_UP: entirepath(routes.VOLUNTEER, routes.SIGN_UP),
     VOLUNTEER_FORM: entirepath(routes.VOLUNTEER, routes.FORM),
+    ACTIVITY: entirepath(routes.ACTIVITY),
     VOLUNTEER_UPCOMING_ACTIVITIES: entirepath(routes.VOLUNTEER, routes.UPCOMING_ACTIVITIES),
     ADMIN_UPCOMING_ACTIVITIES: entirepath(routes.ADMIN, routes.UPCOMING_ACTIVITIES),
     ADMIN_UPLOAD_ACTIVITY: entirepath(routes.ADMIN, routes.UPLOAD_ACTIVITY),

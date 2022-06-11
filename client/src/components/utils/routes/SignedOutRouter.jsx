@@ -44,6 +44,10 @@ export default function SignedOutRouter() {
           element: <ShowProfileVolunteers />,
         },
         {
+          path: entireRoutes.ACTIVITY + "/:activityId",
+          element: <ActivityPage />,
+        },
+        {
           path: entireRoutes.SIGN_UP,
           element: <SignUpPage />,
         },
@@ -123,4 +127,8 @@ const ShowProfileVolunteers = Loadable(
 
 const ListVolunteers = Loadable(
   lazy(() => import("../../../pages/ListVolunteers"))
+);
+
+const ActivityPage = Loadable(
+  lazy(() => import("../../../pages/ActivityPage"))
 );

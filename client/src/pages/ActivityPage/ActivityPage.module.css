@@ -1,0 +1,16 @@
+.container{
+    box-sizing: border-box;
+    width: 100%;
+    padding: var(--gutter);
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - var(--nav-height));
+    overflow-y: auto;
+    background-image: url("../../assets/textured_paper.png");
+    /* padding-top: 2rem; */
+    padding-bottom: 2rem;
+}
+
+.title{
+    text-align: center;
+}
