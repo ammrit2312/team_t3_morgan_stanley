@@ -30,8 +30,8 @@ const ActivitySchema = new mongoose.Schema({
         default:[]
     },
     Activity_Mode:{
-        type:Array,
-        default:[]
+        type:String,
+        default:""
     },
     Language_Preference:{
         type:Array,

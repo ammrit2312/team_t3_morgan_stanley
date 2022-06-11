@@ -24,7 +24,7 @@ router.get("/get-user-details/:uid",async(req,res) => {
                 res.status(200).json(user);
             }
             else{
-                res.json({"message":"user not found"})
+                res.status(404).json({"message":"user not found"})
             }
     }
     catch(err){

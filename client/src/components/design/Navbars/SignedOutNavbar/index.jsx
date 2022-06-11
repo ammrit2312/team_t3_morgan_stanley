@@ -49,7 +49,7 @@ const SignedOutNavbar = ({ navLinks, signedOut }) => {
                     customStyles={{
                         backgroundColor: colors.PRIMARY_ORANGE,
                         borderRadius: "10px",
-                        width: "60%",
+                        width: "20%",
                         border: "0",
                     }}
                 />

@@ -80,13 +80,21 @@ router.get("/list-all-users-for-activity/:activityid",async(req,res)=>{
 //updates Upcoming_Activities list for volunteer by pushing activity id
 router.put("/updateList/:activityid/:uid",async(req,res)=>{
     try{
-    id=req.params.activityid 
-    userID=req.params.uid
-    const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID},$inc:{Current_assigned : 1}});
-    const status=await Reccomendation.updateMany({UserId:userID},{User_Activity_Select:true});
-    const update=await Volunteers.findOneAndUpdate({UserID:userID},{ $push : {"Upcoming_Activities": id }});
-    await Volunteers.updateOne({_id:userID},{assigned:true});
-    res.status(200).json({"message":"Assigned successfully"});
+    let id=req.params.activityid 
+    let userID=req.params.uid
+    let ok=await Activity.findOne({_id:id,$expr: { $lt: [ "$Current_assigned" , "$Max_volunteers" ] }})
+    let ok1=await Volunteers.findOne({UserID:userID,assigned:false})
+    if(ok && ok1)
+    {
+        const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID},$inc:{Current_assigned : 1}});
+        const status=await Reccomendation.updateMany({UserId:userID},{User_Activity_Select:true});
+        const update=await Volunteers.findOneAndUpdate({UserID:userID},{ $push : {"Upcoming_Activities": id },assigned:true});
+        res.status(200).json({"message":"Assigned successfully"});
+    }
+    else
+    {
+        res.status(500).json({"message":"activity filled up or user assigned to another activity"})
+    }
     }
     catch(e)
     {
@@ -114,13 +122,24 @@ router.put("/update-attendance/:aid/:uid",async(req,res)=>{
     }
 })
 
-//api to get all information of the user
+//api to get basic information of volunteer 
+router.get("/get-volunterer-basic-details",async(req,res) => {
+    try{
+        const basic_details = await Volunteers.find({},{_id:0,UserID:1,Volunteer_Name:1,Volunteer_email:1,Volunteer_Availability:1,Volunteer_Languages:1})
+        res.status(200).json(basic_details);
+    }
+    catch(err){
+        res.status(500).json({"message":"encountered a server error"});
+    }
+})
+
+//api to get all information of the volunteer
 router.get("/get-all-volunteer-info/:userID",async(req,res)=>{
     try
     {
         let userid=req.params.userID
-        const data=await Promise.all(Volunteers.findById(userid,{UserID:1,Volunteer_Name:1,Volunteer_Academic_Qualifications:1,Volunteer_Occupation:1,Volunteer_email:1,Volunteer_Number:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1}));
-        res.status(200).json(data);
+        const all_detail = await Volunteers.findOne({UserID:userid},{_id:0,UserID:1,Volunteer_Name:1,Volunteer_Academic_Qualifications:1,Volunteer_Occupation:1,Volunteer_email:1,Volunteer_Number:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1})
+        res.status(200).json(all_detail);
     }
     catch(e)
     {
@@ -161,6 +180,17 @@ router.get("/get-all-mapped-users/:activityid",async(req,res) => {
         res.status(500).json({"message":"encountered a server error"})
     }
     
+})
+
+//route for rejecting the volunteer from the admin side
+router.put("/reject-volunteer/:activityid/:uid",async(req,res) => {
+    try{
+        await Activity.findByIdAndUpdate(req.params.activityid,{$pull:{Preferred_Users:req.params.uid}})
+        res.status(200).json({"message":"rejected volunteer"})
+    }
+    catch(err){
+        res.status(500).json({"message":"encountered a server error"});
+    }
 })
 
 

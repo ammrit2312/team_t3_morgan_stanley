@@ -2,6 +2,15 @@ import React from "react";
 
 // components
 import Button from "../../Button";
+import IconCard from "../IconCard";
+
+// icons
+import { IoTime } from "react-icons/io5";
+import { GiSandsOfTime } from "react-icons/gi";
+import { BsCalendarDateFill } from "react-icons/bs";
+import { BiWifiOff } from "react-icons/bi";
+import { BiWifi } from "react-icons/bi";
+import { ImLocation } from "react-icons/im";
 
 // constants
 import { colors } from "../../../../constants/colors.constants";
@@ -9,62 +18,92 @@ import { colors } from "../../../../constants/colors.constants";
 // css
 import styles from "../Cards.module.css";
 
-/**
- *
- * @param {String} title Title of the activity
- * @param {String} description Description of the activity
- * @param {String} mode Mode of the activity
- * @param {Array} icons Array of Icons as React elements
- * @param {Array} otherCards Array of other set of cards
- * @author ammrit2312 <amriteshc101@icloud.com>
- * @returns {React.Component} Card for Volunteer Dashboard
- */
-
 const VolunteerDashboardCard = ({
-  title,
-  description,
-  mode,
-  icons,
-  otherCards,
+  ActivityName,
+  Activity_Description,
+  Activity_Mode,
+  ActivityDate,
   buttons,
+  ActivityTime,
+  ActivityDurationInMinutes,
+  Activity_Location,
+  _id,
 }) => {
   return (
     <div className={styles.container}>
-      <section className={`${styles.leftContainer} ${buttons && styles.leftContainerWidth}`}>
+      <section
+        className={`${styles.leftContainer} ${
+          buttons && styles.leftContainerWidth
+        }`}
+      >
         <div>
-          <h3 className={styles.title}>{title}</h3>
-          <p className={styles.para}>
-            {description}
-          </p>
+          <h3 className={styles.title}>{ActivityName}</h3>
+          <p className={styles.para}>{Activity_Description}</p>
         </div>
-        {icons && <div className={styles.iconContainer}>
-          {/* <span>Time: 11am</span> */}
-          {icons.map((icon, index)=>(
-            <div key={index}>
-              {icon}
-            </div>
-          ))}
-        </div>}
-        {mode === "offline" && otherCards && (
+        <div className={styles.iconContainer}>
+          {ActivityDate && (
+            <IconCard
+              icon={
+                <BsCalendarDateFill size={25} color={colors.PRIMARY_GREEN} />
+              }
+              title="Date"
+              detail={ActivityDate}
+            />
+          )}
+          {ActivityTime && (
+            <IconCard
+              icon={<IoTime size={30} color={colors.PRIMARY_GREEN} />}
+              title="Time"
+              detail={ActivityTime}
+            />
+          )}
+          {ActivityDurationInMinutes && (
+            <IconCard
+              icon={<GiSandsOfTime size={25} color={colors.PRIMARY_GREEN} />}
+              title="Duration"
+              detail={`${ActivityDurationInMinutes} mins`}
+            />
+          )}
+          {Activity_Mode && (
+            <IconCard
+              icon={
+                Activity_Mode === "online" ? (
+                  <BiWifi size={25} color={colors.PRIMARY_GREEN} />
+                ) : (
+                  <BiWifiOff size={25} color={colors.PRIMARY_GREEN} />
+                )
+              }
+              title="Mode"
+              detail={Activity_Mode === "online" ? "Online" : "Offline"}
+            />
+          )}
+        </div>
+        {Activity_Mode === "offline" && (
           <div className={styles.locationStyler}>
-            {otherCards.map((otherCard, index)=>(
-              <div key={index}>
-                {otherCard}
-              </div>
-            ))}
+            {Activity_Location && (
+              <IconCard
+                icon={<ImLocation size={25} color={colors.PRIMARY_GREEN} />}
+                title="Location"
+                detail={Activity_Location[0]}
+                customStyles={{
+                  padding: "10px 10px",
+                  marginRight: "0",
+                  maxWidth: "25rem",
+                }}
+              />
+            )}
           </div>
         )}
       </section>
-      {buttons && <section className={styles.rightContainer}>
-        <div>
-          {buttons.map((button, index) => (
-            <Button
-              key={index}
-              {...button}
-            />
-          ))}
-        </div>
-      </section>}
+      {buttons && (
+        <section className={styles.rightContainer}>
+          <div>
+            {buttons.map((button, index) => (
+              <Button key={index} {...button} id={_id}/>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 };

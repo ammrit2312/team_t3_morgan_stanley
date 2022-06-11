@@ -8,4 +8,5 @@
     overflow-y: auto; */
     min-height: calc(100vh - var(--nav-height));
     background-image: url("../../assets/textured_paper.png");
+    min-height: calc(100vh - var(--nav-height));
 }
