@@ -17,11 +17,13 @@ router.post("/submit-volunteer/:uid",async(req,res) => {
         const newVolunteer = new Volunteers(req.body);    
         const volunteer = await newVolunteer.save();
         filledForm(req.params.uid)
-        Activity.find({ $expr: { $lt: [ "$Current_assigned" , "$Max_volunteers" ] } },(err,activity)=>{
+        Activity.find({ $expr: { $lt: [ "$Current_assigned" , "$Max_volunteers" ] } },async(err,activity)=>{
             if(!err)
             {
             const bestActivitiesIDs=getBestActivitiesForUser(userDict,volunteer,activity);
             console.log(volunteer.Volunteer_Name,bestActivitiesIDs)
+            volunteer.Volunteer_mapped+=bestActivitiesIDs.length
+            await volunteer.save()
             addReccomendation(volunteer,bestActivitiesIDs);
             res.status(200).json({"message":"successfully mapped volunteer"});
             }
@@ -224,7 +226,8 @@ router.put("/get-new-user/:actID",async(req,res)=>{
         else
         {
             const x=Reccomendation.updateOne({userId:userID},{$push:{Reccomendation_ActivityID:activityID}});
-            const z=Volunteers.updateOne({_id:userID},{assigned:true})
+            const z=Volunteers.updateOne({userID:userID},{$inc:{Volunteer_mapped:1}})
+
             await Promise.all([x,z])
             res.status(200).json({"message":"New Volunteer mapping recommended"});
         }
