@@ -123,12 +123,13 @@ router.get("/upcoming-activities/:userID",async(req,res)=>{
     try
     {
         let userid=req.params.userID
-        const Confirmed_ActivityID = await Volunteers.findOne({UserID:userid},{Upcoming_Activities:1});
-        if(Confirmed_ActivityID.length > 0)
+        const {Upcoming_Activities} = await Volunteers.findOne({UserID:userid},{Upcoming_Activities:1});
+        console.log(Upcoming_Activities)
+        if(Upcoming_Activities.length > 0)
         {
             const return_act = await Promise.all(
-                Confirmed_ActivityID.map((activityId) => {
-                    return Activity.findById(activityId,{_id:1,ActivityName:1,Activity_Location:1,ActivityType:1,Activity_Description:1,ActivityDate:1,ActivityTime:1,ActivityDurationInMinutes:1});
+                Upcoming_Activities.map((activityId) => {
+                    return Activity.findById(activityId,{_id:1,ActivityName:1,Activity_Location:1,ActivityType:1,Activity_Description:1,ActivityDate:1,ActivityTime:1,Activity_availability:1,Activity_Mode:1,ActivityDurationInMinutes:1});
                 }))
             res.status(200).json(return_act)
         }
