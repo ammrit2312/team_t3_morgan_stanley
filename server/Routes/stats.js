@@ -8,7 +8,6 @@ const Volunteers = require('../Model/Volunteers');
 router.get("/get-platform",async(req,res) => {
     try {
         const data = await Volunteers.find({},{_id:0,Volunteer_Platform:1})
-        console.log(data);
         let arr = []
         data.map((i) => {
             if((i.Volunteer_Platform).length > 0)
@@ -16,7 +15,8 @@ router.get("/get-platform",async(req,res) => {
                 arr = arr.concat(i.Volunteer_Platform);
             }
         })
-        stats_data = map_stats_platform(arr);
+        // using the reusable function
+        stats_data = map_stats(arr);
         res.status(200).json(stats_data);
     } catch (err) {
         console.log(err);
@@ -89,7 +89,7 @@ router.get("/get-activity-stats",async(req,res) => {
                 array = array.concat(i.Volunteer_Interested_Activity_Type);
             }
         })
-        stats_data = map_stats(arr);
+        stats_data = map_stats(array);
         res.status(200).json(stats_data);
     } catch (err) {
         console.log(err);
@@ -108,7 +108,7 @@ router.get("/get-places-stats",async(req,res) => {
                 array = array.concat(i.Volunteer_Preferred_Locations);
             }
         })
-        stats_data = map_stats(arr);
+        stats_data = map_stats(array);
         res.status(200).json(stats_data);
     } catch (err) {
         console.log(err);
@@ -127,7 +127,7 @@ router.get("/get-mode-stats",async(req,res) => {
                 array = array.concat(i.Volunteer_Preferred_Mode);
             }
         })
-        stats_data = map_stats(arr);
+        stats_data = map_stats(array);
         res.status(200).json(stats_data);
     } catch (err) {
         console.log(err);

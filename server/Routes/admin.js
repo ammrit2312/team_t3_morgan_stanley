@@ -3,6 +3,7 @@ const Activity = require('../Model/Activity');
 const Reccomendation = require('../Model/Reccomendation');
 const Volunteers = require('../Model/Volunteers');
 const Volunteer_archives = require('../Model/Volunteer_archives');
+const User = require('../Model/User');
 
 
 // const io=require('socket.io')(8800,{
@@ -53,20 +54,32 @@ router.get("/list-all-activities",async(req,res)=> {
     }
 })
 
+// api to get a single activity
+router.get("/get-single-activity/:activityid",async(req,res) => {
+    try {
+        const signle_activity = await Activity.findById(req.params.activityid);
+        res.status(200).json(signle_activity);
+    } catch (err) {
+        res.status(500).json({"message":"encounter a server error"});
+    }
+})
+
+
 // api to delete volunteer
-router.put("/list-delete-volunteer:uid",async(req,res)=> {
+router.put("/list-delete-volunteer/:uid",async(req,res)=> {
     try{
         uid=req.params.uid
-        const details = await Volunteers.findById(UserId,{_id:0,UserID:1,Volunteer_Name:1,Volunteer_Address:1,Volunteer_College:1,Volunteer_Organization:1,Volunteer_Academic_Qualifications:1,Volunteer_Platform:1,Volunteer_Occupation:1,Volunteer_email:1,Volunteer_Nationality:1,Volunteer_Number:1,Volunteer_Preferred_Mode:1,Volunteer_Preferred_Locations:1,Volunteer_Availability:1,Volunteer_Interested_Activity_Type:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1});
+        const details = await Volunteers.find({UserID:uid});
         const newArchive = new Volunteer_archives(details);
         await newArchive.save();
-        const data = await Volunteers.findByIdAndDelete(uid);
-        await data.save();
+        await Volunteers.findOneAndDelete({UserID:uid});
+        await Reccomendation.findOneAndDelete({UserId:uid})
+        await User.findOneAndDelete({UserID:uid})
         res.status(200).json({"message":"successfully deleted"});
     }
     catch(err){
         console.log(err)
-        res.status(500).json({"message":err})
+        res.status(500).json({"message":"encounter a server error"})
     }
 })
 
@@ -203,7 +216,8 @@ router.get("/get-all-mapped-users/:activityid",async(req,res) => {
 //route for rejecting the volunteer from the admin side
 router.put("/reject-volunteer/:activityid/:uid",async(req,res) => {
     try{
-        await Activity.findByIdAndUpdate(req.params.activityid,{$pull:{Preferred_Users:req.params.uid}})
+        await Activity.findByIdAndUpdate(req.params.activityid,{$pull:{Preferred_Users:req.params.uid}});
+        await Reccomendation.findOneAndUpdate({"UserId":req.params.uid},{$pull:{UserPreferred_Activity:req.params.activityid}});
         res.status(200).json({"message":"rejected volunteer"})
     }
     catch(err){
