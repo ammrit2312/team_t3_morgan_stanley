@@ -10,11 +10,14 @@ import useFirebaseAuth from "../../hooks/firebase/useFirebaseAuth";
 
 import img from "../../assets/images/sign-up.svg";
 
+// utils
+import {regexValidateEmail, regexValidatePassword} from "../../utils/regex.utils";
+import showNotification from "../../utils/notifications.utils";
+
 // constants
 import { colors } from "../../constants/colors.constants";
-import { accountTypes } from "../../constants/accounts.constants";
 
-const SignUpPage = () => {
+const SignUpPage = ({ accountType }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -22,7 +25,14 @@ const SignUpPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signUpWithEmailAndPassword(email, password, accountTypes.VOLUNTEER);
+    if (regexValidateEmail(email) && regexValidatePassword(password)) {
+      signUpWithEmailAndPassword(email, password, accountType);
+    }else{
+      showNotification({
+        type: "danger",
+        message: "Invalid format of email or password",
+      });
+    }
   };
 
   return (

@@ -2,12 +2,6 @@ import React from "react";
 import { lazy } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 
-/**
- *
- * @author ammrit2312 <amriteshc101@icloud.com>
- * @returns The Lazy loaded component according to signed out routes
- */
-
 // components
 import { Loadable } from "./Loadable";
 
@@ -16,6 +10,7 @@ import SignedOutLayout from "../../../layouts/SignedOutLayout";
 
 // constants
 import { entireRoutes, routes } from "../../../constants/routes";
+import { accountTypes } from "../../../constants/accounts.constants";
 
 export default function SignedOutRouter() {
   return useRoutes([
@@ -31,10 +26,6 @@ export default function SignedOutRouter() {
           path: entireRoutes.SIGN_IN,
           element: <SignInPage />,
         },
-        // {
-        //     path: entireRoutes.VOLUNTEER_FORM,
-        //     element: <VolunteerFormPage />
-        // },
         {
           path: entireRoutes.ADMIN_SHOW_VOLUNTEERS,
           element: <ListVolunteers />,
@@ -45,7 +36,11 @@ export default function SignedOutRouter() {
         },
         {
           path: entireRoutes.SIGN_UP,
-          element: <SignUpPage />,
+          element: <SignUpPage accountType={accountTypes.VOLUNTEER} />,
+        },
+        {
+          path: entireRoutes.ADMIN_SIGN_UP,
+          element: <SignUpPage accountType={accountTypes.ADMIN} />,
         },
         {
           path: entireRoutes.CONTACT_US,
@@ -58,10 +53,6 @@ export default function SignedOutRouter() {
         {
           path: entireRoutes.FORGOT_PASSWORD,
           element: <ForgotPasswordPage />,
-        },
-        {
-          path: entireRoutes.POST_NOTIFICATION,
-          element: <PostNotification />,
         },
         // Check
         // {
@@ -102,13 +93,6 @@ const EmailVerificationPage = Loadable(
   lazy(() => import("../../../pages/Auth/EmailVerificationPage"))
 );
 
-// check
-const PostNotification = Loadable(
-  lazy(() => import("../../../pages/PostNotificationPage"))
-);
-const VolunteerFormPage = Loadable(
-  lazy(() => import("../../../pages/VolunteerFormPage"))
-);
 const ProfilePage = Loadable(lazy(() => import("../../../pages/ProfilePage")));
 
 const UploadActivityForm = Loadable(

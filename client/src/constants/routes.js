@@ -42,4 +42,5 @@ export const entireRoutes = {
     EMAIL_VERIFICATION: entirepath(routes.EMAIL_VERIFICATION),
     FORGOT_PASSWORD: entirepath(routes.FORGOT_PASSWORD),
     POST_NOTIFICATION: entirepath(routes.ADMIN,routes.POST_NOTIFICATION),
+    ADMIN_SIGN_UP: entirepath(routes.ADMIN, routes.SIGN_UP),
 };

@@ -141,9 +141,9 @@ router.put("/update-attendance/:aid/:uid",async(req,res)=>{
 })
 
 //api to get basic information of volunteer 
-router.get("/get-volunterer-basic-details",async(req,res) => {
+router.get("/get-volunteer-basic-details",async(req,res) => {
     try{
-        const basic_details = await Volunteers.find({},{_id:0,UserID:1,Volunteer_Name:1,Volunteer_email:1,Volunteer_Availability:1,Volunteer_Languages:1})
+        const basic_details = await Volunteers.find({},{_id:0,UserID:1,Volunteer_Name:1,Volunteer_Preferred_Mode:1,Volunteer_email:1,Volunteer_Availability:1,Volunteer_Languages:1})
         res.status(200).json(basic_details);
     }
     catch(err){
