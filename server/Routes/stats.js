@@ -61,6 +61,41 @@ const map_stats_platform = (arr) => {
 }
 
 
+// function for getting the activities registered and its count
+const map_stats_activity = (arr) => {
+    const dict={};
+    for(let i=0;i<arr.length;i++)
+    {
+        attr=(arr[i])
+        if(attr in dict){
+            dict[attr] +=1;
+        }
+        else{
+            dict[attr] =1
+        }
+    }
+    return {x:Object.keys(dict),y:Object.values(dict)}
+}
+
+//route to get stats for activity type preferred by volunteers
+router.get("/get-activity-stats",async(req,res) => {
+    try {
+        const data = await Volunteers.find({},{_id:0,Volunteer_Interested_Activity_Type:1})
+        let array = []
+        data.map((i) => {
+            if((i.Volunteer_Interested_Activity_Type).length > 0)
+            {
+                array = array.concat(i.Volunteer_Interested_Activity_Type);
+            }
+        })
+        stats_data = map_stats_activity(arr);
+        res.status(200).json(stats_data);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({"message":"encountered a server error"});
+    }
+})
+
 
 
 
