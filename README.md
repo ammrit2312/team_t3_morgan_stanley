@@ -1,11 +1,10 @@
 # team_t3_morgan_stanley
 
-**postman collection link updated today 11/06/2022 at 2:14 pm (below link)**
+**postman collection link updated today 12/06/2022 at 2:00 pm (below link)**
 
-added reject button for admin side and 1 stats api
+added a few more apis
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.postman.co/run-collection/403eb677cb9d024c741d?action=collection%2Fimport)
-
 
 
 ---------------------------------------------------------------------------------------------------
