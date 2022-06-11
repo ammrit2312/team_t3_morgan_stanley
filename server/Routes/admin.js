@@ -174,6 +174,17 @@ router.get("/get-all-mapped-users/:activityid",async(req,res) => {
     
 })
 
+//route for rejecting the volunteer from the admin side
+router.put("/reject-volunteer/:activityid/:uid",async(req,res) => {
+    try{
+        await Activity.findByIdAndUpdate(req.params.activityid,{$pull:{Preferred_Users:req.params.uid}})
+        res.status(200).json({"message":"rejected volunteer"})
+    }
+    catch(err){
+        res.status(500).json({"message":"encountered a server error"});
+    }
+})
+
 
 
 // var messages={}
