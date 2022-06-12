@@ -223,14 +223,20 @@ router.get("/get-uptime/:uid",async(req,res) => {
 router.get("/get-all-mapped-users/:activityid",async(req,res) => {
     try{
         const {Preferred_Users} = await Activity.findById(req.params.activityid,{_id:0,Preferred_Users:1});
-        const user_details = await Promise.all(
+        let user_details = await Promise.all(
             Preferred_Users.map((uid) => {
                 return Volunteers.findOne({UserID:uid,assigned:false},{_id:0})
             })
         )
+        user_details =  user_details.filter(n => n)
+        if(user_details.length === 0)
+        {
+            return res.status(200).json({"message":"no such users found the list is empty"})
+        }
         res.status(200).json(user_details);
     }
     catch(err){
+        console.log(err)
         res.status(500).json({"message":"encountered a server error"})
     }
     
@@ -240,11 +246,16 @@ router.get("/get-all-mapped-users/:activityid",async(req,res) => {
 router.get("/get-all-accepted-users/:activityid",async(req,res) => {
     try{
         const {AssignedTo} = await Activity.findById(req.params.activityid,{_id:0,AssignedTo:1});
-        const user_details = await Promise.all(
+        let user_details = await Promise.all(
             AssignedTo.map((uid) => {
                 return Volunteers.findOne({UserID:uid},{_id:0})
             })
         )
+        user_details =  user_details.filter(n => n)
+        if(user_details.length === 0)
+        {
+            return res.status(200).json({"message":"no such users found the list is empty"})
+        }
         res.status(200).json(user_details);
     }
     catch(err){
