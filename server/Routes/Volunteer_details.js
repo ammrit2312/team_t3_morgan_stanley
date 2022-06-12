@@ -203,7 +203,7 @@ router.put("/reject-activity/:uID/:actID",async(req,res)=>{
         if(data.modifiedCount)
             res.status(200).json({"message":"Rejected successfully"})
         else
-            res.status(200).json({"message":"Rejection unsucessful"});
+            res.status(200).json({"message":"Rejection unsuccessful"});
     }
     catch(e)
     {
