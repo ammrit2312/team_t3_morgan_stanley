@@ -22,9 +22,9 @@ router.get("/chat/:adminID/:volunteerID", (req, res) => {
 
 io.on("connection", (socket) => {
   console.log(socket.id);
-  socket.on("join-room", ({ room }, callback) => {
+  socket.on("join-room", (room , callback) => {
     socket.join(room);
-    // console.log(`Joined room: ${room}`);
+    console.log(`Joined room: ${room}`);
     callback(`Joined room: ${room}`);
   });
 

@@ -121,4 +121,4 @@ const ActivityPage = Loadable(
   lazy(() => import("../../../pages/ActivityPage"))
 );
 
-const Test  = Loadable(lazy(() => import("../../../pages/Test")));
+const Test  = Loadable(lazy(() => import("../../../pages/Chat")));

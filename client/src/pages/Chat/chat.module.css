@@ -1,0 +1,74 @@
+.chat{
+    position: relative;
+    height: calc(100vh - var(--nav-height));
+}
+.main__text{
+    height: 75vh;
+    width: 85%;
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.chat__main{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.chatBottom{
+    width: 90vw;
+    margin-left: 1.5rem;
+    display: flex;
+}
+.chatBottom__form{
+    width: 100%;
+}
+.chatBottom__text{
+    margin: 2rem !important;
+    width: 83.5%;
+    margin-right: 0 !important;
+}
+.chatBottom__button{
+    width: 8%;
+    background-color: #4287f5;
+    padding: 1rem;
+    margin: 2rem;
+    border-radius: 5px;
+    margin-right: 0;
+    margin-left: 1.5rem;
+    cursor: pointer;
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+.message{
+    padding: 5px;
+    margin: 10px;
+    width: fit-content;
+}
+
+
+.message_user{
+    margin-left: auto;
+    color: white;
+    text-align: left !important;
+}
+.message_userCard{
+    margin-left: auto;
+    background: #0081ff !important;
+}
+.message_guestCard{
+    background: #e9e9eb !important;
+    color: #333 !important;
+}
+.message__message{
+    padding-bottom: 12px !important;
+}
+.message__div{
+    color: #333 !important;
+}
