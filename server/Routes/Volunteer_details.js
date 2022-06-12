@@ -38,29 +38,6 @@ router.post("/submit-volunteer/:uid",async(req,res) => {
     }
 })
 
-// Route for updating the volunteer profile
-router.post("/update-volunteer-profile/:uid",async(req,res) => {
-    try{
-        uid=req.params.uid
-        req.body["UserID"] = uid
-        updates=req.body
-        const data=await Volunteers.find({UserID:uid})
-        if(data.length > 0)
-        {
-            const update_volunteer=Volunteers.findOneAndUpdate({UserID:uid},{updates})
-            const update = await update_volunteer.save();
-            res.status(200).json({"message":"Profile updated successfully"});
-        }
-        else
-        {
-            res.status(404).json({"message":"Volunteer does not exist"});
-        } 
-    }
-    catch(err){
-        console.log(err);
-        res.status(500).json({"message":"encountered a server error"});
-    }
-})
 
 // function for updating the filled form attribute in user-schema to ensure volunteer has filled form before assigning activities
 const filledForm = async(uid) => {
