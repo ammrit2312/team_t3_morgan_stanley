@@ -77,6 +77,10 @@ const ActivitySchema = new mongoose.Schema({
     Preferred_Users:{
         type:Array,
         default:[]
+    },
+    isArchived:{
+        type:Boolean,
+        default:false
     }
 },{timestamps:true}
 )

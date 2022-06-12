@@ -12,6 +12,8 @@ const volunteerRoutes=require("./Routes/Volunteer_details")
 const userRoutes = require("./Routes/users");
 const notificationRoutes = require("./Routes/notification");
 const statsRoutes = require("./Routes/stats");
+const cron = require('node-cron');
+const getallactivies = require('./functions/check_activity_archive');
 
 const uri="mongodb+srv://raghav-tiruvallur:qwertyDUDE@cluster0.1npdfrx.mongodb.net/test";
 
@@ -33,7 +35,13 @@ app.use("/api/admin",notificationRoutes);
 app.use("/api/stats",statsRoutes);
 
 
+// currently this cronjob runs every minute (for testing) , will change the duration later
+// getallactivies();
 
+cron.schedule('* * * * *', () => {
+    console.log('starting cron job');
+    getallactivies();
+});
 
 
 

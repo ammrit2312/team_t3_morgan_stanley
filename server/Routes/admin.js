@@ -44,7 +44,7 @@ async function getAllActivities(){
 // api to get list of all activities
 router.get("/list-all-activities",async(req,res)=> {
     try{
-        const activities = await Activity.find({},{_id:1,ActivityName:1,ActivityDate:1,Activity_Address:1,Activity_Description:1,ActivityTime:1,ActivityType:1,ActivityDurationInMinutes:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1});
+        const activities = await Activity.find({isArchived:false},{_id:1,ActivityName:1,ActivityDate:1,Activity_Address:1,Activity_Description:1,ActivityTime:1,ActivityType:1,ActivityDurationInMinutes:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1});
         res.status(200).json(activities);
     }
     catch(err){
@@ -277,7 +277,27 @@ router.put("/reject-volunteer/:activityid/:uid",async(req,res) => {
     }
 })
 
+// api for marking the activity as false
+router.put('/mark-as-archive/:aid',async(req,res) => {
+    try{
+        await Activity.findByIdAndUpdate(req.params.aid,{$set:{isArchived:true}});
+        const {AssignedTo} = await Activity.findById(req.params.aid,{_id:0,AssignedTo:1})
+        AssignedTo.map(async (uid) => {
 
+                await Reccomendation.findOneAndDelete({UserId:uid});
+
+                await Volunteers.findOneAndUpdate({UserID:uid},{$set:{assigned:false,Upcoming_Activities:[]}});
+                
+                // rerun the mapping for those userids
+
+        })
+        res.status(200);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({"message":"encountered a server error"});
+    }
+})
 
 // var messages={}
 // io.on("connection",socket=>{

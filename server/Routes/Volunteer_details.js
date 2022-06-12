@@ -126,7 +126,7 @@ router.get("/upcoming-activities/:userID",async(req,res)=>{
     try
     {
         let userid=req.params.userID
-        const {Upcoming_Activities} = await Volunteers.findOne({UserID:userid},{Upcoming_Activities:1});
+        const {Upcoming_Activities} = await Volunteers.findOne({UserID:userid,isArchived:false},{Upcoming_Activities:1});
         console.log(Upcoming_Activities)
         if(Upcoming_Activities.length > 0)
         {
