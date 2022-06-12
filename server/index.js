@@ -16,6 +16,8 @@ const userRoutes = require("./Routes/users");
 const notificationRoutes = require("./Routes/notification");
 const statsRoutes = require("./Routes/stats");
 
+const chatRoutes=require("./Routes/chats");
+
 const uri="mongodb+srv://raghav-tiruvallur:qwertyDUDE@cluster0.1npdfrx.mongodb.net/test";
 
 //middlewares
@@ -34,6 +36,7 @@ app.use("/api/admin",volunteerRoutes);
 app.use("/api/user",userRoutes);
 app.use("/api/admin",notificationRoutes);
 app.use("/api/stats",statsRoutes);
+app.use("/api/chat",chatRoutes);
 
 
 // currently this cronjob runs every minute (for testing) , will change the duration later

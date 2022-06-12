@@ -6,6 +6,7 @@ const Message = forwardRef(({message, username}, ref) => {
     const isUser = username.toLowerCase() === message.username.toLowerCase();
     // const isUser = true;
 
+    console.log("Stuff", message)
     
     return (
         <div ref = {ref} className={`${styles.message} ${isUser && styles.message_user}`}>
