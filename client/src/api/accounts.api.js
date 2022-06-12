@@ -1,4 +1,4 @@
-import { POST, GET } from "../config/api.config";
+import { POST, GET, PUT } from "../config/api.config";
 
 export function createNewAccount(user) {
   console.log(user);
@@ -17,4 +17,8 @@ export function createNewAccount(user) {
 
 export function getExistingAccount(uid) {
   return GET(`/api/user/get-user-details/${uid}`);
+}
+
+export function deleteVolunteer(uid){
+  return PUT(`/api/admin/list-delete-volunteer/${uid}`);
 }

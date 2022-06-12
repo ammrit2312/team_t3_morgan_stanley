@@ -9,7 +9,8 @@ const TextFieldComp = ({
   fullWidth = true,
   required,
   onChange=()=>{},
-  value=""
+  value="",
+  type="input"
 }) => {
 
   return (
@@ -18,7 +19,7 @@ const TextFieldComp = ({
         label={label}
         variant={variant}
         fullWidth={fullWidth}
-        type="input"
+        type={type}
         required={required}
         onChange={(e) => {
           onChange(e.target.value);

@@ -47,6 +47,11 @@ const ActivityPage = () => {
     setUserData(data);
   }, []);
 
+  const handleRowClick = (data, e) => {
+    console.log("TABLE DATA",data); // redirect to other page
+    navigate(`${entireRoutes.VOLUNTEER}/${data.UserID}`);
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>Activity Information</h1>
@@ -74,7 +79,20 @@ const ActivityPage = () => {
             })}
             {/*2 table*/}
             {userData.Preferred_Users.length > 0 && (
-              <div></div>
+              <Table
+                tableName=""
+                data={apiData}
+                tableHeaders={tableHeaders}
+                allowFilters={true}
+                allowDownload={true}
+                filename="volunteer-data"
+                onRowClick={handleRowClick}
+                showSerialNo={true}
+                itemsPerPage={10}
+                borderSpacing="3px 5px"
+                nullDataPlaceholder="NA"
+                buttons={buttons}
+              />
             )}
           </div>
         ) : (

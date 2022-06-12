@@ -15,12 +15,7 @@ import { colors } from "../../../constants/colors.constants";
 // icons
 import { BsBookmarkCheckFill, BsStack } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
-import { IoTime } from "react-icons/io5";
-import { GiSandsOfTime } from "react-icons/gi";
-import { BsCalendarDateFill } from "react-icons/bs";
-import { BiWifiOff } from "react-icons/bi";
-import { BiWifi } from "react-icons/bi";
-import { ImLocation } from "react-icons/im";
+
 
 // api
 import {

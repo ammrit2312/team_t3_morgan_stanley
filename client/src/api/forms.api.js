@@ -7,3 +7,7 @@ export function submitVolunteerForm(uid, formData) {
 export function getVolunteerForm(uid) {
   return GET(`/api/user/get-user-details/${uid}`);
 }
+
+export function submitActivity(formData) {
+  return POST(`/api/admin/submit-activity`, formData);
+}

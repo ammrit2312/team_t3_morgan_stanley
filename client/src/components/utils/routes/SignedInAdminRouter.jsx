@@ -2,15 +2,9 @@ import React from "react";
 import { lazy } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 
-/**
- * 
- * @author ammrit2312 <amriteshc101@icloud.com>
- * @returns the signed in route for volunteer
- */
-
 // constants
 import { entireRoutes, routes } from "../../../constants/routes";
-import { signedInVolunteerLinks } from "../../../constants/navbar.constants";
+import { signedInAdminLinks } from "../../../constants/navbar.constants";
 
 // components
 import { Loadable } from "./Loadable";
@@ -19,28 +13,74 @@ import { Loadable } from "./Loadable";
 import SignedInLayout from "../../../layouts/SignedInLayout";
 
 export default function SignedInAdminRouter() {
-    return useRoutes([
+  return useRoutes([
+    {
+      path: entireRoutes.BASE,
+      element: <SignedInLayout navLinks={signedInAdminLinks} />,
+      children: [
         {
-            path: entireRoutes.BASE,
-            element: <SignedInLayout navLinks={signedInVolunteerLinks}/>,
-            children: [
-                {
-                    path: entireRoutes.ADMIN_UPLOAD_ACTIVITY,
-                    element: <UploadActivityForm />
-                },
-                {path: entireRoutes.NOT_FOUND, element: <NotFoundPage />},
-            ],
+          element: <AdminDashboard />,
+          index: true,
         },
-        { path: "*", element: <Navigate to={entireRoutes.NOT_FOUND} replace /> },
-    ])
+        {
+          path: entireRoutes.ADMIN_UPCOMING_ACTIVITIES,
+          element: <UpcomingActivityPage />,
+        },
+        {
+          path: entireRoutes.ADMIN_SHOW_VOLUNTEERS,
+          element: <ListVolunteers />,
+        },
+        {
+          path: entireRoutes.ADMIN_UPLOAD_ACTIVITY,
+          element: <UploadActivityForm />,
+        },
+        {
+          element: <ContactUsPage />,
+          path: entireRoutes.CONTACT_US,
+        },
+        {
+          element: <ActivityPage/>,
+          path: `${entireRoutes.ACTIVITY}/:id`,
+        },
+        {
+          element: <VolunteerPage/>,
+          path: `${entireRoutes.VOLUNTEER}/:id`,
+        },
+        { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
+      ],
+    },
+    { path: "*", element: <Navigate to={entireRoutes.NOT_FOUND} replace /> },
+  ]);
 }
 
 // Generic Pages
 
-const NotFoundPage = Loadable(
-    lazy(()=>import("../../../pages/NotFound")),
-);
+const NotFoundPage = Loadable(lazy(() => import("../../../pages/NotFound")));
 
 const UploadActivityForm = Loadable(
-    lazy(()=>import("../../../pages/UploadActivityFormPage")),
+  lazy(() => import("../../../pages/UploadActivityFormPage"))
+);
+
+const UpcomingActivityPage = Loadable(
+  lazy(() => import("../../../pages/ApprovedActivities"))
+);
+
+const ListVolunteers = Loadable(
+  lazy(() => import("../../../pages/ListVolunteers"))
+);
+
+const ContactUsPage = Loadable(
+  lazy(() => import("../../../pages/ContactUsPage"))
+);
+
+const AdminDashboard = Loadable(
+  lazy(() => import("../../../pages/Dashboards"))
+);
+
+const ActivityPage = Loadable(
+  lazy(() => import("../../../pages/ActivityPage"))
+);
+
+const VolunteerPage = Loadable(
+  lazy(() => import("../../../pages/ShowProfileVolunteers"))
 );

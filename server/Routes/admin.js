@@ -3,7 +3,6 @@ const Activity = require('../Model/Activity');
 const Reccomendation = require('../Model/Reccomendation');
 const Volunteers = require('../Model/Volunteers');
 const Volunteer_archives = require('../Model/Volunteer_archives');
-const User = require('../Model/User');
 
 
 // const io=require('socket.io')(8800,{
@@ -69,12 +68,36 @@ router.get("/get-single-activity/:activityid",async(req,res) => {
 router.put("/list-delete-volunteer/:uid",async(req,res)=> {
     try{
         uid=req.params.uid
-        const details = await Volunteers.find({UserID:uid});
-        const newArchive = new Volunteer_archives(details);
+        const details = await Volunteers.findOne({UserID:uid});
+        if(details.length == 0)
+        {
+           return  res.status(200).json({"message":"the user does not exist"})
+        }
+        const newArchive = new Volunteer_archives({
+            UserID:details.UserID,
+            Volunteer_Name:details.Volunteer_Name,
+            Volunteer_Username:details.Volunteer_Username,
+            Volunteer_Address:details.Volunteer_Address,
+            Volunteer_College:details.Volunteer_College,
+            Volunteer_Organization:details.Volunteer_Organization,
+            Volunteer_Academic_Qualifications:details.Volunteer_Academic_Qualifications,
+            Volunteer_Occupation:details.Volunteer_Occupation,
+            Volunteer_email:details.Volunteer_email,
+            Volunteer_Nationality:details.Volunteer_Nationality,
+            Volunteer_Preferred_Mode:details.Volunteer_Preferred_Mode,
+            Volunteer_Number:details.Volunteer_Number,
+            Volunteer_Number_Of_Activities_Attended:details.Volunteer_Number_Of_Activities_Attended,
+            Volunteer_Number_Of_Activities_Opted_Out:details.Volunteer_Number_Of_Activities_Opted_Out,
+            Volunteer_Preferred_Locations:details.Volunteer_Preferred_Locations,
+            Volunteer_Availability:details.Volunteer_Availability,
+            Volunteer_Interested_Activity_Type:details.Volunteer_Interested_Activity_Type,
+            Volunteer_Languages:details.Volunteer_Languages,
+            Volunteer_Skills:details.Volunteer_Skills,
+        });
+        console.log(newArchive)
         await newArchive.save();
         await Volunteers.findOneAndDelete({UserID:uid});
         await Reccomendation.findOneAndDelete({UserId:uid})
-        await User.findOneAndDelete({UserID:uid})
         res.status(200).json({"message":"successfully deleted"});
     }
     catch(err){
@@ -117,9 +140,9 @@ router.put("/updateList/:activityid/:uid",async(req,res)=>{
     let ok1=await Volunteers.findOne({UserID:userID,assigned:false})
     if(ok && ok1)
     {
-        const data =await Activity.updateOne({_id:id},{$push:{AssignedTo:userID},$inc:{Current_assigned : 1}});
+        const data =await Activity.updateOne({_id:id},{$addToSet:{AssignedTo:userID},$inc:{Current_assigned : 1},$pull:{Preferred_Users:userID}});
         const status=await Reccomendation.updateMany({UserId:userID},{User_Activity_Select:true});
-        const update=await Volunteers.findOneAndUpdate({UserID:userID},{ $push : {"Upcoming_Activities": id },assigned:true});
+        const update=await Volunteers.findOneAndUpdate({UserID:userID},{ $addToSet : {"Upcoming_Activities": id },assigned:true});
         res.status(200).json({"message":"Assigned successfully"});
     }
     else
@@ -169,7 +192,7 @@ router.get("/get-all-volunteer-info/:userID",async(req,res)=>{
     try
     {
         let userid=req.params.userID
-        const all_detail = await Volunteers.findOne({UserID:userid},{_id:0,UserID:1,Volunteer_Name:1,Volunteer_Address:1,Volunteer_College:1,Volunteer_Organization:1,Volunteer_Academic_Qualifications:1,Volunteer_Occupation:1,Volunteer_email:1,Volunteer_Nationality:1,Volunteer_Number:1,Volunteer_Preferred_Mode:1,Volunteer_Preferred_Locations:1,Volunteer_Availability:1,Volunteer_Interested_Activity_Type:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1})
+        const all_detail = await Volunteers.findOne({UserID:userid},{_id:0,UserID:1,Volunteer_Name:1,Volunteer_Address:1,Volunteer_College:1,Volunteer_Organization:1,Volunteer_Academic_Qualifications:1,Volunteer_Occupation:1,Volunteer_Platform:1,Volunteer_email:1,Volunteer_Nationality:1,Volunteer_Number:1,Volunteer_Preferred_Mode:1,Volunteer_Preferred_Locations:1,Volunteer_Availability:1,Volunteer_Interested_Activity_Type:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1})
         res.status(200).json(all_detail);
     }
     catch(e)
@@ -202,6 +225,23 @@ router.get("/get-all-mapped-users/:activityid",async(req,res) => {
         const {Preferred_Users} = await Activity.findById(req.params.activityid,{_id:0,Preferred_Users:1});
         const user_details = await Promise.all(
             Preferred_Users.map((uid) => {
+                return Volunteers.find({UserID:uid,assigned:false},{_id:0})
+            })
+        )
+        res.status(200).json(user_details);
+    }
+    catch(err){
+        res.status(500).json({"message":"encountered a server error"})
+    }
+    
+})
+
+// route for getting all the accepted users of a particular activity
+router.get("/get-all-accepted-users/:activityid",async(req,res) => {
+    try{
+        const {AssignedTo} = await Activity.findById(req.params.activityid,{_id:0,AssignedTo:1});
+        const user_details = await Promise.all(
+            AssignedTo.map((uid) => {
                 return Volunteers.find({UserID:uid},{_id:0})
             })
         )
@@ -212,6 +252,7 @@ router.get("/get-all-mapped-users/:activityid",async(req,res) => {
     }
     
 })
+
 
 //route for rejecting the volunteer from the admin side
 router.put("/reject-volunteer/:activityid/:uid",async(req,res) => {
