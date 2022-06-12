@@ -192,7 +192,7 @@ router.get("/get-all-volunteer-info/:userID",async(req,res)=>{
     try
     {
         let userid=req.params.userID
-        const all_detail = await Volunteers.findOne({UserID:userid},{_id:0,UserID:1,Volunteer_Name:1,Volunteer_Address:1,Volunteer_College:1,Volunteer_Organization:1,Volunteer_Academic_Qualifications:1,Volunteer_Occupation:1,Volunteer_Platform:1,Volunteer_email:1,Volunteer_Nationality:1,Volunteer_Number:1,Volunteer_Preferred_Mode:1,Volunteer_Preferred_Locations:1,Volunteer_Availability:1,Volunteer_Interested_Activity_Type:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1})
+        const all_detail = await Volunteers.findOne({UserID:userid},{_id:0,UserID:1,Volunteer_Name:1,Volunteer_Address:1,Volunteer_College:1,Volunteer_Organization:1,Volunteer_Academic_Qualifications:1,Volunteer_Occupation:1,Volunteer_Platform:1,Volunteer_email:1,Volunteer_Nationality:1,Volunteer_Number:1,Volunteer_Preferred_Mode:1,Volunteer_Preferred_Locations:1,Volunteer_Availability:1,Volunteer_Interested_Activity_Type:1,Volunteer_Number_Of_Activities_Attended:1,Volunteer_Number_Of_Activities_Opted_Out:1,Volunteer_Skills:1,Volunteer_Languages:1,assigned:1})
         res.status(200).json(all_detail);
     }
     catch(e)
