@@ -369,6 +369,26 @@ const addReccomendation_new = async(volunteer,rec) => {
         })
         await newRec.save();
 }
+router.get("/list-all-upcoming-activities",async(req,res)=>{
+    try{
+        const activities=await Activity.find({ $expr: { $eq: [ "$Current_assigned" , "$Max_volunteers" ] } })
+        res.status(200).json({"message":activities})
+    }
+    catch(e)
+    {
+        console.log(e)
+        res.json(500).json({"message":e})
+    }
+
+})
+
+
+
+
+
+
+
+
 
 // var messages={}
 // io.on("connection",socket=>{
