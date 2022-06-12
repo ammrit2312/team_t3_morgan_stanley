@@ -8,6 +8,9 @@ import Button from "../../components/design/Button";
 import styles from "./styles.module.css";
 import { colors } from "../../constants/colors.constants";
 
+// api
+import { postContactUs } from "../../api/contact.api";
+
 const ContactUsPage = () => {
   const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
@@ -15,8 +18,8 @@ const ContactUsPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, title, message);
-  }
+    postContactUs({ Email: email, Title: title, Message: message });
+  };
 
   return (
     <div className={styles.container}>

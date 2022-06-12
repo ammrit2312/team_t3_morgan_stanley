@@ -36,7 +36,4 @@ export const activityToDisplayValue = {
   Activity_Address: "Address",
   Activity_Description: "Description",
   Activity_Attendance: "Attendance",
-  AssignedTo: "Assigned To",
-  Preferred_Users: "Preferred Users",
-  AssignedTo: "Assigned To",
 };
