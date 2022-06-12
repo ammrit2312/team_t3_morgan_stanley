@@ -17,6 +17,7 @@ router.post("/submit-activity",async (req,res) => {
         let volunteerIDs=await getUserIDs(volunteers)
         volunteerIDs.forEach((volunteer)=>{
             //console.log(volunteer)
+            
             addReccomendation(volunteer.UserID,newActivity)
         })
         res.status(200).json({"message":"successfully created activity"});
@@ -37,6 +38,8 @@ const getUserIDs=async(volunteers)=>{
 
 const addReccomendation = async(volunteer,newActivity) => {
     const volunteerNeeded=await Volunteers.findOne({UserID:volunteer})
+    volunteerNeeded.Volunteer_mapped+=1
+    await volunteerNeeded.save();
     const volunteerName=volunteerNeeded.Volunteer_Name
     const ok = await Reccomendation.findOne({UserId:volunteer})
     const newRec = new Reccomendation({
