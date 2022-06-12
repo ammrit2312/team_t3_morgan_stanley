@@ -12,12 +12,7 @@ const compare_dates = async (aid,adate) => {
     {
         // change status of isarchive as true for that activity
         console.log("archived the activity");
-        await axios.put(`http://localhost:8800/api/admin/mark-as-archive/${aid}`);
-
-        // unassign all the users in that activity (including the reccomendation schema too)
-        await axios.put(`http://localhost:8800/api/admin/unassign-volunteer/${aid}`)
-
-        // rerun the mapping function for all those unassigned users
+        await axios.put(`http://localhost:8800/api/admin/mark-as-archive/${aid}`)
 
     }
     else{

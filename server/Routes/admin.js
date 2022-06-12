@@ -4,6 +4,7 @@ const Reccomendation = require('../Model/Reccomendation');
 const Volunteers = require('../Model/Volunteers');
 const Volunteer_archives = require('../Model/Volunteer_archives');
 const {getNewVolunteers}=require('../functions/getVolunteer');
+const getBestActivitiesForUser=require('../functions/mapper');
 const User = require('../Model/User');
 
 //route for admin to submit an activity
@@ -13,10 +14,12 @@ router.post("/submit-activity",async (req,res) => {
         const newActivity = new Activity(req.body);    
         await newActivity.save();
         const unassignedUsers=await Volunteers.find({assigned:false})
+        console.log(unassignedUsers);
         let volunteers=getNewVolunteers(activitiesDict,newActivity,unassignedUsers);
+        console.log(volunteers);
         let volunteerIDs=await getUserIDs(volunteers)
         volunteerIDs.forEach((volunteer)=>{
-            //console.log(volunteer)
+            console.log(volunteer)
             
             addReccomendation(volunteer.UserID,newActivity)
         })
@@ -312,6 +315,11 @@ router.put("/reject-volunteer/:activityid/:uid",async(req,res) => {
     }
 })
 
+
+
+var userDict={};
+var activityDict={};
+
 // api for marking the activity as false
 router.put('/mark-as-archive/:aid',async(req,res) => {
     try{
@@ -326,6 +334,24 @@ router.put('/mark-as-archive/:aid',async(req,res) => {
                 // rerun the mapping for those userids
 
         })
+        // const volunteer = await Volunteers.find({assigned:false})
+        AssignedTo.forEach(async (v) => {
+            const volunteer = await Volunteers.findOne({UserID:v})
+            Activity.find({ $expr: { $lt: [ "$Current_assigned" , "$Max_volunteers" ] },isArchived:false},async(err,activity)=>{
+                if(!err && activity.length > 0)
+                {
+                console.log(volunteer);
+                const bestActivitiesIDs=getBestActivitiesForUser(userDict,volunteer,activity);
+                console.log(volunteer.Volunteer_Name,bestActivitiesIDs)
+                volunteer.Volunteer_mapped+=bestActivitiesIDs.length
+                addReccomendation_new(volunteer,bestActivitiesIDs);
+                res.status(200).json({"message":"successfully mapped volunteer"});
+                }
+                else{
+                    res.json({"message":"the activity max capacity is filled"})
+                }
+            })
+        })
         res.status(200);
     }
     catch(err){
@@ -333,6 +359,16 @@ router.put('/mark-as-archive/:aid',async(req,res) => {
         res.status(500).json({"message":"encountered a server error"});
     }
 })
+
+// function to store the reccomendation in the database
+const addReccomendation_new = async(volunteer,rec) => {
+    const newRec = new Reccomendation({
+            UserId:volunteer.UserID,
+            Name:volunteer.Volunteer_Name,
+            Reccomendation_ActivityID:rec
+        })
+        await newRec.save();
+}
 
 // var messages={}
 // io.on("connection",socket=>{
