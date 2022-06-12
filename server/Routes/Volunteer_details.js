@@ -155,10 +155,10 @@ router.put("/addpreferredactivity/:userid/:pactivityid",async(req,res)=>{
     {
         let userid=req.params.userid
         let pactivityid=req.params.pactivityid
-        const add = await Reccomendation.findOneAndUpdate({UserId:userid},{ $push : {"UserPreferred_Activity": pactivityid}});
+        const add = await Reccomendation.findOneAndUpdate({UserId:userid},{ $addToSet : {"UserPreferred_Activity": pactivityid}});
 
         //pushing userid in the Preferred_Users in the activity schema
-        await Activity.findOneAndUpdate({_id:pactivityid},{$push:{"Preferred_Users":userid}})
+        await Activity.findOneAndUpdate({_id:pactivityid},{$addToSet:{"Preferred_Users":userid}})
 
         // await add.save();
         res.json({"message":"added to preffered list"});
