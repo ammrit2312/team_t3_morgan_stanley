@@ -11,7 +11,7 @@ const SelectMenu = ({
   handleChange,
   options,
   setVar,
-  required
+  required,
 }) => {
   // console.log("options", options);
   return (
@@ -35,7 +35,13 @@ const SelectMenu = ({
                 ))}
             </Select> */}
       {multiple ? (
-        <MultiSelect list={options} item={value} setItem={setVar} label={label} required={required}/>
+        <MultiSelect
+          list={options}
+          item={value}
+          setItem={setVar}
+          label={label}
+          required={required}
+        />
       ) : (
         <SingleSelect
           selectItem={value}

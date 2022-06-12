@@ -52,10 +52,10 @@ const MultiSelect = ({ list, item, setItem, label, required=false}) => {
               <ListItemText primary={name} />
             </MenuItem>
           ))}
-          {/* <MenuItem value={"Other"}>
+          <MenuItem value={"Other"}>
             <Checkbox checked={item.indexOf("Other") > -1}/>
             <ListItemText primary={"Other"} />
-          </MenuItem> */}
+          </MenuItem>
         </Select>
         {/* <div>
           {item.indexOf("Other") > -1 && <TextFieldComp label={"Metion the other options (put ',' between different values)"} variant={"outlined"} required={true} value={textVal} onChange={setTextVal}/>}
