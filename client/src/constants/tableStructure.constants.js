@@ -6,19 +6,19 @@
 
 export const tableHeaders = {
   name: {
-    key: "name",
+    key: "Volunteer_Name",
     title: "Name",
     type: "text",
   },
 
   email: {
-    key: "email",
+    key: "Volunteer_email",
     title: "Email",
     type: "text",
   },
 
   languages: {
-    key: "languages",
+    key: "Volunteer_Languages",
     title: "Known Languages",
     type: "text",
     options: [
@@ -42,7 +42,7 @@ export const tableHeaders = {
   },
 
   availability: {
-    key: "availability",
+    key: "Volunteer_Availability",
     title: "Availability",
     type: "text",
     options: [
@@ -62,7 +62,7 @@ export const tableHeaders = {
   },
 
   mode: {
-    key: "mode",
+    key: "Volunteer_Preferred_Mode",
     title: "Mode of Volunteering",
     type: "text",
     options: [

@@ -28,9 +28,10 @@ const VolunteerDashboardCard = ({
   ActivityDurationInMinutes,
   Activity_Location,
   _id,
+  onClick = () => {},
 }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={onClick}>
       <section
         className={`${styles.leftContainer} ${
           buttons && styles.leftContainerWidth
