@@ -29,7 +29,7 @@ const ListVolunteers = () => {
     });
   }, [apiData]);
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const buttons = [
     {

@@ -291,13 +291,14 @@ const Table = ({
           {filteredData
             .slice(pageState.sliceStartIdx, pageState.sliceEndIdx)
             .map((row, rowIdx) => (
-              <tr
+              (row && <tr
                 key={rowIdx}
                 className={styles.tr}
                 onClick={(e) => onRowClick(row, e)}
               >
                 {showSerialNo && (
                   <td className={styles.td}>
+                    {console.log("Null hai data", row)}
                     {(curPage - 1) * rowsPerPage + rowIdx + 1}
                   </td>
                 )}
@@ -324,7 +325,7 @@ const Table = ({
                     </div>
                   </td>
                 )}
-              </tr>
+              </tr>)
             ))}
         </tbody>
       </table>
