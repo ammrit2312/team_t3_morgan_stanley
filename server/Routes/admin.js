@@ -225,7 +225,7 @@ router.get("/get-all-mapped-users/:activityid",async(req,res) => {
         const {Preferred_Users} = await Activity.findById(req.params.activityid,{_id:0,Preferred_Users:1});
         const user_details = await Promise.all(
             Preferred_Users.map((uid) => {
-                return Volunteers.find({UserID:uid,assigned:false},{_id:0})
+                return Volunteers.findOne({UserID:uid,assigned:false},{_id:0})
             })
         )
         res.status(200).json(user_details);
@@ -242,7 +242,7 @@ router.get("/get-all-accepted-users/:activityid",async(req,res) => {
         const {AssignedTo} = await Activity.findById(req.params.activityid,{_id:0,AssignedTo:1});
         const user_details = await Promise.all(
             AssignedTo.map((uid) => {
-                return Volunteers.find({UserID:uid},{_id:0})
+                return Volunteers.findOne({UserID:uid},{_id:0})
             })
         )
         res.status(200).json(user_details);
