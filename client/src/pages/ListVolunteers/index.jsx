@@ -14,14 +14,14 @@ import Table from "../../components/design/Table";
 
 // icons
 import { BsFillChatFill } from "react-icons/bs";
-import { MdDelete } from "react-icons/md";
+// import { MdDelete } from "react-icons/md";
 
 // api
 import { getAllBasicDetailsOfUsers } from "../../api/adminDashboard.api";
-import {deleteVolunteer} from "../../api/accounts.api"
+// import {deleteVolunteer} from "../../api/accounts.api"
 
-// hooks
-import useFirebaseAuth from "../../hooks/firebase/useFirebaseAuth";
+// // hooks
+// import useFirebaseAuth from "../../hooks/firebase/useFirebaseAuth";
 
 const ListVolunteers = () => {
   const [apiData, setApiData] = useState(null);
