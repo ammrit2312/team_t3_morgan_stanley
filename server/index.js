@@ -2,6 +2,9 @@ const express = require('express');
 const { default: helmet } = require('helmet');
 const mongoose = require('mongoose');
 const cors = require('cors')
+const cron = require('node-cron');
+const getallactivies = require('./functions/check_activity_archive');
+
 
 const app = express();
 const {MongoClient}=require('mongodb');
@@ -34,9 +37,13 @@ app.use("/api/stats",statsRoutes);
 
 
 
+// currently this cronjob runs every minute (for testing) , will change the duration later
+// getallactivies();
 
-
-
+cron.schedule('* * * * *', () => {
+    console.log('starting cron job');
+    getallactivies();
+});
 
 
 
