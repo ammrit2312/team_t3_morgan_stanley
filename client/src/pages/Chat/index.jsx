@@ -1,70 +1,53 @@
-import ChatBottom from "./ChatBottom";
-import React from "react";
-import styles from './chat.module.css';
-import Message from "./Message";
-import {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from "react";
 import {useParams} from "react-router-dom";
+import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
+
+// components
+import ChatBottom from "./ChatBottom";
+import Message from "./Message";
+
+// css
+import styles from './chat.module.css';
+
+// constants
+import { ADMIN_ID } from "../../constants/accounts.constants";
 
 const Chat = () => {
-
-    const {id, userid, username} = useParams();
-    const [input, setInput] = useState();
+    const [currentMessage, setCurrentMessage] = useState('');
+    const currUser = useSelector((state) => state.user);
+    const [room, setRoom] = useState('');
     const [messages, setMessages] = useState([]);
+    const {userId} = useParams();
+    const socket = io("http://localhost:8001");
 
-    const user = userid;
-    const chat_id = id;
+    useEffect(() => {
+        socket.on("send-message", (data)=>{
+            setMessages([...messages, data]);
+        });
 
-    const messagesEnd = useRef(null);
+        setRoom(ADMIN_ID+"-"+userId);
+        socket.emit("join-room", { room }, (data)=>{
+            console.log(data);
+        });
+    }, []);
 
-    const scrollToBottom = () => { 
-        if (messagesEnd !== null) {
-            messagesEnd.current.scrollIntoView({ behavior: "smooth" });
-        }
-    } 
-    let date = new Date();
-    setInterval(()=>{
-        date = new Date();
-    }, 3);
-
-    //update the whole array 
-    // useEffect(()=>{
-    //     db.collection('chat').doc(chat_id).get().then((querySnapshot)=>{
-    //         setMessages(querySnapshot.data().chat);
-    //     });
-    //     console.log(messages);
-    // }, [date])
-
-    const sendMessage = (e) => {
-        e.preventDefault();
-        // feCa73Z5qm3BO4vyjAyh
-        const data = {
-            message: input,
-            username: username,
-            key: messages.length + 1
-        };
-
-        let check = messages;
-        check.push(data);
-        setMessages(check);
-
-        // console.log("This is the message", messages);
-        // db.collection("chat").doc(chat_id).update({chat: messages});
-        setInput('');
-        scrollToBottom();
-    }
+    const sendMessage = () => {
+        socket.emit("message", {messageSent: currentMessage, senderID: currUser.uid, room })
+    };
 
     return (
-        <div className={styles.chat}>
-            <div className={styles.main__text}>
+        <main className={styles.chat}>
+            <section className={styles.main__text}>
                 {messages.map((message, key)=>(
-                    <Message username={username} message={message} key={`message-${key}`}/>
+                    <Message username={currUser.uid} message={message} key={`message-${key}`}/>
                 ))}
-                <div style={{ marginTop: "75px", float:"left", clear: "both" }} ref={messagesEnd} />
-            </div>
-            <div className={styles.chat__main}>
-                <ChatBottom input={input} setInput={setInput} sendButton={sendMessage}/>
-            </div>
-        </div>
+                {/* <div style={{ marginTop: "75px", float:"left", clear: "both" }} ref={messagesEnd} /> */}
+            </section>
+            <section className={styles.chat__main}>
+                <ChatBottom input={currentMessage} setInput={setCurrentMessage} sendButton={sendMessage}/>
+            </section>
+        </main>
     );
 }
 

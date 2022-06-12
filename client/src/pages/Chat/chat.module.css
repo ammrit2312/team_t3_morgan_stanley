@@ -1,6 +1,6 @@
 .chat{
     position: relative;
-    height: calc(95vh - var(--nav-height));
+    height: calc(100vh - var(--nav-height));
 }
 .main__text{
     height: 75vh;

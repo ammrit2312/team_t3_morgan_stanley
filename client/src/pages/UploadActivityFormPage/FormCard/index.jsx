@@ -253,7 +253,7 @@ const FormCard = ({
         Activity_availability: availability,
         Preferred_skills: skill,
         Max_volunteers: maxVol,
-        Activity_Adress: address,
+        Activity_Address: address,
         Activity_Description: description,
       };
       submitActivity(data).then((res) => {
