@@ -11,11 +11,11 @@ import SignedOutNavbar from "../components/design/Navbars/SignedOutNavbar";
  * @return Signedin layout for the page
  */
 
-export default function SignedInLayout({navLinks}) {
+export default function SignedInLayout({navLinks, showNotification=false}) {
 
     return (
         <main className={styles.container}>
-            <SignedOutNavbar navLinks={navLinks} signedOut={false}/>
+            <SignedOutNavbar navLinks={navLinks} signedOut={false} showNotification={showNotification}/>
             <Outlet />
         </main>
     );

@@ -20,6 +20,9 @@ import { MdDelete } from "react-icons/md";
 import { getAllBasicDetailsOfUsers } from "../../api/adminDashboard.api";
 import {deleteVolunteer} from "../../api/accounts.api"
 
+// hooks
+import useFirebaseAuth from "../../hooks/firebase/useFirebaseAuth";
+
 const ListVolunteers = () => {
   const [apiData, setApiData] = useState(null);
 
@@ -27,7 +30,7 @@ const ListVolunteers = () => {
     getAllBasicDetailsOfUsers().then((res) => {
       setApiData(res.data);
     });
-  }, [apiData]);
+  }, []);
 
   let navigate = useNavigate();
 
@@ -51,28 +54,28 @@ const ListVolunteers = () => {
         marginRight: "25px",
       },
     },
-    {
-      onClick: (e, row) => {
-        e.stopPropagation();
-        console.log("Delete Volunteer", row);
-        deleteVolunteer(row.UserID).then(res=>{
-          console.log(res);
-          setApiData(apiData.filter(volunteer=>volunteer.UserID!==row.UserID))
-          // Firebase delete USER
-        })
-      },
-      icon: <MdDelete size={22} />,
-      customStyles: {
-        backgroundColor: colors.PRIMARY_RED,
-        borderRadius: "10px",
-        border: "0",
-        fontWeight: "bold",
-        fontSize: "0.9rem",
-        width: "5px",
-        minWidth: "0px",
-        padding: "10px 25px",
-      },
-    },
+    // {
+    //   onClick: (e, row) => {
+    //     e.stopPropagation();
+    //     console.log("Delete Volunteer", row);
+    //     deleteVolunteer(row.UserID).then(res=>{
+    //       console.log(res);
+    //       setApiData(apiData.filter(volunteer=>volunteer.UserID!==row.UserID))
+    //       // Firebase delete USER
+    //     })
+    //   },
+    //   icon: <MdDelete size={22} />,
+    //   customStyles: {
+    //     backgroundColor: colors.PRIMARY_RED,
+    //     borderRadius: "10px",
+    //     border: "0",
+    //     fontWeight: "bold",
+    //     fontSize: "0.9rem",
+    //     width: "5px",
+    //     minWidth: "0px",
+    //     padding: "10px 25px",
+    //   },
+    // },
   ];
 
   const handleRowClick = (data, e) => {

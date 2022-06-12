@@ -46,6 +46,10 @@ export default function SignedInAdminRouter() {
           element: <VolunteerPage/>,
           path: `${entireRoutes.VOLUNTEER}/:id`,
         },
+        {
+          element: <PostNotificationPage/>,
+          path: entireRoutes.POST_NOTIFICATION,
+        },
         { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
       ],
     },
@@ -83,4 +87,8 @@ const ActivityPage = Loadable(
 
 const VolunteerPage = Loadable(
   lazy(() => import("../../../pages/ShowProfileVolunteers"))
+);
+
+const PostNotificationPage = Loadable(
+  lazy(() => import("../../../pages/PostNotificationPage"))
 );

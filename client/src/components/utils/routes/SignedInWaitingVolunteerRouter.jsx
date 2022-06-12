@@ -22,7 +22,7 @@ export default function SignedInWaitingVolunteerRouter() {
   return useRoutes([
     {
       path: entireRoutes.BASE,
-      element: <SignedInLayout navLinks={signedOutNavbarLinks} />,
+      element: <SignedInLayout navLinks={signedOutNavbarLinks} showNotification={true}/>,
       children: [
         {
           element: <VolunteerFormPage />,
@@ -31,6 +31,10 @@ export default function SignedInWaitingVolunteerRouter() {
         {
           element: <ContactUsPage />,
           path: entireRoutes.CONTACT_US,
+        },
+        {
+          element: <NotificationsPage />,
+          path: entireRoutes.SHOW_NOTIFICATIONS,
         },
         { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
       ],
@@ -49,4 +53,8 @@ const VolunteerFormPage = Loadable(
 
 const ContactUsPage = Loadable(
   lazy(() => import("../../../pages/ContactUsPage"))
+);
+
+const NotificationsPage = Loadable(
+  lazy(() => import("../../../pages/NotificationsPage"))
 );

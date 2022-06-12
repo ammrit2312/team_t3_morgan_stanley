@@ -22,7 +22,10 @@ import Divider from "@mui/material/Divider";
 import NavLink from "../NavLink";
 import Button from "../../Button";
 
-const SignedOutNavbar = ({ navLinks, signedOut }) => {
+// icon
+import {IoIosNotifications} from "react-icons/io";
+
+const SignedOutNavbar = ({ navLinks, signedOut, showNotification }) => {
 
     const navigate = useNavigate();
 
@@ -42,6 +45,7 @@ const SignedOutNavbar = ({ navLinks, signedOut }) => {
                         // add links
                         <NavLink key={index} data={item} />
                     ))}
+                    {showNotification && <IoIosNotifications className={styles.icon} onClick={() => navigate(entireRoutes.SHOW_NOTIFICATIONS)}/>}
                 </nav>
                 <Button
                     value={signedOut?"Sign In":"Sign Out"}
