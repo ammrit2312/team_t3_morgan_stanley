@@ -47,6 +47,10 @@ export default function SignedOutRouter() {
           element: <SignUpPage accountType={accountTypes.ADMIN} />,
         },
         {
+          path: entireRoutes.VOLUNTEER,
+          element: <Test />,
+        },
+        {
           path: entireRoutes.CONTACT_US,
           element: <ContactUsPage />,
         },
@@ -116,3 +120,5 @@ const ListVolunteers = Loadable(
 const ActivityPage = Loadable(
   lazy(() => import("../../../pages/ActivityPage"))
 );
+
+const Test  = Loadable(lazy(() => import("../../../pages/Test")));

@@ -45,5 +45,9 @@ export const signedInAdminLinks = [
         name: "Upload Activity",
         path: entireRoutes.ADMIN_UPLOAD_ACTIVITY,
     },
+    {
+        name: "Post Notification",
+        path: entireRoutes.POST_NOTIFICATION,
+    },
     ...navLinks,
 ]

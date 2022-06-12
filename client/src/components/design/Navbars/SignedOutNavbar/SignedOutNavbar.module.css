@@ -36,6 +36,12 @@
     margin-right: 42px;
 }
 
+.icon{
+    font-size: 25px;
+    color: var(--yellow);
+    cursor: pointer;
+}
+
 .menuIcon {
     display: none;
     cursor: pointer;
