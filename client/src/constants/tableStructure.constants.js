@@ -77,3 +77,61 @@ export const tableHeaders = {
     ],
   },
 };
+
+export const activityMappinDetails = {
+  name: {
+    key: "Volunteer_Name",
+    title: "Name",
+    type: "text",
+  },
+
+  email: {
+    key: "Volunteer_email",
+    title: "Email",
+    type: "text",
+  },
+
+  languages: {
+    key: "Volunteer_Languages",
+    title: "Known Languages",
+    type: "text",
+    options: [
+      {
+        label: "Hindi",
+        value: "Hindi",
+      },
+      {
+        label: "English",
+        value: "English",
+      },
+      {
+        label: "Urdu",
+        value: "Urdu",
+      },
+      {
+        label: "Marathi",
+        value: "Marathi",
+      },
+    ],
+  },
+
+  availability: {
+    key: "Volunteer_Availability",
+    title: "Availability",
+    type: "text",
+    options: [
+      {
+        label: "Weekdays",
+        value: "Weekdays",
+      },
+      {
+        label: "Weekends",
+        value: "Weekends",
+      },
+      {
+        label: "Both",
+        value: "Both",
+      },
+    ],
+  },
+}

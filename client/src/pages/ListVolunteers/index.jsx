@@ -32,7 +32,7 @@ const ListVolunteers = () => {
     });
   }, []);
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const buttons = [
     {
