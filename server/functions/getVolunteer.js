@@ -60,4 +60,12 @@ const getNewVolunteer=(activityDict,activityObject,users)=>{
     keys=keys.reduce((result, key) => { if (activityDict[id][key] === largest){ result.push(key); } return result; }, []);
     return keys[0];
 }
-module.exports=getNewVolunteer;
+const getNewVolunteers=(activityDict,activityObject,users)=>{
+    let id=activityObject._id.toString();
+    getMatchScoreForActivity(id,activityDict,activityObject,users);
+    var keys=Object.keys(activityDict[id]);
+    largest = Math.max(...keys.map(x => activityDict[id][x]));
+    keys=keys.reduce((result, key) => { if (activityDict[id][key] === largest){ result.push(key); } return result; }, []);
+    return keys.slice(0,activityObject.Max_volunteers);
+}
+module.exports={getNewVolunteer,getNewVolunteers};

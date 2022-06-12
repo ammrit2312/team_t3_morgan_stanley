@@ -14,6 +14,7 @@ const ActivitySchema = new mongoose.Schema({
     ActivityDate:{
         type:String,
         require:true,
+        default:""
     },
     ActivityTime:{
         type:String,
@@ -77,6 +78,10 @@ const ActivitySchema = new mongoose.Schema({
     Preferred_Users:{
         type:Array,
         default:[]
+    },
+    isArchived:{
+        type:Boolean,
+        default:false
     }
 },{timestamps:true}
 )

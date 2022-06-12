@@ -38,6 +38,7 @@ router.post("/submit-volunteer/:uid",async(req,res) => {
     }
 })
 
+
 // function for updating the filled form attribute in user-schema to ensure volunteer has filled form before assigning activities
 const filledForm = async(uid) => {
     await User.updateOne({UserID:uid},{Filled_Form:true})
@@ -125,7 +126,7 @@ router.get("/upcoming-activities/:userID",async(req,res)=>{
     try
     {
         let userid=req.params.userID
-        const {Upcoming_Activities} = await Volunteers.findOne({UserID:userid},{Upcoming_Activities:1});
+        const {Upcoming_Activities} = await Volunteers.findOne({UserID:userid,isArchived:false},{Upcoming_Activities:1});
         console.log(Upcoming_Activities)
         if(Upcoming_Activities.length > 0)
         {
