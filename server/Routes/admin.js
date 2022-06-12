@@ -3,19 +3,22 @@ const Activity = require('../Model/Activity');
 const Reccomendation = require('../Model/Reccomendation');
 const Volunteers = require('../Model/Volunteers');
 const Volunteer_archives = require('../Model/Volunteer_archives');
-
-
-// const io=require('socket.io')(8800,{
-//     cors:{
-//         origin:['http://localhost:3000']
-//     }
-// })
+const {getNewVolunteers}=require('../functions/getVolunteer');
+const User = require('../Model/User');
 
 //route for admin to submit an activity
+var activitiesDict={}
 router.post("/submit-activity",async (req,res) => {
     try{
         const newActivity = new Activity(req.body);    
         await newActivity.save();
+        const unassignedUsers=await Volunteers.find({assigned:false})
+        let volunteers=getNewVolunteers(activitiesDict,newActivity,unassignedUsers);
+        let volunteerIDs=await getUserIDs(volunteers)
+        volunteerIDs.forEach((volunteer)=>{
+            //console.log(volunteer)
+            addReccomendation(volunteer.UserID,newActivity)
+        })
         res.status(200).json({"message":"successfully created activity"});
     
     }
@@ -24,6 +27,35 @@ router.post("/submit-activity",async (req,res) => {
         res.status(500).json({"message":err});
     }
 })
+
+const getUserIDs=async(volunteers)=>{
+    return await Promise.all(volunteers.map((volunteer)=>{
+        return Volunteers.findOne({_id:volunteer})
+        }));
+}
+
+
+const addReccomendation = async(volunteer,newActivity) => {
+    const volunteerNeeded=await Volunteers.findOne({UserID:volunteer})
+    const volunteerName=volunteerNeeded.Volunteer_Name
+    const ok = await Reccomendation.findOne({UserId:volunteer})
+    const newRec = new Reccomendation({
+        UserId:volunteer,
+        Name:volunteerName,
+        Reccomendation_ActivityID:newActivity._id.toString()
+    })
+    if(!ok)
+    {
+        await newRec.save();
+        return ;
+    }
+    ok.Reccomendation_ActivityID.push(newActivity._id.toString())
+    await ok.save();
+}
+
+const updateRecommendation=async(volunteer,newActivity)=>{
+    await Reccomendation.updateOne({userId:volunteer},{$push:{Reccomendation_ActivityID:newActivity._id.toString()}})
+}
 
 
 // function for getting the list of all activities (to be used for mapping)
