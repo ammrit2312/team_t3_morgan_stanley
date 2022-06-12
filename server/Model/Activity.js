@@ -14,6 +14,7 @@ const ActivitySchema = new mongoose.Schema({
     ActivityDate:{
         type:String,
         require:true,
+        default:""
     },
     ActivityTime:{
         type:String,
