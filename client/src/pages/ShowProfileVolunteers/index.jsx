@@ -38,6 +38,7 @@ const ShowProfileVolunteer = () => {
   useEffect(() => {
     getUserData(id).then((res) => {
       setData(res.data);
+      console.log(res.data);
     });
   }, []);
 
@@ -71,7 +72,7 @@ const ShowProfileVolunteer = () => {
                 <IconCard
                   title="Email"
                   icon={<MdEmail size={25} color={colors.PRIMARY_BLUE} />}
-                  detail={data["Volunteer_Email"]}
+                  detail={data["Volunteer_email"]}
                 />
                 <IconCard
                   title="Number"
