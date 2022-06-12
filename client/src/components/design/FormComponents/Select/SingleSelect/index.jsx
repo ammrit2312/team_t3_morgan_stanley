@@ -24,6 +24,9 @@ const SingleSelect = ({selectItem, setSelectItem, label, options, required}) => 
                     {options.map((option, index)=>(
                         <MenuItem value={option.value} key={index}>{option.label}</MenuItem>
                     ))}
+                     <MenuItem value={"Other"}>
+                        Other
+                    </MenuItem>
                 </Select>
             </FormControl>
         </div>
