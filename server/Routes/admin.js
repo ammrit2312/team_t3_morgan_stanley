@@ -378,7 +378,7 @@ const addReccomendation_new = async(volunteer,rec) => {
 }
 router.get("/list-all-upcoming-activities",async(req,res)=>{
     try{
-        const activities=await Activity.find({ Current_assigned: { $gt: 0 },isArchived:false})
+        const activities=await Activity.find({ Current_assigned: { $gt: 0 },isArchived:false},{_id:1,ActivityName:1,ActivityDate:1,ActivityDurationInMinutes:1,ActivityTime:1,Activity_Address:1,Activity_Description:1,Activity_Mode:1})
         res.status(200).json(activities)
     }
     catch(e)
