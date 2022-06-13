@@ -382,7 +382,16 @@ router.get("/list-all-upcoming-activities",async(req,res)=>{
 
 })
 
-
+router.get("/get-archived-activities",async(req,res)=>{
+    try{
+        const archivedActivities=await Activity.find({isArchived:true})
+        res.status(200).json({"message":archivedActivities})
+    }
+    catch(e)
+    {
+        res.status(500).json({"message":e})
+    }
+})
 
 
 
