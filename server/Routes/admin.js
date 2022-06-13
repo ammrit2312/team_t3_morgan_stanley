@@ -19,7 +19,7 @@ router.post("/submit-activity",async (req,res) => {
         console.log(volunteers);
         let volunteerIDs=await getUserIDs(volunteers)
         volunteerIDs.forEach((volunteer)=>{
-            console.log(volunteer)
+        console.log(volunteer.UserID)
             
             addReccomendation(volunteer.UserID,newActivity)
         })
@@ -56,6 +56,7 @@ const addReccomendation = async(volunteer,newActivity) => {
         return ;
     }
     ok.Reccomendation_ActivityID.push(newActivity._id.toString())
+    ok.User_Activity_Select=false;
     await ok.save();
 }
 
@@ -371,7 +372,7 @@ const addReccomendation_new = async(volunteer,rec) => {
 }
 router.get("/list-all-upcoming-activities",async(req,res)=>{
     try{
-        const activities=await Activity.find({ $expr: { $eq: [ "$Current_assigned" , "$Max_volunteers" ] } })
+        const activities=await Activity.find({ $expr: { $eq: [ "$Current_assigned" , "$Max_volunteers" ] },isArchived:false})
         res.status(200).json({"message":activities})
     }
     catch(e)
