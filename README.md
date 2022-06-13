@@ -4,7 +4,6 @@
 ```
 ├── client
 │   ├── Has the frontend code
-│   ├── Dockerfile
 ├── server
 │   ├── Has the backend code
 └── README.md
