@@ -86,6 +86,51 @@ const ActivityPage = () => {
     },
   ];
 
+  const buttons_attendance = [
+    {
+      onClick: (e, row) => {
+        e.stopPropagation();
+        console.log("attendanceApproved");
+        console.log(row);
+        // adminApprove(id, row.UserID).then((res) => {
+        //   showNotification({ type: "success", message: "Volunteer Approved" });
+        // });
+      },
+      icon: <TiTick size={22} />,
+      customStyles: {
+        backgroundColor: colors.PRIMARY_GREEN,
+        borderRadius: "10px",
+        border: "0",
+        fontWeight: "bold",
+        fontSize: "0.9rem",
+        width: "5px",
+        minWidth: "0px",
+        padding: "10px 25px",
+        marginRight: "25px",
+      },
+    },
+    {
+      onClick: (e, row) => {
+        e.stopPropagation();
+        console.log("absent Volunteer");
+        // adminReject(id, row.UserID).then((res) => {
+        //   showNotification({ type: "success", message: "Volunteer Rejected" });
+        // });
+      },
+      icon: <ImCross size={15} />,
+      customStyles: {
+        backgroundColor: colors.PRIMARY_RED,
+        borderRadius: "10px",
+        border: "0",
+        fontWeight: "bold",
+        fontSize: "0.9rem",
+        width: "5px",
+        minWidth: "0px",
+        padding: "10px 25px",
+      },
+    },
+  ];
+
   const buttons_assigned = [
     {
       onClick: (e, row) => {
@@ -156,7 +201,7 @@ const ActivityPage = () => {
                 )
               );
             })}
-            {activity.Preferred_Users.length > 0 &&
+            {activity.Preferred_Users.length > 0 && !activity.isArchived &&
               (preferredVolunteers.message ? (
                 <div>
                   <span className={styles.key}>Preferred Volunteers</span>:
@@ -180,7 +225,7 @@ const ActivityPage = () => {
                   />
                 </div>
               ))}
-            {activity.AssignedTo.length > 0 &&
+            {activity.AssignedTo.length > 0 && !activity.isArchived &&
               (finalisedVolunteers.message ? (
                 <div>
                   <span className={styles.key}>Assigned Volunteers</span>:
@@ -204,6 +249,30 @@ const ActivityPage = () => {
                   />
                 </div>
               ))}
+            {activity.isArchived && 
+            (finalisedVolunteers.message ? (
+              <div>
+                <span className={styles.key}>Assigned Volunteers</span>:
+                <span className={styles.value}>No volunteers were assigned !</span>
+              </div>
+            ) : (
+              <div className={styles.tableContainer}>
+                <Table
+                  tableName="Assigned Volunteers"
+                  data={finalisedVolunteers}
+                  tableHeaders={activityMappinDetails}
+                  allowFilters={true}
+                  allowDownload={true}
+                  filename={"assigned-volunteer-data" + activity.ActivityID}
+                  onRowClick={handleRowClick}
+                  showSerialNo={false}
+                  itemsPerPage={10}
+                  borderSpacing="3px 5px"
+                  nullDataPlaceholder="NA"
+                  buttons={buttons_attendance}
+                />
+              </div>
+            ))}
           </div>
         ) : (
           <div>Loading...</div>
