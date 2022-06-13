@@ -2,7 +2,9 @@
   box-sizing: border-box;
   width: 100%;
   padding: var(--gutter);
-  height: calc(100vh - var(--nav-height));
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  min-height: calc(100vh - var(--nav-height));
   display: flex;
   flex-direction: column;
   background-image: url("../../assets/textured_paper.png");
@@ -37,7 +39,7 @@
   border-radius: 20px;
   margin: 0 4vw;
   padding: 4vh 4vw;
-  background-color: #f1f1f1;
+  background-color: white;
 }
 
 .text,

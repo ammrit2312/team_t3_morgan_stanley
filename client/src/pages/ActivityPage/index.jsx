@@ -131,27 +131,27 @@ const ActivityPage = () => {
     },
   ];
 
-  const buttons_assigned = [
-    {
-      onClick: (e, row) => {
-        e.stopPropagation();
-        console.log("Message should be done");
-        console.log(row);
-      },
-      icon: <BsFillChatFill size={22} />,
-      customStyles: {
-        backgroundColor: colors.PRIMARY_GREEN,
-        borderRadius: "10px",
-        border: "0",
-        fontWeight: "bold",
-        fontSize: "0.9rem",
-        width: "5px",
-        minWidth: "0px",
-        padding: "10px 25px",
-        marginRight: "25px",
-      },
-    },
-  ];
+  // const buttons_assigned = [
+  //   {
+  //     onClick: (e, row) => {
+  //       e.stopPropagation();
+  //       console.log("Message should be done");
+  //       console.log(row);
+  //     },
+  //     icon: <BsFillChatFill size={22} />,
+  //     customStyles: {
+  //       backgroundColor: colors.PRIMARY_GREEN,
+  //       borderRadius: "10px",
+  //       border: "0",
+  //       fontWeight: "bold",
+  //       fontSize: "0.9rem",
+  //       width: "5px",
+  //       minWidth: "0px",
+  //       padding: "10px 25px",
+  //       marginRight: "25px",
+  //     },
+  //   },
+  // ];
 
   useEffect(() => {
     console.log(id);
@@ -245,7 +245,7 @@ const ActivityPage = () => {
                     itemsPerPage={10}
                     borderSpacing="3px 5px"
                     nullDataPlaceholder="NA"
-                    buttons={buttons_assigned}
+                    // buttons={buttons_assigned}
                   />
                 </div>
               ))}
