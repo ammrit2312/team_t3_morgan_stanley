@@ -23,3 +23,7 @@ export function getAdminNumber(){
 export function volunteerOptsOut(activityId,uid){
   return PUT(`/api/admin/opt-out/${uid}/${activityId}`)
 }
+
+export function volunteerReallocation(activityId){
+  return PUT(`/api/admin/get-new-user/${activityId}`)
+}

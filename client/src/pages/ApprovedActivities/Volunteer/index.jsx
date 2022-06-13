@@ -21,6 +21,7 @@ import {
   getVolunteerUpcomingActivities,
   getAdminNumber,
   volunteerOptsOut,
+  volunteerReallocation
 } from "../../../api/volunteerDashboard.api";
 
 function VolunteerApprovedActivities() {
@@ -70,6 +71,7 @@ function VolunteerApprovedActivities() {
               type: "success",
               message: "Activity cancelled successfully",
             });
+            volunteerReallocation(e.target.id);
           } else {
             showNotification({
               type: "danger",
