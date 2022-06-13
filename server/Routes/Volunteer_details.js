@@ -132,7 +132,7 @@ router.get("/upcoming-activities/:userID",async(req,res)=>{
         {
             const return_act = await Promise.all(
                 Upcoming_Activities.map((activityId) => {
-                    return Activity.findOne({_id:activityId,isArchived:false},{_id:1,ActivityName:1,ActivityTime:1,Activity_Mode:1});
+                    return Activity.findOne({_id:activityId,isArchived:false},{_id:1,ActivityName:1,ActivityTime:1,ActivityDate:1,ActivityDurationInMinutes:1,Activity_Address:1,Activity_Description:1,Activity_Mode:1});
                 }))
             res.status(200).json(return_act)
         }

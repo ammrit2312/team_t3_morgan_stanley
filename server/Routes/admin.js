@@ -80,10 +80,10 @@ async function getAllActivities(){
     
 }
 
-// api to get list of all activities
+// api to get list of all activities->1
 router.get("/list-all-activities",async(req,res)=> {
     try{
-        const activities = await Activity.find({isArchived:false},{_id:1,ActivityName:1,ActivityDate:1,Activity_Address:1,Activity_Description:1,ActivityTime:1,ActivityType:1,ActivityDurationInMinutes:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1});
+        const activities = await Activity.find({isArchived:false},{_id:1,ActivityName:1,ActivityDate:1,Activity_Address:1,Activity_Mode:1,Activity_Description:1,ActivityTime:1,ActivityType:1,ActivityDurationInMinutes:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,Activity_availability:1});
         res.status(200).json(activities);
     }
     catch(err){

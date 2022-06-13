@@ -3,7 +3,7 @@ const { default: helmet } = require('helmet');
 const mongoose = require('mongoose');
 const cors = require('cors')
 const cron = require('node-cron');
-const getallactivies = require('./functions/check_activity_archive');
+const getallactivities = require('./functions/check_activity_archive');
 
 
 const app = express();
@@ -44,12 +44,12 @@ app.use("/api/chat",chatRoutes);
 
 cron.schedule('* * * * *', () => {
     console.log('starting cron job');
-    getallactivies();
+    getallactivities();
 });
 
 cron.schedule('* * * * *', () => {
     console.log('starting cron job');
-    getallactivies();
+    getallactivities();
 });
 
 
