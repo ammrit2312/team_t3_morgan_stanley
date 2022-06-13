@@ -11,23 +11,29 @@ import useFirebaseAuth from "../../hooks/firebase/useFirebaseAuth";
 import img from "../../assets/images/sign-up.svg";
 
 // utils
-import {regexValidateEmail, regexValidatePassword} from "../../utils/regex.utils";
+import {
+  regexValidateEmail,
+  regexValidatePassword,
+} from "../../utils/regex.utils";
 import showNotification from "../../utils/notifications.utils";
 
 // constants
 import { colors } from "../../constants/colors.constants";
+import TextFieldComp from "../../components/design/FormComponents/TextField";
+import { accountTypes } from "../../constants/accounts.constants";
 
 const SignUpPage = ({ accountType }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [number, setNumber] = useState();
 
   const { signUpWithEmailAndPassword } = useFirebaseAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (regexValidateEmail(email) && regexValidatePassword(password)) {
-      signUpWithEmailAndPassword(email, password, accountType);
-    }else{
+      signUpWithEmailAndPassword(email, password, accountType, number);
+    } else {
       showNotification({
         type: "danger",
         message: "Invalid format of email or password",
@@ -60,6 +66,19 @@ const SignUpPage = ({ accountType }) => {
                 <li>At least one special character</li>
               </ul>
             </div>
+            {accountType === accountTypes.ADMIN && (
+              <div>
+                <TextFieldComp
+                  label="Phone Number"
+                  value={number}
+                  onChange={setNumber}
+                  required={true}
+                />
+                <div className={styles.passwordCriteria}>
+                  <p>Phone Number should be without country code.</p>
+                </div>
+              </div>
+            )}
             <Button
               value="Sign Up"
               customStyles={{

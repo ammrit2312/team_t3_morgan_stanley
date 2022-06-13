@@ -29,7 +29,8 @@ const ProfilePage = () => {
         {userData !== null ? (
           Object.keys(userData).map((key, index) => {
             return (
-              key !== "UserID" && (
+              key !== "UserID" &&
+              keyToDisplayValue[key] && (
                 <div key={index} className={styles.detail}>
                   <span className={styles.key}>{keyToDisplayValue[key]}</span> :{" "}
                   <span className={styles.value}>

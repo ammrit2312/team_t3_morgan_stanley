@@ -15,3 +15,15 @@ export function volunteerRejectsActivity(uid, activityId) {
 export function getVolunteerUpcomingActivities(uid) {
   return GET(`/api/admin/upcoming-activities/${uid}`);
 }
+
+export function getAdminNumber(){
+  return GET(`/api/admin/get-admin-number`);
+}
+
+export function volunteerOptsOut(activityId,uid){
+  return PUT(`/api/admin/opt-out/${uid}/${activityId}`)
+}
+
+export function volunteerReallocation(activityId){
+  return PUT(`/api/admin/get-new-user/${activityId}`)
+}

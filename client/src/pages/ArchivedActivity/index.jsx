@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "./ArchivedActivities.module.css";
 
 // components
 import VolunteerDashboardCard from "../../components/design/Cards/VolunteerDashboardCard";
@@ -22,7 +23,7 @@ function ArchivedActivities() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Archived Activities</h1>
       {apiData !== null ? (
         apiData.message ? (
