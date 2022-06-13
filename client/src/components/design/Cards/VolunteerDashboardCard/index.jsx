@@ -81,7 +81,7 @@ const VolunteerDashboardCard = ({
             />
           )}
         </div>
-        {Activity_Mode === "offline" && (
+        {Activity_Mode && (Activity_Mode.toLowerCase() === "offline" && (
           <div className={styles.locationStyler}>
             {Activity_Address && (
               <IconCard
@@ -96,7 +96,7 @@ const VolunteerDashboardCard = ({
               />
             )}
           </div>
-        )}
+        ))}
       </section>
       {buttons && (
         <section className={styles.rightContainer}>
