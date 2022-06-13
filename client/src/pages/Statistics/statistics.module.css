@@ -1,0 +1,38 @@
+.container {
+    box-sizing: border-box;
+    width: 100%;
+    padding: var(--gutter);
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    flex-direction: column;
+    background-image: url("../../assets/textured_paper.png");
+}
+
+.title{
+    text-align: center;
+}
+
+.chartsDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: var(--gutter);
+}
+
+.chartContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 1rem 2rem;
+    height: 100%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
