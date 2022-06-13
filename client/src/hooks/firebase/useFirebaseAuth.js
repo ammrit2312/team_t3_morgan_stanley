@@ -135,7 +135,12 @@ function useFirebaseAuth() {
    * @param {String} password - Password of the user
    * @param {integer} accountType - type of account
    */
-  async function signUpWithEmailAndPassword(email, password, accountType, number=1000000000) {
+  async function signUpWithEmailAndPassword(
+    email,
+    password,
+    accountType,
+    number = 1000000000
+  ) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // signed in
@@ -149,9 +154,10 @@ function useFirebaseAuth() {
           AccountType: accountType,
         };
 
-        if(accountType === accountTypes.ADMIN){
-          userData.Number = number;
+        if (accountType === accountTypes.ADMIN) {
+          userData = { ...userData, Number: number };
         }
+  
         // create account in our database
         createNewAccount(userData)
           .then((res) => {
