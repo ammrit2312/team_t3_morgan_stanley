@@ -50,6 +50,10 @@ export default function SignedInAdminRouter() {
           element: <PostNotificationPage/>,
           path: entireRoutes.POST_NOTIFICATION,
         },
+        {
+          path: entireRoutes.ADMIN_ARCHIVED_ACTIVITIES,
+          element: <ArchivedActivityForm />,
+        },
         { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
       ],
     },
@@ -63,6 +67,10 @@ const NotFoundPage = Loadable(lazy(() => import("../../../pages/NotFound")));
 
 const UploadActivityForm = Loadable(
   lazy(() => import("../../../pages/UploadActivityFormPage"))
+);
+
+const ArchivedActivityForm = Loadable(
+  lazy(() => import("../../../pages/ArchivedActivity"))
 );
 
 const UpcomingActivityPage = Loadable(
