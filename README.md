@@ -1,5 +1,23 @@
 # team_t3_morgan_stanley
 
+## Setup
+For setup please keep the following details in mind 
+<bold>Node version : v16.14.0</bold>
+Follow the steps as listed below(make sure you are in the home of the repo)
+```
+cd client
+npm i
+npm run start
+```
+The above code will fire up the frontend (mostly on port 3000)
+
+To run the backend(make sure you are in the home of the repo)
+```
+cd server
+npm i
+npm run start
+```
+
 **postman collection link updated today 12/06/2022 at 2:00 pm (below link)**
 
 added a few more apis
