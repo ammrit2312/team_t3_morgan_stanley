@@ -27,9 +27,11 @@ const VolunteerDashboardCard = ({
   ActivityTime,
   ActivityDurationInMinutes,
   Activity_Location,
+  Activity_Address,
   _id,
   onClick = () => {},
 }) => {
+  console.log("Activity Location", Activity_Address, Activity_Mode);
   return (
     <div className={styles.container} onClick={onClick}>
       <section
@@ -68,24 +70,24 @@ const VolunteerDashboardCard = ({
           {Activity_Mode && (
             <IconCard
               icon={
-                Activity_Mode === "online" ? (
+                Activity_Mode.toLowerCase() === "online" ? (
                   <BiWifi size={25} color={colors.PRIMARY_GREEN} />
                 ) : (
                   <BiWifiOff size={25} color={colors.PRIMARY_GREEN} />
                 )
               }
               title="Mode"
-              detail={Activity_Mode === "online" ? "Online" : "Offline"}
+              detail={Activity_Mode.toLowerCase() === "online" ? "Online" : "Offline"}
             />
           )}
         </div>
-        {Activity_Mode === "offline" && (
+        {Activity_Mode && (Activity_Mode.toLowerCase() === "offline" && (
           <div className={styles.locationStyler}>
-            {Activity_Location && (
+            {Activity_Address && (
               <IconCard
                 icon={<ImLocation size={25} color={colors.PRIMARY_GREEN} />}
                 title="Location"
-                detail={Activity_Location[0]}
+                detail={Activity_Address}
                 customStyles={{
                   padding: "10px 10px",
                   marginRight: "0",
@@ -94,7 +96,7 @@ const VolunteerDashboardCard = ({
               />
             )}
           </div>
-        )}
+        ))}
       </section>
       {buttons && (
         <section className={styles.rightContainer}>

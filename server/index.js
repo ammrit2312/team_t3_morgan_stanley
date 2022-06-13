@@ -47,13 +47,6 @@ cron.schedule('* * * * *', () => {
     getallactivities();
 });
 
-cron.schedule('* * * * *', () => {
-    console.log('starting cron job');
-    getallactivities();
-});
-
-
-
 
 app.listen(8800,() => {
     console.log("backend running");
