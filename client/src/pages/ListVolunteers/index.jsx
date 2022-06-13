@@ -101,7 +101,6 @@ const ListVolunteers = () => {
           itemsPerPage={10}
           borderSpacing="3px 5px"
           nullDataPlaceholder="NA"
-          buttons={buttons}
         />
       )}
     </main>
