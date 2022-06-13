@@ -1,12 +1,14 @@
 # team_t3_morgan_stanley
 
 ## Repo Structure
+```
 ├── client
 │   ├── Has the frontend code
 │   ├── Dockerfile
 ├── server
 │   ├── Has the backend code
 └── README.md
+```
 
 ## Tech Stack
 | Name | Version |
