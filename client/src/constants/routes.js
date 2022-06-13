@@ -25,6 +25,8 @@ export const routes = {
     POST_NOTIFICATION: "post-notification",
     ACTIVITY: "activity",
     SHOW_NOTIFICATION:  "show-notification",
+    ARCHIVED_ACTIVITIES: "archived-activities",
+    STATS: "stats",
 };
 
 export const entireRoutes = {
@@ -36,6 +38,7 @@ export const entireRoutes = {
     ACTIVITY: entirepath(routes.ACTIVITY),
     VOLUNTEER_UPCOMING_ACTIVITIES: entirepath(routes.VOLUNTEER, routes.UPCOMING_ACTIVITIES),
     ADMIN_UPCOMING_ACTIVITIES: entirepath(routes.ADMIN, routes.UPCOMING_ACTIVITIES),
+    ADMIN_ARCHIVED_ACTIVITIES: entirepath(routes.ADMIN, routes.ARCHIVED_ACTIVITIES),
     ADMIN_UPLOAD_ACTIVITY: entirepath(routes.ADMIN, routes.UPLOAD_ACTIVITY),
     ADMIN_SHOW_VOLUNTEERS: entirepath(routes.ADMIN, routes.SHOW_VOLUNTEERS),
     ACCOUNT: entirepath(routes.ACCOUNT),
@@ -47,4 +50,5 @@ export const entireRoutes = {
     POST_NOTIFICATION: entirepath(routes.ADMIN,routes.POST_NOTIFICATION),
     ADMIN_SIGN_UP: entirepath(routes.ADMIN, routes.SIGN_UP),
     SHOW_NOTIFICATIONS: entirepath(routes.SHOW_NOTIFICATION),
+    STATS: entirepath(routes.STATS),
 };
