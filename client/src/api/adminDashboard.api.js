@@ -15,3 +15,15 @@ export function getAllUpcomingActivities() {
 export function getAllArchivedActivities() {
   return GET(`/api/admin/get-archived-activities`);
 }
+
+export function getPlatformStats(){
+  return GET(`/api/stats/get-platform`);
+}
+
+export function getPlacesStats(){
+  return GET(`/api/stats/get-places-stats`);
+}
+
+export function getModeStats(){
+  return GET(`/api/stats/get-mode-stats`);
+}

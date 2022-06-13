@@ -31,7 +31,7 @@ const VolunteerDashboardCard = ({
   _id,
   onClick = () => {},
 }) => {
-  console.log("Activity Location", Activity_Address, Activity_Mode);
+  // console.log("Activity Location", Activity_Address, Activity_Mode);
   return (
     <div className={styles.container} onClick={onClick}>
       <section

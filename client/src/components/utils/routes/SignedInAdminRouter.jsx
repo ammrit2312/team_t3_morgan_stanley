@@ -54,6 +54,10 @@ export default function SignedInAdminRouter() {
           path: entireRoutes.ADMIN_ARCHIVED_ACTIVITIES,
           element: <ArchivedActivityForm />,
         },
+        {
+          path: entireRoutes.STATS,
+          element: <Statistics />,
+        },
         { path: entireRoutes.NOT_FOUND, element: <NotFoundPage /> },
       ],
     },
@@ -100,3 +104,7 @@ const VolunteerPage = Loadable(
 const PostNotificationPage = Loadable(
   lazy(() => import("../../../pages/PostNotificationPage"))
 );
+
+const Statistics = Loadable(
+  lazy(() => import("../../../pages/Statistics"))
+)
