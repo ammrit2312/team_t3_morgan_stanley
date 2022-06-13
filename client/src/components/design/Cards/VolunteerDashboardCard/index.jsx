@@ -100,7 +100,15 @@ const VolunteerDashboardCard = ({
         <section className={styles.rightContainer}>
           <div>
             {buttons.map((button, index) => (
-              <Button key={index} {...button} id={_id}/>
+              <Button
+                key={index}
+                {...button}
+                id={_id}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  button.onClick();
+                }}
+              />
             ))}
           </div>
         </section>

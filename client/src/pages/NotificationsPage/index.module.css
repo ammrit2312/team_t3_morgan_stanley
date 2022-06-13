@@ -1,0 +1,9 @@
+.container {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: calc(100vh - var(--nav-height));
+  padding: 2vh 7vw;
+  display: flex;
+  flex-direction: column;
+  background-image: url("../../assets/textured_paper.png");
+}

@@ -13,7 +13,6 @@ const Message = forwardRef(({message, username}, ref) => {
             <Card className={isUser ? styles.message_userCard : styles.message_guestCard}>
                 <CardContent className={styles.message__message}>
                     <Typography 
-                        color = "white"
                         variant = "div"
                         component = "div"
                         className={styles.message__div}
