@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 
-import EmailField from "../../components/design/FormComponents/EmailField";
-import TextArea from "../../components/design/FormComponents/TextArea";
-import TextField from "../../components/design/FormComponents/TextField";
-import Button from "../../components/design/Button";
+import EmailField from "../../../components/design/FormComponents/EmailField";
+import TextArea from "../../../components/design/FormComponents/TextArea";
+import TextField from "../../../components/design/FormComponents/TextField";
+import Button from "../../../components/design/Button";
 
 import styles from "./styles.module.css";
-import { colors } from "../../constants/colors.constants";
+import { colors } from "../../../constants/colors.constants";
 
 // api
-import { postContactUs } from "../../api/contact.api";
+import { postContactUs } from "../../../api/contact.api";
+
+// utils
+import showNotification from "../../../utils/notifications.utils";
 
 const ContactUsPage = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +21,22 @@ const ContactUsPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postContactUs({ Email: email, Title: title, Message: message });
+    postContactUs({ Email: email, Title: title, Message: message }).then(
+      (res) => {
+        if (res.status === 200) {
+          showNotification({
+            type: "success",
+            message: "Message sent successfully",
+          });
+          setEmail("");
+          setTitle("");
+        } else
+          showNotification({
+            type: "danger",
+            message: "Something went wrong",
+          });
+      }
+    );
   };
 
   return (

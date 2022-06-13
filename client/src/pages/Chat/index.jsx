@@ -18,7 +18,7 @@ const Chat = () => {
     const [currentMessage, setCurrentMessage] = useState('');
     const currUser = useSelector((state) => state.user);
     const [room, setRoom] = useState('');
-    const [messages, setMessages] = useState([{message: "asfdsasadfrweqwsds", username: ADMIN_ID}]);
+    const [messages, setMessages] = useState([]);
     const {userId} = useParams();
 
     useEffect(() => {
@@ -40,6 +40,7 @@ const Chat = () => {
         e.preventDefault();
 
         console.log("Message", currentMessage, room);
+        setMessages([...messages, {message: currentMessage, username: "sLeCdk5sMBU221SA2NJNjeDMBgW2"}]);
         socket.emit("message", {messageSent: currentMessage, senderID: "sLeCdk5sMBU221SA2NJNjeDMBgW2", room })
     };
 

@@ -6,7 +6,7 @@
     width: 100%;
     box-sizing: border-box;
     height: calc(100vh - var(--nav-height));
-    background-image: url("../../assets/textured_paper.png");
+    background-image: url("../../../assets/textured_paper.png");
 }
 
 .innerCoontainer{

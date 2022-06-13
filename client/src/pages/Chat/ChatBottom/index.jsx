@@ -1,5 +1,6 @@
 import React from "react";
 import { TextField } from "@mui/material";
+import Button from "../../../components/design/Button"
 import styles from '../chat.module.css';
 
 const ChatBottom = ({input, setInput, sendButton}) => {
@@ -14,7 +15,7 @@ const ChatBottom = ({input, setInput, sendButton}) => {
                     value={input}
                     onChange={(e)=>setInput(e.target.value)}
                 />
-                <button className={styles.chatBottom__button} onClick={sendButton}>Send</button>
+                <Button onClick={sendButton} value="Send"/>
             </form>
         </div>
     );
