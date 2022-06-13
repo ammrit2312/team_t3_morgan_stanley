@@ -394,7 +394,16 @@ router.get("/get-archived-activities",async(req,res)=>{
     }
 })
 
-
+router.get("/get-admin-number",async(req,res)=>{
+    try{
+    const {Number}=await User.findOne({AccountType:1},{Number:1})
+    res.status(200).json({"message":Number})
+    }
+    catch(e)
+    {
+        res.status(500).json({"message":e})
+    }
+})
 
 
 
