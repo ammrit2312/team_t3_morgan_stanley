@@ -78,7 +78,7 @@ router.get("/get-reccomended-activities/:userid",async (req,res)=> {
 
                 const reccomended_act = await Promise.all(
                 Reccomendation_ActivityID.map((activityId) => {
-                    return Activity.findOne({_id:activityId,isArchived:false},{_id:1,ActivityName:1,Activity_Location:1,Language_Preference:1,Preffered_skills:1,ActivityType:1,Activity_availability:1,Activity_Mode:1,Activity_Description:1,ActivityDate:1,ActivityTime:1,ActivityDurationInMinutes:1});
+                    return Activity.findOne({_id:activityId,isArchived:false},{_id:1,ActivityName:1,ActivityDate:1,ActivityDurationInMinutes:1,ActivityTime:1,Activity_Address:1,Activity_Description:1,Activity_Mode:1});
                 })
             )
             res.status(200).json(reccomended_act)

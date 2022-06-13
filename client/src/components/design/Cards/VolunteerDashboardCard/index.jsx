@@ -106,7 +106,7 @@ const VolunteerDashboardCard = ({
                 id={_id}
                 onClick={(e) => {
                   e.stopPropagation();
-                  button.onClick();
+                  button.onClick(e);
                 }}
               />
             ))}

@@ -4,7 +4,7 @@
     color: var(--yellow);
     text-decoration: none !important;
     cursor: pointer;
-    font-size: medium;
+    font-size: 15px;
 }
 
 .container:after {
