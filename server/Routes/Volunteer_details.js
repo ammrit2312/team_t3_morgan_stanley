@@ -180,7 +180,7 @@ router.put("/opt-out/:uID/:actID",async(req,res)=>{
         let userID=req.params.uID;
         let activityID=req.params.actID;
         const data=await Activity.updateOne({_id:activityID},{$pull:{AssignedTo:userID},$inc:{Current_assigned : -1}});
-        await Volunteers.updateOne({UserID:userID},{$inc:{Volunteer_Number_Of_Activities_Opted_Out : 1},assigned:false});
+        await Volunteers.updateOne({UserID:userID},{$inc:{Volunteer_Number_Of_Activities_Opted_Out : 1},assigned:false,$pull:{Upcoming_Activities:activityID}});
         if(data.modifiedCount)
             res.status(200).json({"message":"Opted out successfully"})
         else

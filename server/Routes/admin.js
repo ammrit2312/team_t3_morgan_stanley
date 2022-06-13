@@ -203,9 +203,15 @@ router.put("/update-attendance/:aid/:uid",async(req,res)=>{
     try{
     aid=req.params.aid 
     uid=req.params.uid
-    const data = await Volunteers.updateOne({UserID:uid},{$inc:{Volunteer_Number_Of_Activities_Attended : 1}});
-    const status= await Activity.findOneAndUpdate({_id:aid},{ $push : {"Activity_Attendance": uid}});
-    await Reccomendation.updateOne({UserId:uid},{User_Activity_Select:true})
+    const {Activity_Attendance} = await Activity.findOne({_id:aid},{Activity_Attendance:1})
+    if(!Activity_Attendance.includes(uid))
+    {
+        console.log(Activity_Attendance);
+        const data = await Volunteers.updateOne({UserID:uid},{$inc:{Volunteer_Number_Of_Activities_Attended : 1}});
+        const status= await Activity.findOneAndUpdate({_id:aid},{ $addToSet : {"Activity_Attendance": uid}});   
+    }
+    //await Reccomendation.updateOne({UserId:uid},{User_Activity_Select:false})
+
     res.status(200).json({"message":"Attendance updated successfully"});
     }
     catch(e)
@@ -324,7 +330,7 @@ var activityDict={};
 // api for marking the activity as false
 router.put('/mark-as-archive/:aid',async(req,res) => {
     try{
-        await Activity.findByIdAndUpdate(req.params.aid,{$set:{isArchived:true}});
+        await Activity.findOneAndUpdate({_id:req.params.aid},{$set:{isArchived:true,Preferred_Users:[]}});
         const {AssignedTo} = await Activity.findById(req.params.aid,{_id:0,AssignedTo:1})
         AssignedTo.map(async (uid) => {
 
@@ -372,8 +378,8 @@ const addReccomendation_new = async(volunteer,rec) => {
 }
 router.get("/list-all-upcoming-activities",async(req,res)=>{
     try{
-        const activities=await Activity.find({ $expr: { $eq: [ "$Current_assigned" , "$Max_volunteers" ] },isArchived:false})
-        res.status(200).json({"message":activities})
+        const activities=await Activity.find({ Current_assigned: { $gt: 0 },isArchived:false},{_id:1,ActivityName:1,ActivityDate:1,ActivityDurationInMinutes:1,ActivityTime:1,Activity_Address:1,Activity_Description:1,Activity_Mode:1})
+        res.status(200).json(activities)
     }
     catch(e)
     {

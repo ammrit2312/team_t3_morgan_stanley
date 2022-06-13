@@ -187,7 +187,7 @@ const ActivityPage = () => {
                 activityToDisplayValue[key] && (
                   <div key={index} className={styles.detail}>
                     <span className={styles.key}>
-                      {activityToDisplayValue[key] && [key]}
+                      {activityToDisplayValue[key] && activityToDisplayValue[key]}
                     </span>{" "}
                     :
                     <span className={styles.value}>

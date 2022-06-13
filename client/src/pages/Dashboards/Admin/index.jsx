@@ -16,7 +16,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     getAllActivities().then((data) => {
-      console.log(data);
+      console.log("mera data", data);
       setAPIData(data.data);
     });
   }, []);
