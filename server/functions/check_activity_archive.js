@@ -42,7 +42,7 @@ const addReccomendation = async(volunteer,rec) => {
     ok.Reccomendation_ActivityID.push(newActivity._id.toString())
     await ok.save();
 }
-const getallactivies = async () => {
+const getallactivities = async () => {
     const activity_data = await axios.get("http://localhost:8800/api/admin/list-all-activities");
     activity_data.data.map((i) => {
         compare_dates(i._id,i.ActivityDate);
@@ -51,4 +51,4 @@ const getallactivies = async () => {
 }
 
 
-module.exports = getallactivies;
+module.exports = getallactivities;
