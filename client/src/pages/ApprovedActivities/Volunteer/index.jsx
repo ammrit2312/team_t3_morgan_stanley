@@ -39,6 +39,7 @@ function VolunteerApprovedActivities() {
     {
       value: "Talk to Admin",
       onClick: () => {
+        // window.open(`https://wa.me/+919108085826`);
         getAdminNumber().then((res) => {
           if (res.status === 200 && res.data.message.length > 0) {
             window.open(`https://wa.me/+91${res.data}`);
