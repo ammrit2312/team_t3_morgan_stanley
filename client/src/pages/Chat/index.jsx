@@ -18,7 +18,7 @@ const Chat = () => {
     const [currentMessage, setCurrentMessage] = useState('');
     const currUser = useSelector((state) => state.user);
     const [room, setRoom] = useState('');
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState([{message: "asfdsasadfrweqwsds", username: ADMIN_ID}]);
     const {userId} = useParams();
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const Chat = () => {
         socket.emit("join-room", check , (data)=>{
             console.log(data);
         });
-    }, []);
+    }, [messages]);
 
     const sendMessage = (e) => {
         e.preventDefault();

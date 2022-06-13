@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // css
 import styles from "../Dashboards.module.css";
@@ -15,7 +15,6 @@ import { colors } from "../../../constants/colors.constants";
 // icons
 import { BsBookmarkCheckFill, BsStack } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
-
 
 // api
 import {
@@ -105,11 +104,13 @@ const VolunteerDashboard = () => {
       {apiData !== null ? (
         apiData.message ? (
           <div>
+            <p>{apiData.message}</p>
             <p>
-            {apiData.message}
-            </p>
-            <p>
-              Visit <Link to="/volunteer/upcoming-activities/">Upcoming Activities</Link> for further details
+              Visit{" "}
+              <Link to="/volunteer/upcoming-activities/">
+                Upcoming Activities
+              </Link>{" "}
+              for further details
             </p>
           </div>
         ) : (

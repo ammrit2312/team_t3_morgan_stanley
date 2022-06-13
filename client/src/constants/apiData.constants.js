@@ -17,6 +17,7 @@ export const keyToDisplayValue = {
   Volunteer_Interested_Activity_Type: "Interested Activity Type",
   Volunteer_Languages: "Languages",
   Volunteer_Skills: "Skills",
+  Volunteer_Platform: "Platform",
 };
 
 export const activityToDisplayValue = {
