@@ -47,7 +47,7 @@ const getMatchScoreForActivity=(activityID,activityDict,activityData,users)=>{
     users.forEach((userObj)=>{
         let score = 0;
         let userID=userObj._id.toString();
-        score=(activityData.Activity_Mode==="online")?handleScore(activityData,userObj,1):handleScore(activityData,userObj,0);
+        score=(activityData.Activity_Mode.toLowerCase()==="online")?handleScore(activityData,userObj,1):handleScore(activityData,userObj,0);
         activityDict[activityID][userID]=score;
     });
 

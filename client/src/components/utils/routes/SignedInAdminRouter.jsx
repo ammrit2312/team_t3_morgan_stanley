@@ -35,7 +35,7 @@ export default function SignedInAdminRouter() {
           element: <UploadActivityForm />,
         },
         {
-          element: <ContactUsPage />,
+          element: <ContactUsPage/>,
           path: entireRoutes.CONTACT_US,
         },
         {
@@ -74,7 +74,7 @@ const ListVolunteers = Loadable(
 );
 
 const ContactUsPage = Loadable(
-  lazy(() => import("../../../pages/ContactUsPage"))
+  lazy(() => import("../../../pages/ContactUsPage/Admin"))
 );
 
 const AdminDashboard = Loadable(
