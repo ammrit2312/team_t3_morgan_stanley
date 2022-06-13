@@ -34,16 +34,24 @@ export const signedInAdminLinks = [
         path: entireRoutes.BASE,
     },
     {
-        name: "Upcoming Activities",
-        path: entireRoutes.ADMIN_UPCOMING_ACTIVITIES,
-    },
-    {
-        name: "Volunteers",
-        path: entireRoutes.ADMIN_SHOW_VOLUNTEERS,
+        name: "Statistics",
+        path: entireRoutes.STATS,
     },
     {
         name: "Upload Activity",
         path: entireRoutes.ADMIN_UPLOAD_ACTIVITY,
+    },
+    {
+        name: "Upcoming Activities",
+        path: entireRoutes.ADMIN_UPCOMING_ACTIVITIES,
+    },
+    {
+        name: "Archived Activities",
+        path: entireRoutes.ADMIN_ARCHIVED_ACTIVITIES,
+    },
+    {
+        name: "Volunteers",
+        path: entireRoutes.ADMIN_SHOW_VOLUNTEERS,
     },
     {
         name: "Post Notification",
