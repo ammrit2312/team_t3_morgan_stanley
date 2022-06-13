@@ -52,7 +52,7 @@ const VolunteerFormPage = Loadable(
 );
 
 const ContactUsPage = Loadable(
-  lazy(() => import("../../../pages/ContactUsPage"))
+  lazy(() => import("../../../pages/ContactUsPage/Volunteer"))
 );
 
 const NotificationsPage = Loadable(

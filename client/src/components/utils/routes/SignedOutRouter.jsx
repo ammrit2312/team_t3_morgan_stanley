@@ -88,7 +88,7 @@ const SignInPage = Loadable(
 );
 
 const ContactUsPage = Loadable(
-  lazy(() => import("../../../pages/ContactUsPage"))
+  lazy(() => import("../../../pages/ContactUsPage/Volunteer"))
 );
 
 const NotFoundPage = Loadable(lazy(() => import("../../../pages/NotFound")));
