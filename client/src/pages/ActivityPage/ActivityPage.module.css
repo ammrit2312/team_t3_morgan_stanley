@@ -19,6 +19,7 @@
   height: 75%;
   overflow-y: auto;
   max-width: 70%;
+  min-width: 60%;
 }
 
 .detail {
