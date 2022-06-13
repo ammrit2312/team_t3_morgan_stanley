@@ -5,19 +5,19 @@
 //   },
 
 export const tableHeaders = {
-  name: {
+  Volunteer_Name: {
     key: "Volunteer_Name",
     title: "Name",
     type: "text",
   },
 
-  email: {
+  Volunteer_email: {
     key: "Volunteer_email",
     title: "Email",
     type: "text",
   },
 
-  languages: {
+  Volunteer_Languages: {
     key: "Volunteer_Languages",
     title: "Known Languages",
     type: "text",
@@ -41,7 +41,7 @@ export const tableHeaders = {
     ],
   },
 
-  availability: {
+  Volunteer_Availability: {
     key: "Volunteer_Availability",
     title: "Availability",
     type: "text",
@@ -61,7 +61,7 @@ export const tableHeaders = {
     ],
   },
 
-  mode: {
+  Volunteer_Preferred_Mode: {
     key: "Volunteer_Preferred_Mode",
     title: "Mode of Volunteering",
     type: "text",
@@ -79,19 +79,19 @@ export const tableHeaders = {
 };
 
 export const activityMappinDetails = {
-  name: {
+  Volunteer_Name: {
     key: "Volunteer_Name",
     title: "Name",
     type: "text",
   },
 
-  email: {
+  Volunteer_email: {
     key: "Volunteer_email",
     title: "Email",
     type: "text",
   },
 
-  languages: {
+  Volunteer_Languages: {
     key: "Volunteer_Languages",
     title: "Known Languages",
     type: "text",
@@ -115,7 +115,7 @@ export const activityMappinDetails = {
     ],
   },
 
-  availability: {
+  Volunteer_Availability: {
     key: "Volunteer_Availability",
     title: "Availability",
     type: "text",
