@@ -5,7 +5,7 @@ const Reccomendation = require('../Model/Reccomendation');
 const User = require('../Model/User');
 
 const getBestActivitiesForUser=require('../functions/mapper');
-const getNewVolunteer=require('../functions/getVolunteer');
+const {getNewVolunteer}=require('../functions/getVolunteer');
 
 var userDict={};
 var activityDict={};
@@ -126,13 +126,13 @@ router.get("/upcoming-activities/:userID",async(req,res)=>{
     try
     {
         let userid=req.params.userID
-        const {Upcoming_Activities} = await Volunteers.findOne({UserID:userid,isArchived:false},{Upcoming_Activities:1});
+        const {Upcoming_Activities} = await Volunteers.findOne({UserID:userid},{Upcoming_Activities:1});
         console.log(Upcoming_Activities)
         if(Upcoming_Activities.length > 0)
         {
             const return_act = await Promise.all(
                 Upcoming_Activities.map((activityId) => {
-                    return Activity.findById(activityId,{_id:1,ActivityName:1,ActivityTime:1,Activity_Mode:1});
+                    return Activity.findOne({_id:activityId,isArchived:false},{_id:1,ActivityName:1,ActivityTime:1,Activity_Mode:1});
                 }))
             res.status(200).json(return_act)
         }
@@ -180,8 +180,7 @@ router.put("/opt-out/:uID/:actID",async(req,res)=>{
         let userID=req.params.uID;
         let activityID=req.params.actID;
         const data=await Activity.updateOne({_id:activityID},{$pull:{AssignedTo:userID},$inc:{Current_assigned : -1}});
-        const updates=await Volunteers.updateOne({_id:userID},{$inc:{Volunteer_Number_Of_Activities_Opted_Out : 1}});
-        await Volunteers.updateOne({_id:userID},{assigned:false});
+        await Volunteers.updateOne({UserID:userID},{$inc:{Volunteer_Number_Of_Activities_Opted_Out : 1},assigned:false});
         if(data.modifiedCount)
             res.status(200).json({"message":"Opted out successfully"})
         else
@@ -220,14 +219,17 @@ router.put("/get-new-user/:actID",async(req,res)=>{
         let actObj=await Activity.findOne({_id:activityID})
         let users=await Volunteers.find({assigned:false})
         let userID=getNewVolunteer(activityDict,actObj,users);
-        if(userID===undefined)
+        const {UserID} = await Volunteers.findById(userID,{_id:0,UserID:1})
+        console.log(UserID)
+
+        if(UserID===undefined)
         {
             res.status(500).json({"message":"No such user present"});
         }
         else
         {
-            const x=Reccomendation.updateOne({userId:userID},{$push:{Reccomendation_ActivityID:activityID}});
-            const z=Volunteers.updateOne({userID:userID},{$inc:{Volunteer_mapped:1}})
+            const x=Reccomendation.updateOne({UserId:UserID},{$addToSet:{Reccomendation_ActivityID:activityID}});
+            const z=Volunteers.updateOne({UserID:UserID},{$inc:{Volunteer_mapped:1}})
 
             await Promise.all([x,z])
             res.status(200).json({"message":"New Volunteer mapping recommended"});
