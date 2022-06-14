@@ -411,41 +411,4 @@ router.get("/get-admin-number",async(req,res)=>{
     }
 })
 
-
-
-
-
-// var messages={}
-// io.on("connection",socket=>{
-//     console.log(socket.id)
-//     let room
-//     socket.on("join-room",({adminID,userID},callback)=>{
-//         room=adminID.toString()+"-"+userID.toString();
-//         socket.join(room);
-//         callback();
-//     })
-//     socket.on("message",({message,senderID})=>{
-//         socket.broadcast.to(room).emit("message",message);
-//         let messageObj={
-//             message,
-//             senderID,
-//             time:new Date().getTime()
-//         }
-//         messages[room].push(messageObj)
-//     })
-    
-// })
-// router.get("/chat/:adminID/:volunteerID",(req,res)=>{
-//     let adminID=req.params.adminID
-//     let volunteerID=req.params.volunteerID
-//     let room=adminID+"-"+volunteerID
-//     let messagesForRoom=messages[room]
-//     messagesForRoom.sort((x,y)=>{
-//         return x.time - y.time;
-//     })
-//     return res.status(200).json({"message":messagesForRoom})
-// })
-
-module.exports =router
-
-//
+module.exports = router

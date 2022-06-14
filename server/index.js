@@ -18,6 +18,7 @@ const statsRoutes = require("./Routes/stats");
 
 const chatRoutes=require("./Routes/chats");
 
+// add mongodb uri here
 const uri="mongodb+srv://raghav-tiruvallur:qwertyDUDE@cluster0.1npdfrx.mongodb.net/test";
 
 //middlewares
@@ -40,7 +41,6 @@ app.use("/api/chat",chatRoutes);
 
 
 // currently this cronjob runs every minute (for testing) , will change the duration later
-// getallactivies();
 
 cron.schedule('* * * * *', () => {
     console.log('starting cron job');
@@ -51,7 +51,3 @@ cron.schedule('* * * * *', () => {
 app.listen(8800,() => {
     console.log("backend running");
 })
-// connectToDB(client);
-//1.submit volunteer form
-//2. get all activities
-//3. mapping

@@ -242,16 +242,6 @@ router.put("/get-new-user/:actID",async(req,res)=>{
         res.status(500).json({"message":"encountered a server error"});
     }
 })
-//How it works now:
-//Volunteer opts out by a button => fires backend request => backend removes his assignment => send response "he is removed"
-//Frontend send another request to backend to get new volunteer for this activity => backend finds new user for this activity 
-//=> if present backend queries the Recommendation db and pushes the activityID for the userID => volunteer is updated of this
-// by refreshing the page because he keeps querying the recommendation db on every page reload. Admin is also updated on page 
-// reload because he too queries recommendation db on page reload.          
-
-
-//Broadcast schema and post to this=>name of the activity => broadcast it in the forum tab
-
 
 
 module.exports = router
